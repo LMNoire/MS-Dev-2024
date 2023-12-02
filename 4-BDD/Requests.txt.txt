@@ -1,0 +1,247 @@
+/*1 : Sélectionner toutes les colonnes de la table SERV.*/
+SELECT * FROM serv;
+/*2 : Sélectionner d’une autre manière ces colonnes.*/
+SELECT noserv, service, ville FROM serv;
+/*3 : Sélectionner les colonnes SERVICE et NOSERV de la table SERV.*/
+SELECT service, noserv FROM serv;
+/*4 : Sélectionner toutes les colonnes de la table EMP.*/
+SELECT * FROM emp;
+/*5 : Sélectionner les emplois de la table EMP.*/
+SELECT emploi FROM emp;
+/*6 : Sélectionner les différents emplois de la table EMP.*/
+SELECT DISTINCT emploi FROM emp;
+/*7 : Sélectionner les employés du service N°3.*/
+SELECT noemp, nom, prenom FROM emp WHERE noserv=3;
+/*8 : Sélectionner les noms, prénoms, numéro d’employé, numéro de service de tous les techniciens.*/
+SELECT nom, prenom, noemp, noserv FROM emp WHERE emploi='Technicien';
+/*9 : Sélectionner les noms, numéros de service de tous les services dont le numéro est supérieur à 2.*/
+SELECT nom, prenom, noserv FROM emp WHERE noserv >2;
+/*10 : Sélectionner les noms, numéros de service de tous les services dont le numéro est inférieur ou égal à 2.*/
+SELECT nom, noserv FROM emp WHERE noserv <=2;
+/*11 : Sélectionner les employés dont la commission est inférieure au salaire. Vérifiez le résultat jusqu’à  obtenir la bonne réponse.*/
+SELECT noemp, nom, prenom FROM emp WHERE comm < sal;
+/*12 : Sélectionner les employés qui ne touchent jamais de commission.*/
+SELECT noemp, nom, prenom, comm, sal FROM emp WHERE comm IS NULL OR comm=0;
+/*13 : Sélectionner les employés qui touchent éventuellement une commission et dans l’ordre croissant des commissions.*/
+SELECT noemp, nom, prenom, comm FROM emp WHERE comm >0 ORDER BY comm;
+/*14 : Sélectionner les employés qui ont un chef.*/
+SELECT noemp, nom, prenom, sup FROM emp WHERE sup IS NOT NULL;
+/*15 : Sélectionner les employés qui n’ont pas de chef.*/
+SELECT noemp, nom, prenom, sup FROM emp WHERE sup IS NULL;
+/*16 : Sélectionner les noms, emploi, salaire, numéro de service de tous les employés du service 5 qui gagnent plus de 20000 €.*/
+SELECT nom, emploi, sal, noserv FROM emp WHERE noserv=5 AND sal>20000;
+/*17 : Sélectionner les vendeurs du service 6 qui ont un revenu mensuel supérieur ou égal à 9500 €.*/
+SELECT noemp, nom, prenom FROM emp WHERE noserv=6 AND emploi='VENDEUR' AND sal>=9500;
+/*18 : Sélectionner dans les employés tous les présidents et directeurs. Attention, le français et la logique sont parfois contradictoires.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi IN ('PRESIDENT', 'DIRECTEUR');
+/*19 : Sélectionner les directeurs qui ne sont pas dans le service 3.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi='DIRECTEUR' AND NOT noserv=3;
+/*20 : Sélectionner les directeurs et « les techniciens du service 1 ».*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi='DIRECTEUR' OR emploi='TECHNICIEN' AND noserv=1;
+/*21 : Sélectionner les « directeurs et les techniciens » du service 1.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi IN ('DIRECTEUR', 'TECHNICIEN') AND noserv=1;
+/*22 : Sélectionner les employés du service 1 qui sont directeurs ou techniciens.*/
+SELECT noemp, nom, prenom FROM emp WHERE noserv=1 AND emploi IN ('DIRECTEUR', 'TECHNICIEN');
+/*23 : Sélectionner les employés qui ne sont ni directeur, ni technicien et travaillant dans le service 1.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi NOT IN ('DIRECTEUR', 'TECHNICIEN') AND noserv=1;
+/*24 : Sélectionner les employés qui sont techniciens, comptables ou vendeurs.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi IN ('TECHNICIEN', 'COMPTABLE', 'VENDEUR');
+/*25 : Sélectionner les employés qui ne sont ni technicien, ni comptable, ni vendeur.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi NOT IN ('TECHNICIEN', 'COMPTABLE', 'VENDEUR');
+/*26 : Sélectionner les directeurs des services 2, 4 et 5.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi='DIRECTEUR' AND noserv IN (2, 4, 5);
+/*27 : Sélectionner les subalternes qui ne sont pas dans les services 1, 3, 5.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi NOT IN ('DIRECTEUR', 'PRESIDENT') AND noserv NOT IN (1, 3, 5);
+/*28 : Sélectionner les employés qui gagnent entre 20000 et 40000 euros, bornes comprises.*/
+SELECT noemp, nom, prenom FROM emp WHERE sal BETWEEN 20000 AND 40000;
+/*29 : Sélectionner les employés qui gagnent moins de 20000 et plus de 40000 euros.*/
+SELECT noemp, nom, prenom FROM emp WHERE sal NOT BETWEEN 20000 AND 40000;
+/*30 : Sélectionner les employés qui ne sont pas directeur et qui ont été embauchés en 88.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi NOT IN ('DIRECTEUR') AND embauche BETWEEN '1988-01-01' AND '1988-12-31';
+/*31 : Sélectionner les directeurs des services 2 ,3 , 4, 5 sans le IN.*/
+SELECT noemp, nom, prenom FROM emp WHERE emploi='DIRECTEUR' AND noserv=2 OR noserv=3 OR noserv=4 OR noserv=5;
+/*32 : Sélectionner les employés dont le nom commence par la lettre M.*/
+SELECT noemp, nom, prenom FROM emp WHERE nom LIKE 'm%';
+/*33 : Sélectionner les employés dont le nom se termine par T.*/
+SELECT noemp, nom, prenom FROM emp WHERE nom LIKE '%t';
+/*34 : Sélectionner les employés ayant au moins deux E dans leur nom.*/
+SELECT noemp, nom, prenom FROM emp WHERE nom LIKE '%e%e%';
+/*35 : Sélectionner les employés ayant exactement un E dans leur nom.*/
+SELECT noemp, nom, prenom FROM emp WHERE nom LIKE '%e%' AND nom NOT LIKE '%e%e%';
+/*36 : Sélectionner les employés ayant au moins un N et un O dans leur nom.*/
+SELECT noemp, nom, prenom FROM emp WHERE nom LIKE '%n%' AND nom LIKE '%o%';
+/*37 : Sélectionner les employés dont le nom s'écrit avec 6 caractères et qui se termine par N.*/
+SELECT noemp, nom, prenom FROM emp WHERE LENGTH(nom)='6_' AND nom LIKE '%N';  
+/*38 : Sélectionner les employés dont la troisième lettre du nom est un R.*/
+SELECT noemp, nom, prenom FROM emp WHERE nom LIKE '__R%';
+/*39 : Sélectionner les employés dont le nom ne s'écrit pas avec 5 caractères.*/
+SELECT noemp, nom, prenom FROM emp WHERE LENGTH(nom)!='5';  
+/*40 : Trier les employés (nom, prénom, n° de service, salaire) du service 3 par ordre de salaire croissant.*/
+SELECT noemp, nom, prenom, noserv, sal FROM emp WHERE noserv='3' AND noserv ORDER BY sal;
+/*41 : Trier les employés (nom, prénom, n° de service , salaire) du service 3 par ordre de salaire décroissant.*/
+SELECT noemp, nom, prenom, noserv, sal FROM emp WHERE noserv='3' AND noserv ORDER BY sal DESC;
+/*42 : Idem en indiquant le numéro de colonne à la place du nom colonne.*/
+SELECT noemp, nom, prenom, noserv, sal FROM emp WHERE noserv='3' AND '9' ORDER BY '7' DESC;
+/*43 : Trier les employés (nom, prénom, n° de service, salaire, emploi) par emploi, et pour chaque emploi par ordre décroissant de salaire.*/
+SELECT noemp, nom, prenom, noserv, sal, emploi FROM emp ORDER BY emploi, sal DESC; 
+/*44 : Idem en indiquant les numéros de colonnes.*/
+SELECT * FROM emp ORDER BY 4, 7 DESC; /*45 : Trier les employés (nom, prénom, n° de service, commission) du service 3 par ordre croissant de commission.*/
+SELECT noemp, nom, prenom, noserv, comm FROM emp WHERE noserv='3' ORDER BY comm DESC;
+/*46 : Trier les employés (nom, prénom, n° de service, commission) du service 3 par ordre décroissant de commission, en considérant que celui dont la commission est nulle ne touche pas de commission.*/
+SELECT noemp, nom, prenom, noserv, comm FROM emp WHERE noserv='3' AND comm IS NOT NULL ORDER BY comm DESC;
+/*47 : Sélectionner le nom, le prénom, l'emploi, le nom du service de l'employé pour tous les employés.*/
+SELECT nom, prenom, emploi, service FROM emp INNER JOIN serv WHERE emp.noserv = serv.noserv;
+/*48 : Sélectionner le nom, l'emploi, le numéro de service, le nom du service pour tous les employés.*/
+SELECT nom, emploi, emp.noserv, service FROM emp INNER JOIN serv WHERE emp.noserv = serv.noserv;
+/*49 : Idem en utilisant des alias pour les noms de tables.*/
+SELECT nom, emploi, t1.noserv, service FROM emp AS t1 INNER JOIN serv AS t2 WHERE t1.noserv = t2.noserv;
+/*50 : Sélectionner le nom, l'emploi, suivis de toutes les colonnes de la table SERV pour tous les employés.*/
+SELECT nom, emploi, serv.* FROM emp INNER JOIN serv WHERE emp.noserv = serv.noserv;
+/*51 : Sélectionner les nom et date d'embauche des employés suivi des nom et date
+d'embauche de leur supérieur pour les employés plus ancien que leur supérieur, dans l'ordre nom employés, noms supérieurs. */
+SELECT t1.nom, t1.embauche, t1.noemp, t1.sup, t2.nom, t2.embauche, t2.noemp, t2.sup FROM emp AS t1 RIGHT OUTER JOIN emp AS t2 ON t2.embauche > t1.embauche;
+/*52 : Sélectionner sans doublon les prénoms des directeurs et « les prénoms des techniciens du service 1 » avec un UNION.*/
+SELECT prenom, emploi FROM emp WHERE emploi='DIRECTEUR' UNION SELECT prenom, emploi FROM emp WHERE emploi='TECHNICIEN' AND noserv=1;
+/*53 : Sélectionner les numéros de services n’ayant pas d’employés sans une jointure externe*/
+SELECT noserv FROM serv EXCEPT SELECT noserv FROM emp;
+SELECT noserv FROM serv WHERE noserv NOT IN (SELECT DISTINCT noserv FROM emp);
+/*54 : Sélectionner les services ayant au moins un employé.*/
+SELECT service FROM serv WHERE noserv IN (SELECT DISTINCT noserv FROM emp);
+/*55 : Sélectionner les employés qui travaillent à LILLE.*/
+SELECT noemp, nom, prenom FROM emp WHERE noserv IN (SELECT noserv FROM serv WHERE ville='LILLE');
+/*56 : Sélectionner les employés qui ont le même chef que DUBOIS, DUBOIS exclu.*/
+SELECT noemp, nom, prenom FROM emp WHERE sup=1300 AND nom!='DUBOIS';
+/*57 : Sélectionner les employés embauchés le même jour que DUMONT.*/
+SELECT noemp, nom, prenom, embauche FROM emp WHERE embauche = (SELECT DISTINCT embauche FROM emp WHERE nom='DUMONT');
+/*58 : Sélectionner les nom et date d'embauche des employés plus anciens que MINET, dans l’ordre des embauches.*/
+SELECT nom, prenom, embauche FROM emp WHERE embauche < '1987-10-25' ORDER BY embauche;
+/*59 : Sélectionner le nom, le prénom, la date d’embauche des employés plus anciens que tous les employés du service N°6. (Attention MIN)*/
+SELECT nom, prenom, MIN(embauche) FROM emp GROUP BY noserv=6;
+SELECT nom, prenom, emploi, embauche FROM emp WHERE embauche < (SELECT MIN(embauche) FROM emp WHERE noserv=6) ORDER BY embauche;
+/*60 : Sélectionner le nom, le prénom, le revenu mensuel des employés qui gagnent plus qu'au moins un employé du service N°3, trier le résultat dans l'ordre croissant des revenus mensuels.*/
+SELECT nom, prenom, sal FROM emp WHERE sal > (SELECT MIN(sal) FROM emp WHERE noserv=3) ORDER BY sal;
+/*61 : Sélectionner les noms, le numéro de service, l’emplois et le salaires des personnes travaillant dans la même ville que HAVET.*/
+SELECT nom, service, emploi, sal, emp.noserv FROM emp INNER JOIN serv WHERE emp.noserv = serv.noserv AND ville='LILLE';
+/*62 : Sélectionner les employés du service 1, ayant le même emploi qu'un employé du service N°3.*/
+SELECT noemp, nom, prenom, emploi FROM emp WHERE emploi IN (SELECT emploi FROM emp WHERE noserv=3) AND noserv=1;
+/*63 : Sélectionner les employés du service 1 dont l'emploi n'existe pas dans le service 3.*/
+SELECT noemp, nom, prenom, emploi FROM emp WHERE emploi NOT IN (SELECT emploi FROM emp WHERE noserv=3) AND noserv=1;
+/*64 : Sélectionner nom, prénom, emploi, salaire pour les employés ayant même emploi et un salaire supérieur à celui de CARON.*/
+SELECT nom, prenom, emploi, sal FROM emp WHERE emploi = (SELECT emploi FROM emp WHERE nom='CARON') AND sal > (SELECT sal FROM emp WHERE nom='CARON');
+/*65 : Sélectionner les employés du service N°1 ayant le même emploi qu'un employé du service des VENTES.*/
+SELECT nom, prenom, noserv FROM emp WHERE emploi IN (SELECT emploi FROM emp WHERE noserv=3) AND noserv=1;
+/*66 : Sélectionner les employés de LILLE ayant le même emploi que RICHARD, trier le résultat dans l'ordre alphabétique des noms.*/
+SELECT noemp, nom, prenom FROM emp WHERE noserv IN (SELECT noserv FROM serv WHERE ville='LILLE') AND emploi='COMPTABLE' ORDER BY nom;
+/*67 : Sélectionner les employés dont le salaire est plus élevé que le salaire moyen de leur service (moyenne des salaires = avg(sal)), résultats triés par numéros de service.*/
+SELECT nom, prenom, emploi, sal, noserv 
+FROM emp e
+WHERE sal > (SELECT AVG(sal) FROM emp m WHERE e.noserv=m.noserv) 
+ORDER BY noserv;
+/*68 : Sélectionner les employés du service INFORMATIQUE embauchés la même année qu'un employé du service VENTES. ( année -> oracle : to_char(embauche,’YYYY’)> MYSQL: DATE_FORMAT(embauche,’%Y’)*/
+SELECT emp.* 
+FROM emp 
+INNER JOIN serv ON emp.noserv = serv.noserv 
+WHERE DATE_FORMAT(embauche,'%Y') 
+IN (SELECT DATE_FORMAT(embauche,'%Y') 
+FROM emp 
+INNER JOIN serv ON emp.noserv = serv.noserv 
+WHERE service = 'VENTES') AND service = 'INFORMATIQUE';
+/*69 : Sélectionner le nom, l’emploi, la ville pour les employés qui ne travaillent pas dans le même service que leur supérieur hiérarchique direct.*/
+SELECT e.nom, e.emploi, s.ville 
+FROM emp e INNER JOIN serv s ON e.noserv=s.noserv 
+INNER JOIN emp sup ON e.sup = sup.noemp 
+WHERE e.noserv !=sup.noserv;
+/*70 : Sélectionner le nom, le prénom, le service, le revenu des employés qui ont des subalternes, trier le résultat suivant le revenu décroissant.*/
+SELECT e.nom, e.prenom, s.service, e.sal, e.noemp  
+FROM emp e INNER JOIN serv s ON e.noserv=s.noserv 
+WHERE e.noemp IN (SELECT DISTINCT e.sup FROM emp e) 
+ORDER BY e.sal DESC;
+/*71 :Sélectionner le nom, l’emploi, le revenu mensuel (nommé Revenu) avec deux décimales pour tous les employés, dans l’ordre des revenus décroissants.*/
+SELECT nom, prenom, emploi, ROUND(sal, 2) AS 'Revenu' FROM emp;
+/*73 : Sélectionner nom, prénom, emploi, le pourcentage de commission (deux décimales) par rapport au revenu mensuel ( renommé "% Commissions") , pour tous les vendeurs dans l'ordre décroissant de ce pourcentage.*/
+SELECT nom, prenom, emploi, ROUND(comm*100/sal, 2) AS '% COMMISSION' FROM emp WHERE emploi='VENDEUR' ORDER BY comm DESC;
+/*75 : Sélectionner nom, prénom, emploi, salaire, commissions, revenu mensuel pour les employés des services 3,5,6 */
+SELECT nom, prenom, emploi, sal , comm , ROUND((sal+IFNULL(comm,0))/12,2) AS 'Revenu mensuel' FROM emp WHERE noserv IN (3, 5, 6);
+/*77 : Idem pour les employés des services 3,5,6 en remplaçant GAIN_ MENSUEL par GAINMENSUEL*/
+SELECT nom, prenom, emploi, sal AS 'SALAIRE', comm AS 'COMISSION', ROUND((sal+IFNULL(comm,0))/12,2) AS 'GAINMENSUEL' FROM emp WHERE noserv IN (3, 5, 6);
+/*78 : Afficher le nom, l'emploi, les salaires journalier et horaire pour les employés des services 3,5,6 (22 jours/mois et 8 heures/jour), sans arrondi, arrondi au centime près.
+79 : Idem sans arrondir mais en tronquant.*/
+SELECT nom, emploi, sal, 
+TRUNCATE(((sal+IFNULL(comm,0))/12)/22, 2) 
+as 'SALAIRES JOURNALIER', 
+TRUNCATE((((sal+IFNULL(comm,0))/12)/22)/8, 2) 
+as 'SALAIRES HORAIRES' 
+FROM emp WHERE noserv IN (3,5,6);
+/*80 : Concaténer les colonnes Service et Ville en les reliant par " ----> ", les premières lettres des noms de villes doivent se trouver sur une même verticale.*/
+SELECT CONCAT(ville, '---->', service) FROM serv;
+/*89 : Sélectionner nom, emploi, date d'embauche des employés du service 6.*/
+/*90 : Même chose en écrivant la colonne embauche sous la forme ‘dd-mm-yy’, renommée embauche.*/
+SELECT nom, emploi, DATE_FORMAT(embauche,'%d-%m-%y') FROM emp WHERE noserv=6;
+/*91 : Même chose en écrivant la colonne embauche sous la forme ‘day dd month yyyy'*/
+SELECT nom, emploi, DATE_FORMAT(embauche,'%W-%d-%m-%y') FROM emp WHERE noserv=6;
+/*92 : Même chose en écrivant la colonne embauche sous la forme ‘day dd month(abv) yy'*/
+SELECT nom, emploi, DATE_FORMAT(embauche,'%W-%d-%b-%y') FROM emp WHERE noserv=6;
+/*115 : Afficher l'emploi, l'effectif, le salaire moyen pour tout type d'emploi ayant plus de deux représentants.*/
+SELECT emploi,
+COUNT(*) AS Effectif,
+ROUND(AVG(sal),2) AS SalaireMoyen
+FROM emp
+GROUP BY emploi
+HAVING COUNT(*) > 2;
+/*116 : Sélectionner les services ayant au mois deux vendeurs.*/
+SELECT v.service,
+COUNT(*)
+FROM emp AS p
+JOIN serv v ON p.noserv = v.noserv
+WHERE emploi = 'Vendeur'
+GROUP BY p.noserv
+HAVING COUNT(*) >= 2;
+/*121 : Augmenter de 10% ceux qui ont un salaire inférieur au salaire moyen. Valider.*/
+CREATE TABLE emp2 AS SELECT * FROM emp;
+CREATE TABLE serv2 AS SELECT * FROM serv;
+UPDATE emp2 SET sal = sal * 1.1 WHERE sal < (SELECT AVG(sal) FROM emp)
+/*123 : Effacer les employés ayant le métier de SECRETAIRE. Valider*/
+CREATE TABLE emp2 AS SELECT * FROM emp;
+CREATE TABLE serv2 AS SELECT * FROM serv;
+DELETE FROM emp2 WHERE Emploi="SECRETAIRE"
+/*125 : Supprimer tous les employés ayant un A dans leur nom. Faire un SELECT sur votre table pour vérifier cela. Annuler les modifications et vérifier que cette action s’est bien déroulée.*/
+CREATE TABLE emp2 AS SELECT * FROM emp;
+CREATE TABLE serv2 AS SELECT * FROM serv;
+DELETE FROM emp2 WHERE nom LIKE '%A%';
+SELECT * FROM `emp` WHERE nom LIKE '%A%';
+/*127 : Créer les tables EMP1 et SERV1 comme copie des tables EMP et SERV*/
+CREATE TABLE EMP1 AS SELECT * FROM emp;
+CREATE TABLE SERV1 AS SELECT * FROM serv;
+/*128 : Vérifier que la table PROJ n’existe pas.*/
+SELECT *
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'PROJ';
+/*129 : Créer une table PROJET avec les colonnes suivantes:
+numéro de projet (noproj), type numérique 3 chiffres, doit contenir une valeur. nom de projet (nomproj), type caractère, longueur = 10
+budget du projet (budget), type numérique, 6 chiffres significatifs et 2 décimales.
+Vérifier l'existence de la table PROJET.
+Faire afficher la description de la table PROJET.
+C’était une erreur!!! Renommez la table PROJET en PROJ*/
+CREATE TABLE PROJET (noproj INT(3) NOT NULL,nomproj VARCHAR(10),budget DECIMAL(8,2))
+SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'projet';
+DESC projet;
+RENAME TABLE projet TO proj;
+/*130 : Insérer trois lignes de données dans la table PROJ: numéros des projets = 101, 102,103.
+noms des projets = alpha, beta, gamma budgets = 250000, 175000, 950000
+Afficher le contenu de la table PROJ.
+Valider les insertions faites dans la table PROJ.*/
+INSERT INTO proj (noproj, nomproj, budget)
+VALUES
+(101, 'alpha', 250000 ),
+(102,'beta',175000),
+(103, 'gamma', 950000);
+/*131 : Modifier la table PROJ en donnant un budget de 1.500.000 Euros au projet 103.
+Modifier la colonne budget afin d'accepter des projets jusque 10.000.000.000 d’Euros
+Retenter la modification demandée 2 lignes au dessus.*/
+UPDATE proj SET budget = 1500000 WHERE noproj = 103
+ALTER TABLE proj
+MODIFY budget DECIMAL(13,2)
+/*132 : Ajouter une colonne NOPROJ (type numérique) à la table EMP. Afficher le contenu de la table EMP.*/
+ALTER TABLE emp1
+ADD noproj INT
+SELECT * FROM EMP1;
