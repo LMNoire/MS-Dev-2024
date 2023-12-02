@@ -1,0 +1,224 @@
+body {
+    background-color: #F8D177;
+}
+.parent {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+}
+p {
+    font-weight: bold;
+}
+/*Places 1 to 16*/
+.div1 { 
+    grid-area: 4 / 1 / 5 / 2; 
+    display: flex;
+    justify-content: center;
+    background-color: #FFBEA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div2 { 
+    grid-area: 4 / 2 / 5 / 3; 
+    display: flex;
+    justify-content: center;
+    background-color: #FFBEA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div3 { 
+    grid-area: 5 / 2 / 6 / 3; 
+    display: flex;
+    justify-content: center;
+    background-color: #FFBEA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div4 { 
+    grid-area: 5 / 1 / 6 / 2; 
+    display: flex;
+    justify-content: center;
+    background-color: #FFBEA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div5 { 
+    grid-area: 8 / 3 / 9 / 4; 
+    display: flex;
+    justify-content: center;
+    background-color: #D9FFA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div6 { 
+    grid-area: 9 / 3 / 10 / 4; 
+    display: flex;
+    justify-content: center;
+    background-color: #D9FFA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div7 { 
+    grid-area: 9 / 4 / 10 / 5; 
+    display: flex;
+    justify-content: center;
+    background-color: #D9FFA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div8 { 
+    grid-area: 8 / 4 / 9 / 5; 
+    display: flex;
+    justify-content: center;
+    background-color: #D9FFA2;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div9 { 
+    grid-area: 8 / 6 / 9 / 7; 
+    display: flex;
+    justify-content: center;
+    background-color: #A2EDFF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div10 { 
+    grid-area: 9 / 6 / 10 / 7; 
+    display: flex;
+    justify-content: center;
+    background-color: #A2EDFF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div11 { 
+    grid-area: 9 / 7 / 10 / 8; 
+    display: flex;
+    justify-content: center;
+    background-color: #A2EDFF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div12 { 
+    grid-area: 8 / 7 / 9 / 8; 
+    display: flex;
+    justify-content: center;
+    background-color: #A2EDFF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div13 { 
+    grid-area: 5 / 9 / 6 / 10; 
+    display: flex;
+    justify-content: center;
+    background-color: #F1A2FF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div14 { 
+    grid-area: 4 / 9 / 5 / 10; 
+    display: flex;
+    justify-content: center;
+    background-color: #F1A2FF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div15 { 
+    grid-area: 4 / 8 / 5 / 9; 
+    display: flex;
+    justify-content: center;
+    background-color: #F1A2FF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+.div16 { 
+    grid-area: 5 / 8 / 6 / 9; 
+    display: flex;
+    justify-content: center;
+    background-color: #F1A2FF;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    border: 2px solid black;
+}
+/*Moussa's desk*/
+.div17 { 
+    grid-area: 1 / 3 / 2 / 5; 
+    border: 2px solid black;
+    background-color: #D58C3B;
+    text-align: center;
+    font-family: "Roboto";
+    height: 100px;
+    display: inline-block;
+}
+#computerpic {
+    width: 25%;
+    height: 60%;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+}
+/*Table 1*/
+.div18 { 
+    grid-area: 4 / 1 / 6 / 3; 
+    border: 2px solid black;
+    width: 320px;
+    height: 200px;
+    display: inline-block;
+}
+/*Table 2*/
+.div19 { 
+    grid-area: 8 / 3 / 10 / 5; 
+    border: 2px solid black;
+    width: 320px;
+    height: 200px;
+    display: inline-block;
+}
+/*Table 3*/
+.div20 { 
+    grid-area: 8 / 6 / 10 / 8; 
+    border: 2px solid black;
+    width: 320px;
+    height: 200px;
+    display: inline-block;
+    }
+/*Table 4*/
+.div21 { 
+    grid-area: 4 / 8 / 6 / 10; 
+    border: 2px solid black;
+    width: 320px;
+    height: 200px;
+    display: inline-block;
+}
