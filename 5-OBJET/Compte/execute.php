@@ -1,26 +1,53 @@
 <?php
-/*Include the class of the object*/
-include 'Client.class.php';
-include 'Compte.class.php';
-/*Instanciate a new object of class Client*/
-$client = new Client("EE111222", "DUPONT", "Michel", "0606060606");
-/*Call method to view customer informations*/
-$afficher = $client->afficher();
-echo $afficher;
-/*Instanciate a new object of class Compte*/
-$compte = new Compte(0, 2000, "EE111222");
-/*Call method to view account informations*/
-$afficherCpt = $compte->afficher();
-echo $afficherCpt;
-/*Ask amount and call method to credit an account*/
-$credit = readline ("Quel montant souhaitez-vous créditer ? : ");
-$nouveauSolde = $compte->crediter($credit);
-echo "Votre nouveau solde est de : ".$nouveauSolde."\n";
-/*Ask amount and call method to debit an account*/
-$debit = readline ("Quel montant souhaitez-vous débiter ? : ");
-$nouveauSolde = $compte->debiter($debit);
-echo "Votre nouveau solde est de : ".$nouveauSolde."\n";
-/*Ask amount and call method to credit an account from another*/
-$montant = readline ("Quel montant souhaitez-vous débiter ? : ");
-$soldeCredit = $compte->crediterCpt($montant, $compte);
-echo "Votre nouveau solde est de : ".$soldeCredit;
+include "Compte.class.php";
+
+
+
+
+// $client1->afficher();
+$client1 = new Client ("EE111222", "Salim", "Omar", "0611111");
+echo "Détails du compte:" ."\n";
+echo "**********************" ."\n";
+$compte1 = new Compte ($client1, 0);
+$compte1->afficherCompte();
+echo "**********************" ."\n";
+
+echo "Donner le montant à déposer: ".$compte1->crediter(5000)."\n";
+echo "Opération bien effectuée" ."\n";
+echo "**********************" ."\n";
+$compte1->afficherCompte();
+echo "**********************" ."\n";
+
+
+echo "Donner le montant à retirer: ".$somme = 1000 ."\n";
+$compte1->debiter($somme);
+echo "Opération bien effectuée" ."\n";
+echo "**********************" ."\n";
+$compte1->afficherCompte();
+
+
+$client2 = new Client ("EE333444", "Karimi", "samir", "0622222");
+echo "Détails du compte:" ."\n";
+echo "**********************" ."\n";
+$compte2 = new Compte ($client2, 0);
+$compte2->afficherCompte();
+echo "**********************" ."\n";
+
+echo "Créditer le compte 2 à partir du compte 1 ". "\n";
+echo "Donner le montant à déposer: ".$somme = 3000 ."\n";
+$compte2->crediterCpt($somme, $compte1);
+echo "Opération bien effectuée" ."\n";
+echo "Créditer le compte 1 et créditer le com ". "\n";
+echo "Donner le montant à retirer: ".$somme = 1000 ."\n";
+$compte1->debiterCpt($somme, $compte2);
+echo "Opération bien effectuée" ."\n";
+echo "**********************" ."\n";
+
+
+$compte1->afficherCompte();
+echo "**********************" ."\n";
+$compte2->afficherCompte();
+echo "**********************" ."\n";
+
+
+$compte1->afficherNbCompte();

@@ -1,85 +1,103 @@
 <?php
-/*Name of the class*/
+
 class Client
 {
-/*Attributs (or Properties) of the class*/
-    private string $cinClient;
-    private string $nomClient;
-    private string $prenomClient;
-    private string $telClient;
-/*Instanciate the object*/
-public function __construct(string $cinClient, string $nomClient, string $prenomClient, string $telClient) {
-    $this->cinClient = $cinClient;
-    $this->nomClient = $nomClient;
-    $this->prenomClient = $prenomClient;
-    $this->telClient = $telClient;
+    private String $CIN;
+    private string $name;
+    private string $firstname;
+    private string $tel;
+
+    public function __construct($CIN, $name, $firstname, $tel){
+        $this->CIN = $CIN;
+        $this->name = $name;
+        $this->firstname = $firstname;
+        $this->tel = $tel;
     }
-/**
-* Get the value of cinClient
-*/ 
-public function getCinClient() {
-    return $this->cinClient;
+
+    public function afficher(): void{
+        echo "CIN : ".$this->CIN ."\n";
+        echo "Le nom : ".$this->name."\n";
+        echo "Le prénom : ".$this->firstname."\n";
+        echo "Le numéro de téléphone : ".$this->tel."\n";
     }
-/**
-* Set the value of cinClient
-*
-* @return  self
-*/ 
-public function setCinClient($cinClient) {
-    $this->cinClient = $cinClient;
-    return $this;
+
+    /**
+     * Get the value of CIN
+     */ 
+    public function getCIN()
+    {
+        return $this->CIN;
     }
-/**
-* Get the value of nomClient
-*/ 
-public function getNomClient() {
-    return $this->nomClient;
+
+    /**
+     * Set the value of CIN
+     *
+     * @return  self
+     */ 
+    public function setCIN($CIN)
+    {
+        $this->CIN = $CIN;
+
+        return $this;
     }
-/**
-* Set the value of nomClient
-*
-* @return  self
-*/ 
-public function setNomClient($nomClient) {
-    $this->nomClient = $nomClient;
-    return $this;
+
+    /**
+     * Get the value of name
+     */ 
+    public function getName()
+    {
+        return $this->name;
     }
-/**
-* Get the value of prenomClient
-*/ 
-public function getPrenomClient() {
-    return $this->prenomClient;
+
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
-/**
-* Set the value of prenomClient
-*
-* @return  self
-*/ 
-public function setPrenomClient($prenomClient) {
-    $this->prenomClient = $prenomClient;
-    return $this;
+
+    /**
+     * Get the value of firstname
+     */ 
+    public function getFirstname()
+    {
+        return $this->firstname;
     }
-/**
-* Get the value of telClient
-*/ 
-public function getTelClient() {
-    return $this->telClient;
+
+    /**
+     * Set the value of firstname
+     *
+     * @return  self
+     */ 
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
     }
-/**
-* Set the value of telClient
-*
-* @return  self
-*/ 
-public function setTelClient($telClient) {
-    $this->telClient = $telClient;
-    return $this;
+
+    /**
+     * Get the value of tel
+     */ 
+    public function getTel()
+    {
+        return $this->tel;
     }
-/*Method to view customer informations*/
-public function afficher () : void {
-    echo "Le CIN du client est de : ".$this->cinClient."\n";
-    echo "Le nom du client est : ".$this->nomClient."\n";
-    echo "Le prénom du client est : ".$this->prenomClient."\n";
-    echo "Le téléphone du client est : ".$this->telClient."\n";
+
+    /**
+     * Set the value of tel
+     *
+     * @return  self
+     */ 
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+
+        return $this;
     }
 }
-?>
