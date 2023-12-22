@@ -1,0 +1,10 @@
+body{
+    background-image:  url(assets/scroll.png);
+    background-position: 50% 20%;
+    background-repeat: no-repeat;
+    background-color: #230000;
+}
+
+h1{
+    color: blue;
+}
