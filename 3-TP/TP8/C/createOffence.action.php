@@ -33,6 +33,8 @@ $password = $_POST['password'];
         echo "OSKOUR";
         return "Echec authentification"; 
     }
+ 
+$email = $_SESSION['denonciateur']->getMail();    
     
 $mail->setFrom("noreply@example.com");
 $mail->addAddress($email);

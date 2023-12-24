@@ -39,5 +39,7 @@
    
     
 </table>
+
+<a href="../C/readUser.action.php">Retour au DashBoard</a>
 </body>
 </html>

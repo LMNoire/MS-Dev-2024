@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Réinitialiser mot de passe</title>
+    <title>Reset Password</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="resetPasswordSS.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div class="box">
-    <h2>Réinitialiser son mot de passe</h2>
-    <form method="post" action="../C/resetPassword.action.php" class="formfield">
-        <div class="container">
-            <label for="email"><b>Email</b></label><br>
-            <input type="email" placeholder="Entrez votre email" name="email" required>
-            <br>
-            <label for="pswd"><b>Nouveau mot de passe</b></label><br>
-            <input type="pswd" placeholder="Votre nouveau mot de passe" name="newPass" required>
-            <br>
-            <label for="pswd"><b>Confirmer mot de passe</b></label><br>
-            <input type="pswd" placeholder="Confirmer votre mot de passe" name="confirmPass" required>
-            <br>
-            <button type="submit" class="button">Réinitialiser</button>
-        </div>
+
+<div class="box">
+    <h1>Reset Password</h1>
+
+    <form method="post" action="../C/processResetPassword.action.php">
+
+        <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
+    <div class="container">
+        <label for="email">Email</label>
+        <input class="input" type="email" id="email" name="email"><br><br>
+
+
+        <label for="password">New password</label>
+        <input class="input" type="password" id="password" name="password"><br><br>
+
+        <label for="password_confirmation">Repeat password</label>
+        <input class="input" type="password" id="password_confirmation"
+               name="password_confirmation"><br><br>
+
+        <button class="button" >Send</button>
+    </div>
     </form>
-    </div>
-    <div class="candle">
+</div>
+
+<div class="candle">
         <img class="candlePic" src="assets/candle.png"> 
-    </div>
+</div>
+
 </body>
 </html>
+

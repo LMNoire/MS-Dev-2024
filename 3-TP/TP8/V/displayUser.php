@@ -43,7 +43,7 @@
                         </form>
                         <form action="../C/updateOffence.action.php" method= "POST">
                             <input type="hidden" name="nom" value="<?php echo $user["Nom"];?>"/>
-                            <button type="submit">Dette Réglé</button>
+                            <button type="submit">Dette Réglée</button>
                         </form>
                         <?php };?>
                     </td>   
@@ -58,7 +58,7 @@
                     <th>Quantité</th>
                 </tr>
                 </tr>
-                <?php for ($i=0; $i <= 10 ; $i++) { 
+                <?php for ($i=0; $i < sizeof($_SESSION["tab_user"]) ; $i++) { 
                             ($denonciateur = $_SESSION["topDenonciation"][$i])?>         
                 <tr>
                     <td>
@@ -70,7 +70,10 @@
                     <td>
                         <?php echo $denonciateur["cpt_denonciations"]; ?>
                     </td>
-                        <?php };?>
+                        <?php 
+                        if ($i == 10){
+                            break;
+                    }};?>
                 </tr>
             </table>
             <!-- Troisième tableu user pour le top des contrevenants -->
@@ -82,7 +85,7 @@
                     <th>Quantité</th>
                 </tr>
                 </tr>
-                    <?php for ($i=0; $i <= 10 ; $i++) { 
+                    <?php for ($i=0; $i < sizeof($_SESSION["tab_user"]) ; $i++) { 
                             ($contrevenant = $_SESSION["topContrevenant"][$i])?>         
                 <tr>
                     <td>
@@ -94,7 +97,10 @@
                     <td>
                         <?php echo $contrevenant["cpt_casier"]; ?>
                     </td>
-                        <?php };?>
+                        <?php 
+                        if ($i == 10){
+                            break;
+                    }};?>
                 </tr>
             </table>
         </div>
