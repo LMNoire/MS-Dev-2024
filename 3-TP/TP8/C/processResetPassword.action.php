@@ -20,3 +20,4 @@ if ($_POST["password"] !== $_POST["password_confirmation"]) {
 DbManagement::resetPassword($password, $mail);
 
 echo "Password updated. You can now login.";
+header("Refresh:5; url=../V/index.php");
