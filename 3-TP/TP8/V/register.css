@@ -1,0 +1,79 @@
+body {
+    background-image: url(../V/assets/scroll_table.jpeg);
+    background-size: cover;
+    
+  }  
+  
+  h1 {
+    text-align: center;
+    margin-top: 8%;
+  
+    position: absolute;
+    width: 298px;
+    height: 70px;
+    left: calc(50% - 298px/2 - 64px);
+    top: calc(50% - 70px/2 - 314px);
+  
+    font-family: 'Mansalva';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 70px;
+    color: #000000;
+  
+  }
+  
+  
+  .profil {
+    margin-top: 2%;
+    border-radius: 20px;
+    font-size: 30px;
+    text-align: left;
+    display: block;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+    background-color: #E9B260;
+    font-family: 'Mansalva';
+    font-style: normal;
+    color: #000000;
+  
+  
+  }
+  
+  .inscription {
+     margin-top: 15%; 
+  }
+  
+   .sengager {
+      position: absolute;
+      width: 264px;
+      height: 60px;
+      left: 373px;
+      top: 100%;
+      font-family: 'Mansalva';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 52px;
+      line-height: 57px;
+      color: #000000;
+      
+  }
+  
+  input {
+    margin-top : 85px;
+  }
+  
+  .sceau{
+  
+  width: 239px;
+  height: 206px;
+  position: absolute;
+  top: 90%;
+  right: 15%;
+  
+  background-image: url(assets/sceau-removebg-preview.png);
+  background-size: cover;
+  border: 0px;
+  }
