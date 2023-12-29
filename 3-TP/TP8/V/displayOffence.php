@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="displayOffence.css">
     <title>Liste des méfaits</title>
 </head>
 <body>
@@ -35,11 +36,8 @@
                 <td><?php echo $info["Date"]; ?></td>
                 <td><?php echo $info["Status"]; ?></td>
             <?php } ?>
-            </tr>
-   
-    
+            </tr>    
 </table>
-
-<a href="../C/readUser.action.php">Retour au DashBoard</a>
+<a href="../C/readUser.action.php"> Retourner au Dashboard</a>
 </body>
 </html>

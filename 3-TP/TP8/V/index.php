@@ -3,9 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<link rel="stylesheet" href="button.css">
+<link rel="stylesheet" href="index.css">
 <title>Boite à Jurons</title>
-<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -34,8 +33,5 @@
   <button type="text" class="submit">Envoyer</button>
 </div>
 </form>
-
-
-
 </body>
 </html>

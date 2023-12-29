@@ -11,7 +11,7 @@
 <body>
 
 <div class="box">
-    <h1>Reset Password</h1>
+    <h1>Réinitialiser mot de passe</h1>
 
     <form method="post" action="../C/processResetPassword.action.php">
 
@@ -20,15 +20,14 @@
         <label for="email">Email</label>
         <input class="input" type="email" id="email" name="email"><br><br>
 
-
-        <label for="password">New password</label>
+        <label for="password">Nouveau mot de passe</label>
         <input class="input" type="password" id="password" name="password"><br><br>
 
-        <label for="password_confirmation">Repeat password</label>
+        <label for="password_confirmation">Répeter mot de passe</label>
         <input class="input" type="password" id="password_confirmation"
                name="password_confirmation"><br><br>
 
-        <button class="button" >Send</button>
+        <button class="button">Envoyer</button>
     </div>
     </form>
 </div>
@@ -36,6 +35,7 @@
 <div class="candle">
         <img class="candlePic" src="assets/candle.png"> 
 </div>
+
 
 </body>
 </html>

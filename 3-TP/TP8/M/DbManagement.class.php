@@ -87,35 +87,35 @@ class DbManagement
     /** @author  farid  mekentichifa@gmailcom */
 
     //modifier champs nom
-    public static function updateUserNom($nom):void{
+    public static function updateUserNom($id, $nom):void{
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE user SET nom = ?, WHERE id = $id";
+        $sql = "UPDATE users SET nom = ? WHERE ID_Users = ?";
         $stmt= $bdd->prepare($sql);
-        $stmt->execute($nom); 
+        $stmt->execute([$nom,$id]); 
     }
 
     //modifier champs prenom
-    public static  function updateUserPrenom($prenom) :void{
+    public static  function updateUserPrenom($id,$prenom) :void{
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE user SET prenom = ?, WHERE id = ?";
+        $sql = "UPDATE users SET prenom = ? WHERE ID_Users = ?";
         $stmt= $bdd->prepare($sql);
-        $stmt->execute($prenom); 
+        $stmt->execute([$prenom,$id]); 
     }
 
     //modifier champs mail
-    public static function updateUserMail($mail) :void{
+    public static function updateUserMail($id,$mail) :void{
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE user SET mail = ?, WHERE id = ?";
+        $sql = "UPDATE users SET mail = ? WHERE ID_Users = ?";
         $stmt= $bdd->prepare($sql);
-        $stmt->execute($mail); 
+        $stmt->execute([$mail,$id]); 
     }
 
     //modifier champs tel
-    public static function updateUserTel($tel) :void{
+    public static function updateUserTel($id,$tel) :void{
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE user SET tel = ?, WHERE id = ?";
+        $sql = "UPDATE users SET tel = ? WHERE ID_Users= ?";
         $stmt= $bdd->prepare($sql);
-        $stmt->execute($tel); 
+        $stmt->execute([$tel,$id]); 
     }
 
     public static function createOffence(Offence $offence) : void{    
