@@ -1,28 +1,110 @@
 body {
-    background-image:  url(assets/addOffence.png);
-    background-position: 50% 0%;
-    background-repeat: no-repeat;
-    background-color: #230000;
-    background-size: 70%;
-    z-index: 0;
     margin: 0;
-    padding: 0; 
-    display: flex;
-}
-@media screen and (max-width: 600px) {
-body {    
-    background-size: 100%;
-    }
-}
-@media screen and (min-width: 601px) and (max-width: 1200px) {
-    body {    
-    background-size: 90%;
-    }
+    padding: 0;
+    background-color: #230000;
+    zoom: 70%;
+    overflow: hidden;
 }
 
+.display-offence {
+    background-color: #230000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .display-offence .overlap-group-wrapper {
+    width: 1440px;
+    height: 1024px;
+  }
+  
+  .display-offence .overlap-group {
+    position: relative;
+    width: 1429px;
+    height: 1024px;
+    left: 11px;
+  }
+  
+  .display-offence .red-cloth-banner {
+    position: absolute;
+    width: 1110px;
+    height: 251px;
+    top: 0;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+  .display-offence .text-wrapper {
+    position: absolute;
+    width: 365px;
+    top: 68px;
+    left: 541px;
+    font-family: 'Berkshire Swash';
+    font-weight: 400;
+    color: #000000;
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .display-offence .ejv {
+    position: absolute;
+    width: 1429px;
+    height: 837px;
+    top: 187px;
+    left: 0;
+    object-fit: cover;
+  }
+  
+  .display-offence .element {
+    top: 281px;
+    position: absolute;
+    width: 138px;
+    height: 119px;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+  .display-offence .img {
+    top: 795px;
+    position: absolute;
+    width: 138px;
+    height: 119px;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+  .display-offence .ellipse {
+    position: absolute;
+    width: 154px;
+    height: 142px;
+    top: 45px;
+    left: 100%;
+    background-color: #d9d9d9;
+    border-radius: 77px/71px;
+  }
+  
+  .display-offence .div {
+    position: absolute;
+    width: 158px;
+    top: 84px;
+    left: 100%;
+    font-family: 'Berkshire Swash';
+    font-weight: 400;
+    color: #000000;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+
 .container {
+    zoom: 150%;
     font-family: "Roboto";
-    margin-top: 4%;
+    top: 3%;
+    left: -5%;
     width: 100%;
     display: flex;
     flex-direction: column; 
@@ -44,7 +126,7 @@ body {
     display: flex;
     justify-content: center;
     width: 100%; 
-    margin: 10px;
+    margin: 20px;
 }
 .card {
     display: flex;
@@ -94,11 +176,3 @@ body {
     border-radius: 20px;
     font-family: 'Berkshire Swash';
 }
-
-
-
-
-
-
-
-

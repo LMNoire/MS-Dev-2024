@@ -1,39 +1,22 @@
 <?php
 /** @author  farid  mekentichifa@gmailcom */
 include_once "../M/DbManagement.class.php";
+include_once "../M/User.class.php";
+session_start();
 
 // recuperation données methode post 
-
-$id = $_POST['ID'];
-$select = $_POST['colunn'];
-if ($select == "Probablement pas"){
-echo "ça ne fonctionne pas";
-}
+$id = $_SESSION["ID_UserDenonciateur"];
 // apppel des fonctions update
-if ($select == "nom") {
-    $nom = $_POST["info"];
-    DbManagement::updateUserNom($id,$nom);
-    header('Location: ../C/readUser.action.php');
-    exit();
-} elseif ($select == "prenom") {
-    $prenom = $_POST["info"];
-    DbManagement::updateUserPrenom($id,$prenom);
-    header('Location: ../C/readUser.action.php');
-    exit();
-} elseif ($select == "mail") {
-    $mail = $_POST["info"];
+
+    $nom = $_POST["nom"];
+    $prenom = $_POST["prenom"];
+    $mail = $_POST["mail"];
+    $tel = $_POST["tel"];
     if (filter_var($mail, FILTER_VALIDATE_EMAIL) === false) {
         echo "Votre adresse mail n'est pas valide /*/";
         echo "Patience est mère de vertue";
         header("Refresh:5; url=../V/settingUser.php");
-    } else {
-    DbManagement::updateUserMail($id,$mail);
-    header('Location: ../C/readUser.action.php');
-    exit();
-    }
-} elseif ($select == "tel" ) {
-    $tel = $_POST["info"];
-    if (!is_numeric($tel)) {
+    } elseif (!is_numeric($tel)) {
         echo "Ne prend que des chiffres /*/ ";
         echo "Patience est mère de vertue";
         header("Refresh:5; url=../V/settingUser.php");
@@ -42,9 +25,11 @@ if ($select == "nom") {
     echo "Patience est mère de vertue";
     header("Refresh:5; url=../V/settingUser.php");
     } else {
-        DbManagement::updateUserTel($id,$tel);
-        header('Location: ../C/readUser.action.php');}
+        DbManagement::updateUser($id,$tel,$nom,$prenom,$mail);
+        $tab = (DbManagement::readUser($mail)[0]);
+        $_SESSION["denonciateur"] = new User ($tab["Nom"],$tab["Prenom"],$tab['Mail'], $tab['Tel'], $tab['Password']);
+        header('Location: ../C/readUser.action.php');
         exit();
-}
+    }
 
 ?>

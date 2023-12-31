@@ -28,7 +28,7 @@
   </div>
 
   <a href="forgotPassword.php">Mot de Passe oublié?</a>
-  <a href="registrer.php">Vous n'êtes pas encore Inscrit ?</a>
+  <a href="register.php">Vous n'êtes pas encore Inscrit ?</a>
 
   <button type="text" class="submit">Envoyer</button>
 </div>

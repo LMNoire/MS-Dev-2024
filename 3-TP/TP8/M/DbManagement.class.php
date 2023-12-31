@@ -86,36 +86,12 @@ class DbManagement
 
     /** @author  farid  mekentichifa@gmailcom */
 
-    //modifier champs nom
-    public static function updateUserNom($id, $nom):void{
+    public static function updateUser($id,$tel,$nom,$prenom,$mail) : void {
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE users SET nom = ? WHERE ID_Users = ?";
+        $sql = "UPDATE users SET tel = ?, nom = ?, prenom = ?, mail = ? WHERE ID_Users= ?;";
         $stmt= $bdd->prepare($sql);
-        $stmt->execute([$nom,$id]); 
-    }
+        $stmt->execute([$tel,$nom,$prenom, $mail, $id]); 
 
-    //modifier champs prenom
-    public static  function updateUserPrenom($id,$prenom) :void{
-        $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE users SET prenom = ? WHERE ID_Users = ?";
-        $stmt= $bdd->prepare($sql);
-        $stmt->execute([$prenom,$id]); 
-    }
-
-    //modifier champs mail
-    public static function updateUserMail($id,$mail) :void{
-        $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE users SET mail = ? WHERE ID_Users = ?";
-        $stmt= $bdd->prepare($sql);
-        $stmt->execute([$mail,$id]); 
-    }
-
-    //modifier champs tel
-    public static function updateUserTel($id,$tel) :void{
-        $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "UPDATE users SET tel = ? WHERE ID_Users= ?";
-        $stmt= $bdd->prepare($sql);
-        $stmt->execute([$tel,$id]); 
     }
 
     public static function createOffence(Offence $offence) : void{    
@@ -199,13 +175,13 @@ class DbManagement
 
     public static function readUser($mail) : array {
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "SELECT Nom, Prenom, Mail, Tel, Password FROM users WHERE Mail = ? ;";
+        $sql = "SELECT Nom, Prenom, Mail, Tel, Password, ID_Users FROM users WHERE Mail = ? ;";
         $stmt= $bdd->prepare($sql);
         $stmt->execute([$mail]);
         $tabUser = $stmt->fetchAll(PDO::FETCH_ASSOC); 
         return $tabUser;
     }
-
+    
     public static function offenceSum($nom) : float {
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
         $sql = "SELECT ROUND(SUM(Montant),2) AS Total FROM offence WHERE Nom = ? AND Status = false";
@@ -216,7 +192,7 @@ class DbManagement
         if ($sum == NULL) {
             $sum = 0;
         } else{ 
-            $sum = $sum;
+            $sum == $sum;
         }
         return $sum;
     }

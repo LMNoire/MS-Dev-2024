@@ -23,6 +23,12 @@
 
 <body>
 
+<div class="display-offence">
+      <div class="overlap-group-wrapper">
+        <div class="overlap-group">
+          <img class="red-cloth-banner" src="assets/header.png" />
+          <div class="text-wrapper">Châtier un utilisateur</div>
+          <img class="ejv" src="assets/scroll.png" />
 <div class="container">
         <!--Formulaire-->
         <form action="../C/createOffence.action.php" id="offenceForm" method="post">
@@ -41,11 +47,11 @@
         <div class="card" id="infrac">
             <p>Infraction</p>
             <select name="infraction" method="post">
-                <option value="1">Petite injure</option>
-                <option value="2">Grosse injure</option>
+                <option value="0">Petite injure</option>
+                <option value="1">Grosse injure</option>
+                <option value="2">Comportement inadapté</option>
                 <option value="3">Comportement violent</option>
-                <option value="4">Comportement inadapté</option>
-                <option value="5">Retard</option>
+                <option value="4">Retard</option>
             </select>
         </div>
 </div>
@@ -64,6 +70,12 @@
 
 </div>
 </div>
+<div class="ellipse"></div>
+          <div class="div">Profil</div>
+          
+        </div>
+      </div>
+    </div>
 
 </body>
 

@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #230000;
+    zoom: 70%;
+    overflow: hidden;
+}
+
+.display-offence {
+    background-color: #230000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .display-offence .overlap-group-wrapper {
+    width: 1440px;
+    height: 1024px;
+  }
+  
+  .display-offence .overlap-group {
+    position: relative;
+    width: 1429px;
+    height: 1024px;
+    left: 11px;
+  }
+  
+  .display-offence .red-cloth-banner {
+    position: absolute;
+    width: 1110px;
+    height: 251px;
+    top: 0;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+
+  
+  .display-offence .ejv {
+    position: absolute;
+    width: 1429px;
+    height: 837px;
+    top: 187px;
+    left: 0;
+    object-fit: cover;
+  }
+  
+  .display-offence .element {
+    top: 281px;
+    position: absolute;
+    width: 138px;
+    height: 119px;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+  .display-offence .img {
+    top: 795px;
+    position: absolute;
+    width: 138px;
+    height: 119px;
+    left: 175px;
+    object-fit: cover;
+  }
+
+.display-offence .text-wrapper {
+    position: absolute;
+    width: 365px;
+    top: 68px;
+    left: 541px;
+    font-family: 'Berkshire Swash';
+    font-weight: 400;
+    color: #000000;
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    transform: translate(20%, -10%);
+  }
+
+.container {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-60%, -50%);
+    width: 80%; 
+    max-width: 500px; 
+    padding: 20px; 
+    text-align: center; 
+}
+
+.container p {
+    margin: 0; 
+    font-family: 'Berkshire Swash';
+    font-size: 20px;
+}
+

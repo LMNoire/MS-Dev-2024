@@ -13,7 +13,7 @@ $_SESSION ["tab_penality"] = DBManagement::readPenality();
 $_SESSION ["tab_user"] = DBManagement::getAllUsers();
 
 //Récupérer infraction depuis formulaire addOffence
-$infraction = $_POST ["infraction"] -1 ;
+$infraction = $_POST ["infraction"] ;
 //Récupérer password depuis formulaire addOffence
 $password = $_POST['password'];
 
@@ -33,7 +33,9 @@ $password = $_POST['password'];
         echo "OSKOUR";
         return "Echec authentification"; 
     }
-    
+     
+$email = $_SESSION['contrevenant']->getMail();
+
 $mail->setFrom("noreply@example.com");
 $mail->addAddress($email);
 $mail->Subject = "Vous vous êtes fait châtier";
