@@ -6,8 +6,8 @@ use PHPMailer\PHPMailer\Exception;
 include "../M/vendor/autoload.php";
 
 $mail = new PHPMailer(true);
-$mail->CharSet = "UTF-8";
-// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+//$mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
 $mail->isSMTP();
 $mail->SMTPAuth = true;

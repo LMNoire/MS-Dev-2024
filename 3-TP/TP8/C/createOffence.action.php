@@ -4,7 +4,6 @@
 include "../M/DbManagement.class.php" ;
 include "../M/Offence.class.php" ;
 include "../M/Mail.class.php";
-include "../M/Mail.class.php";
 
 //Session start
 session_start();
@@ -31,7 +30,8 @@ $password = $_POST['password'];
 
 // Échec de l'authentification            
     else {
-        header ("Location: ../V/get1_error.php");
+        echo "OSKOUR";
+        return "Echec authentification"; 
     }
      
 $email = $_SESSION['contrevenant']->getMail();

@@ -70,8 +70,9 @@
 
 </div>
 </div>
-        <a href="../V/settingUser.php" class="modify">Modifier Profil</a>
-        <a href="../C/logoutUser.action.php" class="logout">Déconnexion</a>  
+<div class="ellipse"></div>
+          <div class="div">Profil</div>
+          
         </div>
       </div>
     </div>

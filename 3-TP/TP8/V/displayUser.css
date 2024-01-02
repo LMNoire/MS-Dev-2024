@@ -4,7 +4,6 @@ body {
     background-color: #230000;
     zoom: 70%;
     overflow: hidden;
-    font-family: "Berkshire Swash";
 }
 
 .display-offence {
@@ -40,7 +39,7 @@ body {
     position: absolute;
     width: 365px;
     top: 68px;
-    left: 620px;
+    left: 541px;
     font-family: 'Berkshire Swash';
     font-weight: 400;
     color: #000000;
@@ -203,15 +202,9 @@ td {
     border: 2px solid black;
     background-color: #fb5c0d;
   }
-  .sancBut:hover{
-    background-color: #fb150d;
-  }
   .detReg {
     border: 2px solid black;
     background-color: #FB9B0D;
-  }
-  .detReg:hover {
-    background-color: #a86706;
   }
   .logout{
     position: absolute;
@@ -265,9 +258,6 @@ td {
   left: 50%; 
   transform: translateX(-50%);
 
-}
-.button:hover {
-  background-color: #a86706;
 }
 .clearfix::after {
   content: "";

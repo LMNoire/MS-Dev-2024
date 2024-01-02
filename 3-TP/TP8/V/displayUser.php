@@ -23,7 +23,7 @@
     <div class="overlap-group-wrapper">
         <div class="overlap-group">
           <img class="red-cloth-banner" src="assets/header.png" />
-          <div class="text-wrapper">Dashboard</div>
+          <div class="text-wrapper">DASHBOARD</div>
           <img class="ejv" src="assets/scroll.png" />
         <div >
 
@@ -60,7 +60,7 @@
             <?php endforeach; ?>
         </table>
     </div>
-    <a href="../C/readOffence.action.php"><button type="submit" class="button">Consulter la liste</button></a>
+    <a href="displayOffence.php"><button type="submit" class="button">Consulter la liste</button></a>
     
 </div>
 <!-- Deuxième tableau user pour le top des dénonciateurs -->
@@ -117,6 +117,10 @@
         </table>
     </div>
 </div>
+        <!-- <img class="element" src="assets/shield.png" />
+          <img class="img" src="assets/shield.png" /> -->
+          <div class="ellipse"></div>
+          <div class="div">Profil</div>
            <a href="../V/settingUser.php" class="modify">Modifier Profil</a>
          <a href="../C/logoutUser.action.php" class="logout">Déconnexion</a>
         </div>
