@@ -1,0 +1,81 @@
+body{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(35, 0, 0, 1);
+    overflow : hidden;
+    font-family: 'Berkshire Swash';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+.container{
+    position: absolute;
+    width: 1084px;
+    height: 192px;
+    left: 198px;
+    top: 214px;
+    background: #E9B260;
+    border-radius: 20px;
+}
+span{
+    position: absolute;
+    width: 962px;
+    height: 120px;
+    left: calc(50% - 962px/2 + 16px);
+    margin-top: 10px;
+
+    font-family: 'Berkshire Swash';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 60px;
+    text-align: center;
+
+    color: #0D0C26;
+}
+button{
+    position: absolute;
+    width: 480px;
+    height: 100px;
+    left: 30rem;
+    top: 44.7rem;
+
+    background: #FB9B0D;
+    border-radius: 20px;
+    z-index: 2;
+}
+a{
+    font-family: 'Berkshire Swash';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    color: #0D0C26;
+}
+.sceau{
+    position: absolute;
+    width: 322px;
+    height: 307px;
+    left: 894px;
+    top: 265px;
+}
+.candle1{
+    position: absolute;
+    width: 996px;
+    height: 928px;
+    left: -52px;
+    top: 310px;
+    z-index: 1;
+}
+.candle2{
+    position: absolute;
+    width: 1012px;
+    height: 1024px;
+    left: 37rem;
+    top: 15.8rem;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    z-index: 1;
+}
+
+
+
+

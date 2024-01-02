@@ -34,7 +34,6 @@ class DbManagement
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$mail]);
         $hashPassword = $stmt->fetchColumn();
-
         // Vérifier si l'utilisateur existe et si le mot de passe est correct
         if (password_verify($password, $hashPassword)) {
             echo "Welcome";

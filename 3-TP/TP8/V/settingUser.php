@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modification Profil</title>
     <link rel="stylesheet" href="settinguser.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Mansalva&display=swap" rel="stylesheet">
 </head>
     <body>
 
@@ -42,7 +44,7 @@
     <p class="valid">valider mes Modifications  ?</p>
 
     
-    <input type="image" src="../V/assets/sceau.jpeg"  class="sceau" value =" "/>   
+    <input type="image" src="../V/assets/sceau.png"  class="sceau" value =" "/>   
 
 
   </table> 
