@@ -37,7 +37,7 @@ elseif(!DbManagement::verifyMail($mail)) {
 
 elseif (trim($_POST['name'])&&trim($_POST['firstname'])&&trim($_POST['mail'])&&trim($_POST['tel'])&&trim($_POST['password'])== !NULL ) {
     DbManagement::createUser($user);
-    header('Location: ../V/index.php');
+    header('Location: ../V/successRegister.php');
 }
 else {
     header('Location: ../V/get1_error.php');

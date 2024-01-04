@@ -58,8 +58,8 @@ public function getMontant() {
 *
 * @return  self
 */ 
-public function setMontant($Montant) {
-    $this->Montant = $Montant;
+public function setMontant($montant) {
+    $this->montant = $montant;
     return $this;
     }
 /*End get & set*/

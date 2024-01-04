@@ -126,4 +126,200 @@ p{
 }
 
 
+/*Pour écran 24 pouces */
 
+@media only screen and (min-width: 1600px){
+    span{
+        position :absolute;
+        height: 7.9375rem;
+        flex-shrink: 0;
+        top :2rem;
+        left: 36%;
+        z-index: 2;
+        color: #FFF;
+        text-align: center;
+        font-family: "Miss Fajardose";
+        font-size: 8rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .candleNcoins1{
+        position: absolute;
+        top: 20rem;
+        right : 57%;
+        height: 900px;
+        width: 900px;
+        flex-shrink: 0;
+        z-index: 2;
+    }
+
+    .candleNcoins2{
+        position: absolute;
+        top: 20rem;
+        left: 70rem;
+        width: 900px;
+        height: 900px;
+        flex-shrink: 0;
+        transform: scaleX(-1);
+        z-index: 2;
+    }
+
+    .mail, .password {
+        position: relative;
+        margin-bottom: 35px;
+        left: 26%;
+    }
+
+    .submit {
+        margin-top: 1.8rem;
+        background-color: #FB9B0D;
+        border: 2px solid black;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-family: 'Berkshire Swash';
+        font-size: 20px;
+        border-radius : 20px;
+        position: relative;
+        left: 7.5rem;
+        box-shadow: 5px 4px 10px #000000;
+    }
+
+    .checkpass{
+        position: relative;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        left: 6.5rem;
+    }
+
+    .checkregister{
+        position: relative;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        left: 4rem;
+    }
+
+    .checkbox{
+        position: absolute;
+        top: 33%;
+        right : -8%;
+        z-index: 0;
+        
+    }
+    
+}
+
+
+@media only screen and (min-width: 960px) and (max-width : 1599px){
+    body{
+        height: 100%;
+        width: 100%;
+        background-color: rgba(35, 0, 0, 1);
+        overflow : hidden;
+        font-family: 'Berkshire Swash';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        zoom: 80%;
+    }
+
+    span{
+        position :absolute;
+        height: 7.9375rem;
+        flex-shrink: 0;
+        top :2rem;
+        left: 36%;
+        z-index: 2;
+        color: #FFF;
+        text-align: center;
+        font-family: "Miss Fajardose";
+        font-size: 8rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .candleNcoins1{
+        position: absolute;
+        top: 19rem;
+        right : 60%;
+        height: 850px;
+        width: 850px;
+        flex-shrink: 0;
+        z-index: 2;
+    }
+
+    .candleNcoins2{
+        position: absolute;
+        top: 19rem;
+        left: 72rem;
+        width: 850px;
+        height: 850px;
+        flex-shrink: 0;
+        transform: scaleX(-1);
+        z-index: 2;
+    }
+
+    .mail, .password {
+        position: relative;
+        margin-bottom: 35px;
+        left: 26%;
+    }
+
+    .submit {
+        margin-top: 1.8rem;
+        background-color: #FB9B0D;
+        border: 2px solid black;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-family: 'Berkshire Swash';
+        font-size: 20px;
+        border-radius : 20px;
+        position: relative;
+        left: 7.5rem;
+        box-shadow: 5px 4px 10px #000000;
+    }
+
+    .checkpass{
+        position: relative;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        left: 6.5rem;
+    }
+
+    .checkregister{
+        position: relative;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        left: 4rem;
+    }
+
+    .checkbox{
+        position: absolute;
+        top: 33%;
+        right : -8%;
+        z-index: 0;
+        
+    }
+
+
+}

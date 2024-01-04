@@ -96,3 +96,14 @@ body {
     font-size: 20px;
 }
 
+@media only screen and (min-width: 1600px){
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #230000;
+    zoom: 90%;
+    overflow: hidden;
+    font-family: "Berkshire Swash";
+}
+}
+

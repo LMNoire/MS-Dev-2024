@@ -10,6 +10,7 @@
 </head>
     <title>Liste des méfaits</title>
 </head>
+<body>
 <?php 
 //Start session
     session_start();
@@ -60,9 +61,9 @@
                       <a href="../C/readUser.action.php">Retour au DashBoard</a>
           <img class="element" src="assets/shield.png" />
           <img class="img" src="assets/shield.png" />
-          <div class="ellipse"></div>
-          <div class="div">Profil</div>
-          
+
+        <a href="../V/settingUser.php" class="modify">Modifier Profil</a>
+        <a href="../C/logoutUser.action.php" class="logout">Déconnexion</a>
         </div>
       </div>
     </div>

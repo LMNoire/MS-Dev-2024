@@ -21,20 +21,26 @@ $password = $_POST['password'];
     if (password_verify($password, $_SESSION['denonciateur']->getPassword())) {
         //Instancier new penality
         $penality = new Penality ($_SESSION["tab_penality"][$infraction]["Code_Infraction"],$_SESSION["tab_penality"][$infraction]["Libelle"],$_SESSION["tab_penality"][$infraction]["Montant"]);
-        //Instancier new offence
-        $offence = new Offence ($_SESSION['denonciateur'], $penality, $_SESSION['contrevenant']);
-        //Ajout de l'offence dans la BDD
-        DBManagement::createOffence($offence);
-                header ("Location: ../C/readOffence.action.php");
-    } 
-
-// Échec de l'authentification            
-    else {
-        echo "OSKOUR";
-        return "Echec authentification"; 
-    }
-     
-$email = $_SESSION['contrevenant']->getMail();
+        //Si retard calcul du retard à partir du moment ou l'on clique sur le bouton
+        if ($_SESSION["tab_penality"][$infraction]["Code_Infraction"] == 5) {
+            $dateJ =  strtotime(date("H:i"));
+            $dateInit = strtotime(date("8:55"));
+            $result =  $dateJ - $dateInit ;
+            $result = $result / 60 ;
+            $result = $result / 5;
+            $result = round($result) * 0.10;
+            $penality->setMontant($result);
+            $offence = new Offence ($_SESSION['denonciateur'], $penality, $_SESSION['contrevenant']);
+            DBManagement::createOffence($offence);
+            header ("Location: ../C/readOffence.action.php");
+        }else {
+            //Instancier new offence
+            $offence = new Offence ($_SESSION['denonciateur'], $penality, $_SESSION['contrevenant']);
+            //Ajout de l'offence dans la BDD
+            DBManagement::createOffence($offence);
+            header ("Location: ../C/readOffence.action.php");
+        }
+        $email = $_SESSION['contrevenant']->getMail();
 
 $mail->setFrom("noreply@example.com");
 $mail->addAddress($email);
@@ -54,5 +60,11 @@ try {
     echo "Le message n'a pas pu être envoyé. Error Mail: {$mail->ErrorInfo}";
 }
 
-
 echo "Un email a été envoyé, consultez votre boite mail.";
+    }
+    
+        // Échec de l'authentification            
+        else {
+            header ("Location: ../V/get1_error.php");
+        }
+     

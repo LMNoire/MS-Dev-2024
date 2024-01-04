@@ -1,119 +1,89 @@
 body {
-  background-image: url(../V/assets/scroll_table.jpeg);
-  background-size: cover;
-}  
-
-h1 {
-  text-align: center;
-  margin-top: 10%;
-  position: absolute;
-  width: 600px;
-  height: 70px;
-  left: calc(40% - 298px/2 - 64px);
-  top: calc(50% - 70px/2 - 314px);
-  font-family: 'Mansalva';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 64px;
-  line-height: 70px;
-  color: #000000;
-
-}
-
-
-.modif {
-  margin-top: 2%;
-  border-radius: 20px;
-  font-size: 30px;
-  text-align: left;
-  display: block;
-  padding: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 35%;
-  background-color: #E9B260;
-  font-family: 'Mansalva';
-  font-style: normal;
-  color: #000000;
+    background-image: url(../V/assets/1ScrollModified.png);
+    background-size: cover;
+  }  
   
-}
-
- .valid {
-    /* position: absolute;
-    width: 494px;
-    height: 30px;
-    left: 373px;
-    top: 96%;
+  h1 {
+    text-align: center;
+    margin-top: 1%;
+    position: absolute;
+    width: 600px;
+    height: 70px;
+    left: calc(50% - 298px/2 - 64px);
+    top: calc(50% - 70px/2 - 314px);
     font-family: 'Mansalva';
     font-style: normal;
-    font-weight: 200;
-    font-size: 32px;
-    line-height: 57px;
-    color: #000000; */
-    position: absolute;
-  width: 600px;
-  height: 60px;
-  left: 373px;
-  top: 100%;
-  font-family: 'Mansalva';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 52px;
-  line-height: 57px;
-  color: #000000;
-    
-}
-
-.modification {
-  margin-top : 15%;
-}
-
-.sceau{
-
-  width: 239px;
-  height: 206px;
-  position: absolute;
-  top: 90%;
-  right: 15%;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 70px;
+    color: #000000;
   
-  background-image: url(assets/sceau-removebg-preview.png);
-  background-size: cover;
-  border: 0px;
   }
-
- textarea{
-  background-color: #E9B260;
-  margin-top: 1%; 
-  font-size: 30px;
-  border-radius: 20px;
-  width: 500px;
-  font-family: 'Mansalva';
-  text-align: left;
-  font-style: normal;
-  color: #000000; 
-  height: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  /* display: block; */
-   padding: 5px;
- 
-} 
-.table{
-  margin-top: 21%;
-  border-radius: 20px;
-  /* font-size: 10px; */
-  text-align: left;
-  /* display: block; */
-  padding: 10px;
-  margin-left: 30%;
-  margin-right: auto;
-  width: 50%;
-  background-color: transparent;
-  font-family: 'Mansalva';
-  font-style: normal;
-  color: #000000;
-
-}
-input {
- height:15px;
-}
+  
+  
+    .modif {
+    margin-top: 2%;
+    border-radius: 20px;
+    font-size: 40px;
+    text-align: left;
+    display: block;
+    padding: 10px;
+    margin-left: 50%;
+    margin-right: auto;
+    width: 35%;
+    background-color: #E9B260;
+    font-family: 'Mansalva';
+    font-style: normal;
+    color: #000000;
+    
+  }
+  
+   .valid {
+     
+    position: absolute;
+    width: 610px;
+    height: 60px;
+    left: 370px;
+    top: 100%;
+    font-family: 'Mansalva';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 57px;
+    color: #000000;
+      
+  }
+  
+  .modification {
+    margin-top : 15%;
+  }
+  
+  .sceau{
+    width: 239px;
+    height: 206px;
+    position: absolute;
+    top: 90%;
+    right: 15%;
+    border: 0px;
+    }
+  
+  
+  .table{
+    margin-top: 13%;
+    border-radius: 20px;
+    /* font-size: 10px; */
+    text-align: left;
+    /* display: block; */
+    padding: 10px;
+    margin-left: 2%;
+    margin-right: auto;
+    width: 75%;
+    background-color: transparent;
+    font-family: 'Mansalva';
+    font-style: normal;
+    color: #000000;
+  
+  }
+  input {
+   height:35px;
+  }

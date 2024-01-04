@@ -31,7 +31,7 @@
 
         <div class="container">
        <!--Display error message-->
-    <p>Oups ! Une erreur est survenue. <br><br> Revenir à la <a href="index.php">page d'accueil</p></a>
+    <p>Oups ! Une erreur est survenue. <br><br> Revenir à la <a href="addOffence.php">Page d'accueil</p></a>
 </div>
 </div>
 </div>

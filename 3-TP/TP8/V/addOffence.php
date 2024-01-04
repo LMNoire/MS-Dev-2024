@@ -69,10 +69,10 @@
     </form>
 
 </div>
-</div>
-<div class="ellipse"></div>
-          <div class="div">Profil</div>
-          
+</div>  
+        <a href="../C/readUser.action.php">Retour au DashBoard</a>
+        <a href="../V/settingUser.php" class="modify">Modifier Profil</a>
+        <a href="../C/logoutUser.action.php" class="logout">Déconnexion</a>  
         </div>
       </div>
     </div>
