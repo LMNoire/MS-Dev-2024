@@ -1,7 +1,7 @@
 # MS-Dev-2024
 Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 # Contenu de la formation
-- OCTOBRE : Algorithmes, instructions conditionnelles en PHP
+- OCTOBRE : Algorithmes, instructions conditionnelles en PHP, méthode Agile SCRUM
 - NOVEMBRE : Création et appel de fonctions en PHP, architecture MVC, bases de données relationnelles, requêtes SQL
 - DECEMBRE : Création et instanciation de classes d'objets, POO, héritage, procédures stockées MySQL
 - JANVIER : Commandes linux, TP de groupe reprenant les trois premiers mois, API/Json
