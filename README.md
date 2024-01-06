@@ -4,7 +4,7 @@ Formation dev full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - OCTOBRE : Algorithmes, instructions conditionnelles en PHP
 - NOVEMBRE : Création et appel de fonctions en PHP, architecture MVC, bases de données relationnelles, requêtes SQL
 - DECEMBRE : Création et instanciation de classes d'objets, POO, héritage, procédures stockées MySQL
-- JANVIER : Commandes linux, TP de groupe reprenant les trois premiers mois
+- JANVIER : Commandes linux, TP de groupe reprenant les trois premiers mois, API
 # Description du repository
 - 1-ALGO : Exercices sur l'écriture d'algorithmes, tableaux et d'instructions conditionnelles
 - 2-PHP : Exercices sur la création et l'appel de fonctions en PHP
@@ -12,4 +12,14 @@ Formation dev full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - 4-BDD : Exercices sur la modélisation conceptuelle (MCD) et logique (MLD) de BDD relationnelle, création et utilisation des requêtes
 - 5-OBJET : Exercices sur les objets en PHP, écriture de leurs propriétés et méthodes, constructeurs, instanciation, assesseurs, classes abstraites et notions d'héritage
 # Stack technique de la formation
-- 
+- HTML/CSS
+- PHP
+- SQL/MySQL
+- Visual Studio Code
+- Looping/JMerise
+- Miro
+- Trello
+- Figma
+- XAMPP/Apache
+- Gitbash/Hub
+- Notepad++
