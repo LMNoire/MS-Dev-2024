@@ -22,4 +22,5 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - Figma
 - XAMPP/Apache
 - Gitbash/Hub
+- Commandes Linux
 - Notepad++
