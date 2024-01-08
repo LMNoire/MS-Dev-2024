@@ -11,7 +11,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - 3-TP : Suite de TP sur l'utilisation d'une architecture MVC, création de différentes vues, modèles et contrôleurs, POO, BDD, affichage dynamique, requête ajax/Jquery, intégration d'API 
 - 4-BDD : Exercices sur la modélisation conceptuelle (MCD) et logique (MLD) de BDD relationnelle, création et utilisation des requêtes
 - 5-OBJET : Exercices sur les objets en PHP, écriture de leurs propriétés et méthodes, constructeurs, instanciation, assesseurs, classes abstraites et notions d'héritage
-# Stack technique de la formation
+# Stack technique de la formation (Stack complet : www.coulombelselim.fr/competences )
 - HTML/CSS
 - PHP
 - Javascript
