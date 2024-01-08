@@ -15,3 +15,6 @@ Importation des résultats depuis un fichier CSV et affichage en temps réel dan
 Importation et exportation des résultats depuis une BDD MySQL et affichage en temps réel dans la vue
 - TP8 :
 Création d'une "boîte à jurons" en groupe avec création de compte et insertion en BDD, modification et affichage de profil, envoi de mail automatique. Architecture MVC, POO, HTML/CSS/PHP
+- TP9 : 
+Remplacement du header d'un contrôleur par un affichage dynamique sur la même page (register) grâce à l'utilisation d'une requête ajax en jquery + ajout de l'API d'auto
+complétion d'adresse du gouvernement

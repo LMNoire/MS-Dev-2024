@@ -1,0 +1,288 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #230000;
+    zoom: 70%;
+    overflow: hidden;
+    font-family: "Berkshire Swash";
+}
+
+.display-offence {
+    background-color: #230000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .display-offence .overlap-group-wrapper {
+    width: 1440px;
+    height: 1024px;
+  }
+  
+  .display-offence .overlap-group {
+    position: relative;
+    width: 1429px;
+    height: 1024px;
+    left: 11px;
+  }
+  
+  .display-offence .red-cloth-banner {
+    position: absolute;
+    width: 1110px;
+    height: 251px;
+    top: 0;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+  .display-offence .text-wrapper {
+    position: absolute;
+    width: 365px;
+    top: 68px;
+    left: 620px;
+    font-family: 'Berkshire Swash';
+    font-weight: 400;
+    color: #000000;
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .display-offence .ejv {
+    position: absolute;
+    width: 1429px;
+    height: 837px;
+    top: 187px;
+    left: 0;
+    object-fit: cover;
+  }
+  
+  .display-offence .element {
+    top: 281px;
+    position: absolute;
+    width: 138px;
+    height: 119px;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+  .display-offence .img {
+    top: 795px;
+    position: absolute;
+    width: 138px;
+    height: 119px;
+    left: 175px;
+    object-fit: cover;
+  }
+  
+  .display-offence .ellipse {
+    position: absolute;
+    width: 154px;
+    height: 142px;
+    top: 45px;
+    left: 100%;
+    background-color: #d9d9d9;
+    border-radius: 77px/71px;
+  }
+  
+  .display-offence .div {
+    position: absolute;
+    width: 158px;
+    top: 84px;
+    left: 100%;
+    font-family: 'Berkshire Swash';
+    font-weight: 400;
+    color: #000000;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .container {
+    position: absolute;
+    top: 55%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.userTitle {
+    margin-bottom: 10px;
+}
+
+.userTab {
+    border-collapse: collapse;
+    display: inline-block;
+    max-height: 500px;
+    border-radius: 15px;
+    border: 2px solid black;
+    overflow-y: scroll;
+    text-align: center;
+}
+.container2 {
+    position: absolute;
+    top: 42%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+
+.snitchTitle {
+    margin-bottom: 10px;
+}
+
+.snitchTab {
+    border-collapse: collapse;
+    display: inline-block;
+    border-radius: 15px;
+    border: 2px solid black;
+    max-height: 200px;
+    max-width: 500px;
+    overflow-y: scroll; 
+    margin-bottom: 20px; 
+    text-align: center;
+}
+.container3 {
+    position: absolute;
+    top: 70%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+
+.cTab {
+    border-collapse: collapse;
+    display: inline-block;
+    border-radius: 15px;
+    border: 2px solid black;
+    max-height: 200px;
+    max-width: 500px;
+    overflow-y: scroll; 
+    margin-bottom: 20px;
+    text-align: center;
+}
+.cTitle {
+    margin-bottom: 10px;
+}
+th {
+    font-family: 'Berkshire Swash';
+    padding: 15px;
+    color: red;
+    background:  #230000;
+    border: 1px solid #000;
+    z-index: 3;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    font-family: 'Berkshire Swash';
+    padding: 10px;
+    color: black;
+    border: 1px solid #000;
+    z-index: 3;
+}
+
+.modify{
+    position: absolute;
+    top: 74%;
+    left: 100%;
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    width: 19.5%;
+    margin-right: 0.625%;
+    text-align: center;
+    line-height: 3;
+    color: black;
+    font-family: 'Berkshire Swash';
+    border: 3px solid black;
+    background-color: #FB9B0D;
+    border-radius: 45%;
+  }
+  .sancBut {
+    border: 2px solid black;
+    background-color: #fb5c0d;
+  }
+  .sancBut:hover{
+    background-color: #fb150d;
+  }
+  .detReg {
+    border: 2px solid black;
+    background-color: #FB9B0D;
+  }
+  .detReg:hover {
+    background-color: #a86706;
+  }
+  .logout{
+    position: absolute;
+    top: 84%;
+    left: 100%;
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    width: 19.5%;
+    margin-right: 0.625%;
+    text-align: center;
+    line-height: 3;
+    color: black;
+    font-family: 'Berkshire Swash';
+    border: 3px solid black;
+    background-color: #FB9B0D;
+    border-radius: 45%;
+  }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+.button {
+  display: block;
+  justify-content: center;
+  background-color: #FB9B0D;
+  border: 2px solid black;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 20px;
+  font-family: 'Berkshire Swash';
+  position: absolute;
+  left: 50%; 
+  transform: translateX(-50%);
+
+}
+.button:hover {
+  background-color: #a86706;
+}
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@media only screen and (min-width: 1600px){
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #230000;
+    zoom: 90%;
+    overflow: hidden;
+    font-family: "Berkshire Swash";
+}
+}
