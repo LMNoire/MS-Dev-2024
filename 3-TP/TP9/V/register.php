@@ -83,6 +83,7 @@ $(document).ready(function() {
     /*Envoi du formulaire au controleur*/
     $("#submit").click(function(e){
         e.preventDefault();
+        
             /*Call Ajax*/
             $.ajax({
             /*Chemin controleur*/
@@ -99,12 +100,13 @@ $(document).ready(function() {
                 codepostal : $("#inputCodePostal").val(),
                 ville : $("#inputVille").val(),                
             },
+            
             /*Success*/
             success:function(response) {		
             //var json = $.parseJSON(response);
                 console.log(response);
                 /*Afficher résultat dans pop-up*/
-                alert(response.name + response.firstname + response.ville);
+                alert('Bienvenue ' + response.name + ' ' + response.firstname + ' de ' + response.ville);
                 /*Clean output fields*/
                 $("form")[0].reset();
             },
