@@ -8,6 +8,9 @@ $mail = $_POST['mail'];
 $tel = $_POST['tel'];
 $password = $_POST['password'];
 $hashpassword = password_hash($password, PASSWORD_DEFAULT);
+$adresse = $_POST['adresse'];
+$codepostal = $_POST['codepostal'];
+$ville = $_POST['ville'];
 
 // $name = 'name';
 // $firstname = 'firstname';
@@ -16,9 +19,9 @@ $hashpassword = password_hash($password, PASSWORD_DEFAULT);
 // $password = 'password';
 // $hashpassword = password_hash($password, PASSWORD_DEFAULT);
 
-$user = new User ($name, $firstname, $mail, $tel, $hashpassword);
+$user = new User ($name, $firstname, $mail, $tel, $hashpassword, $adresse, $codepostal, $ville);
 
-if (empty($name) || empty($firstname) || empty($mail) || empty($tel) || empty($password)) {
+if (empty($name) || empty($firstname) || empty($mail) || empty($tel) || empty($password) || empty($adresse) || empty($codepostal) || empty($ville)) {
     echo  'Tous les champs doivent être complétés !';
 }
 
@@ -42,14 +45,17 @@ elseif(!DbManagement::verifyMail($mail)) {
     echo 'Adresse mail déjà utilisé';
 } 
 
-elseif (trim($_POST['name'])&&trim($_POST['firstname'])&&trim($_POST['mail'])&&trim($_POST['tel'])&&trim($_POST['password']) ==!NULL ) {
+elseif (trim($_POST['name'])&&trim($_POST['firstname'])&&trim($_POST['mail'])&&trim($_POST['tel'])&&trim($_POST['password'])&&trim($_POST['adresse'])&&trim($_POST['codepostal'])&&trim($_POST['ville']) ==!NULL ) {
     DbManagement::createUser($user);
     $res = array(
         'name' => $name, 
         'firstname' => $firstname, 
         'mail' => $mail, 
         'tel' => $tel, 
-        'password' => $password
+        'password' => $password,
+        'adresse' => $adresse,
+        'codepostal' => $codepostal,
+        'ville' => $ville
         // 'status' => true
         );
     }
@@ -60,3 +66,4 @@ else {
 echo json_encode($res);
 
 ?>
+ 

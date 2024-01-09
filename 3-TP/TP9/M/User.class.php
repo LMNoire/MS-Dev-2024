@@ -9,15 +9,21 @@ class User {
     private string $mail;
     private String $tel;
     private string $password;
+    private string $adresse;
+    private string $codepostal;
+    private string $ville;
 
     //instance  et  iniatialisation
-    public function __construct (string $nom, string $prenom, string $mail, String $tel, string $password ){
+    public function __construct (string $nom, string $prenom, string $mail, String $tel, string $password, string $adresse, string $codepostal, string $ville ){
         
          $this->nom = $nom;
          $this->prenom = $prenom;
          $this->mail = $mail;
          $this->tel = $tel;
          $this->password = $password;
+         $this->adresse = $adresse;
+         $this->codepostal = $codepostal;
+         $this->ville = $ville;
     }   
 // asseceur 
 
@@ -121,4 +127,64 @@ class User {
         return $this;
     }
 
+
+    /**
+     * Get the value of adresse
+     */ 
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set the value of adresse
+     *
+     * @return  self
+     */ 
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codepostal
+     */ 
+    public function getCodepostal()
+    {
+        return $this->codepostal;
+    }
+
+    /**
+     * Set the value of codepostal
+     *
+     * @return  self
+     */ 
+    public function setCodepostal($codepostal)
+    {
+        $this->codepostal = $codepostal;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ville
+     */ 
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set the value of ville
+     *
+     * @return  self
+     */ 
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
 }

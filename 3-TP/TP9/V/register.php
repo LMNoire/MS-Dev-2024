@@ -57,7 +57,7 @@ $(document).ready(function() {
         /*Requete*/
         $.get('https://api-adresse.data.gouv.fr/search/', {
             q: rue,
-            limit: 15,
+            limit: 5,
             autocomplete: 1
         }, function(data, status, xhr) {
             let suggestions = "";
@@ -95,14 +95,16 @@ $(document).ready(function() {
                 mail : $("#mail").val(),
                 tel : $("#tel").val(),
                 password : $("#password").val(),
-                adresse: $("#adresse").val()
+                adresse : $("#inputRue").val(),
+                codepostal : $("#inputCodePostal").val(),
+                ville : $("#inputVille").val(),                
             },
             /*Success*/
             success:function(response) {		
             //var json = $.parseJSON(response);
                 console.log(response);
                 /*Afficher résultat dans pop-up*/
-                alert(response.name + response.firstname);
+                alert(response.name + response.firstname + response.ville);
                 /*Clean output fields*/
                 $("form")[0].reset();
             },

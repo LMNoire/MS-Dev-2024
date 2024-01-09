@@ -5,9 +5,9 @@ class DbManagement
 {
     public static function createUser(User $user){
         $bdd = new PDO('mysql:host=localhost;dbname=tp_penality;charset=utf8mb4', 'root', '');
-        $sql = "INSERT INTO users (nom, prenom, mail, tel, password) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO users (nom, prenom, mail, tel, password, adresse, code_Postal, ville) VALUES (?,?,?,?,?,?,?,?)";
         $stmt= $bdd->prepare($sql);
-        $stmt->execute([$user->getNom(), $user->getPrenom(), $user->getMail(), $user->getTel(), $user->getPassword()]);
+        $stmt->execute([$user->getNom(), $user->getPrenom(), $user->getMail(), $user->getTel(), $user->getPassword(), $user->getAdresse(), $user->getCodePostal(), $user->getVille()]);
     }
 
     public static function verifyMail($mail): bool {
