@@ -22,7 +22,6 @@ h1 {
 
 }
 
-
 .profil {
   margin-top: 3%;
   border-radius: 20px;
@@ -95,4 +94,26 @@ border: 0px;
     color: #000000;
   
   }
+}
+
+.suggestions-container {
+  width: 35%; 
+  margin-left: 25%; 
+  background-color: #ffffff; 
+  border: 2px solid #E9B260;
+  border-radius: 10px; 
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  max-height: 200px; 
+  overflow-y: auto; 
+  position: absolute; 
+  z-index: 1000; 
+}
+.address-item {
+  list-style-type: none;
+  padding: 10px; 
+  cursor: pointer;
+  font-size: 20px; 
+  color: #000000;
+  transition: background-color 0.3s;
+
 }
