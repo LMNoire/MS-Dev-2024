@@ -50,7 +50,7 @@ h1 {
     width: 264px;
     height: 60px;
     left: 433px;
-    top: 115%;
+    top: 150%;
     font-family: 'Mansalva';
     font-style: normal;
     font-weight: 400;
@@ -65,11 +65,10 @@ input {
 }
 
 .sceau{
-
 width: 239px;
 height: 206px;
 position: absolute;
-top: 100%;
+top: 130%;
 right: 21%;
 border: 0px;
 }
