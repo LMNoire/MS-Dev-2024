@@ -31,7 +31,7 @@
             <div class="suggestions-container">
                 <ul class="adress-suggestions"></ul>
             </div>         
-            <input type="text" class="profil" id="inputCodePostal" minlength="5" maxlength="5" placeholder="Code Postal">
+            <input type="text" class="profil" id="inputCodePostal" placeholder="Code Postal">
             <input type="text" class="profil" id="inputVille" name="inputVille" placeholder="Ville">
     </div>  
 <p class= sengager>S'engager ?</p>
@@ -48,23 +48,33 @@
 <!--Script pour récupérer infos du formulaire-->
 <script>
 $(document).ready(function() {
-    
+    $('.suggestions-container').hide();
+
     /*Autocompletion adresse API gouv*/
     $("#inputRue").keyup(function(event) {
         event.preventDefault();
-        
+       
+        /*Déclarer variable avec id de l'input*/
         let rue = $("#inputRue").val();
         /*Requete*/
         $.get('https://api-adresse.data.gouv.fr/search/', {
             q: rue,
-            limit: 5,
+            limit: 5, /*Limite of suggestion*/
             autocomplete: 1
         }, function(data, status, xhr) {
             let suggestions = "";
+                  if (data.features && data.features.length > 0) {
             $.each(data.features, function(i, obj) {
                 suggestions += '<li class="address-item" data-name="' + obj.properties.name + '" data-postcode="' + obj.properties.postcode + '" data-city="' + obj.properties.city + '">' + obj.properties.label + '</li>';
             });
+            
             $('.adress-suggestions').html(suggestions);
+            /*Display suggestion container*/
+            $('.suggestions-container').show();
+        } else {
+            /*Hide suggestion container*/
+            $('.suggestions-container').hide();
+        }
         }, 'json').fail(function() {
             console.log("Error fetching address suggestions.");
         });
@@ -78,6 +88,7 @@ $(document).ready(function() {
 
         /*Vider champ suggestion*/
         $('.adress-suggestions').empty();
+        $('.suggestions-container').hide();
     });
 
     /*Envoi du formulaire au controleur*/
