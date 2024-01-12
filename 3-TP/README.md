@@ -18,4 +18,4 @@ Création d'une "boîte à jurons" en groupe avec création de compte et inserti
 - TP9 : 
 Remplacement du header d'un contrôleur par un affichage dynamique sur la même page (register) grâce à l'utilisation d'une requête ajax en jquery + intégration de l'API d'auto complétion d'adresse du gouvernement
 - TP10 :
-Installation de symfony et paramétrage de son environnement de travail, création d'un formulaire d'inscription, gestion des CRUD, intégration dans une vue et affichage de la page dynamique grâce au call Ajax
+Installation de symfony et paramétrage de son environnement de travail, création d'un formulaire d'inscription, d'un login/logout, gestion des CRUD, intégration dans une vue et affichage de la page dynamique grâce au call Ajax
