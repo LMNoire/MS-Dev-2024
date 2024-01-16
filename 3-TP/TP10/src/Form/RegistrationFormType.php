@@ -68,7 +68,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-                'label' => 'En m\'inscrivant à ce site, j\'accepte les conditions d\'utilisations'
+                'label' => 'En m\'inscrivant à ce site, j\'accepte les conditions d\'utilisations : '
             ])
             ->add('plainPassword', PasswordType::class, [
                                 // instead of being set onto the object directly,
@@ -77,14 +77,14 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'class' => 'form-control'
-                ],
+                ], 
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Your password should be at least 6 characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
