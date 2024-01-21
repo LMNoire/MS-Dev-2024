@@ -4,6 +4,34 @@
 {# {% block title %}Titre{% endblock %} #}
 
 {% block body %}
-    {# <h1>Formulaire d'inscription</h1>
-    <p>Merci de bien vouloir remplir tous les champs</p>  #}
+    <!--If user already connected display dashboard-->
+        {% if app.user %}
+        <div id="dashboardwrapper">
+            <div class="dashboardtitle">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="welcomeuser">
+                Bienvenue <span id="welcomeuser">{{ app.user.userIdentifier }}</span>
+            </div>
+            <div class="welcomebody">
+                <a class="nav-link" href="{{ path('app_profil') }}">Gérer son compte</a>
+            </div>
+        </div>
+        {% endif %}
+    
+    <!--If user not connected display homepage-->
+        {% if not app.user %}
+        <div class="hometitle">
+            <h1>Bienvenue sur le TP10</h1>
+        </div>
+        <div class="homesubtitle">
+            <h2>Symfony 6.4</h2>
+        </div>
+        <div class="objlist">   
+            <li>Connexion</li>
+            <li>Déconnexion</li>
+            <li>Gestion des CRUD</li>
+            <li>Call Ajax</li>
+        </div>
+        {% endif %}
 {% endblock %}

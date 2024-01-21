@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<div id="successMessage"></div>
+<div id="errorMessage"></div>
+    <h1>Liste des utilisateurs</h1>
+    {# Tableau affichant les users #}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                {# <th>Roles</th> #} <!--Probleme conversion string array lors de l'edit de l'user-->
+                {# <th>Mot de passe</th> #} <!--Affichage plus clean-->
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Tel</th>
+                <th>Adresse</th>
+                <th>Code postal</th>
+                <th>Ville</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!--Pour chaque users on affiche les informations disponibles en bdd-->
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
+                {# <td>{{ user.password }}</td> #}
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.tel }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.zipcode }}</td>
+                <td>{{ user.city }}</td>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+
+                    <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Confirmer suppression');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button class="btn btn-outline-danger" id="submit" onclick="deleteUser()">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_new') }}">Créer un utilisateur</a>
+
+<!--JS link-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+{% endblock %}
+{% block javascript %}
+    <script>
+        $(document).on('click', '.deleteUser', function (e) {
+            e.preventDefault();
+
+            function deleteUser(userId, csrfToken) {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '{{ path('ajax_delete_user', {'id': userId}) }}',
+                    data: {'_token': csrfToken},
+                    success: function (data) {
+                        if (data.success) {
+                            // Update the content on the page based on the JSON response
+                            $('#successMessage').text(data.message);
+                            $('#user_' + userId).remove();
+                        } else {
+                            // Update the content on the page based on the JSON response
+                            $('#errorMessage').text('Failed to delete user. ' + (data.message || 'No message provided by the server.'));
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('An error occurred during the AJAX request.', xhr, status, error);
+                    }
+                });
+            }
+
+            // Assuming you have a way to get the user id and CSRF token in your template
+            var userId = $(this).data('user-id');
+            var csrfToken = $(this).data('csrf-token');
+
+            deleteUser(userId, csrfToken);
+        });
+    </script>
+{% endblock %}
