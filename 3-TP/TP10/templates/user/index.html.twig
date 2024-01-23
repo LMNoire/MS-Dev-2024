@@ -40,15 +40,17 @@
                 <td>{{ user.city }}</td>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
+                    <!--Link to display and edit users profils-->
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
 
-                    <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Confirmer suppression');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                        <button class="btn btn-outline-danger" id="submit" onclick="deleteUser()">Supprimer</button>
-                    </form>
+                    <!--Delete button with call ajax-->
+                    <button class="deleteBtn btn btn-danger" id="delete{{ user.id }}" data-csrf-token="{{ csrf_token('delete' ~ user.id) }}">
+                            Supprimer
+                    </button>
                 </td>
             </tr>
+        <!--If empty-->
         {% else %}
             <tr>
                 <td colspan="12">no records found</td>
@@ -56,45 +58,46 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <!--Create a new user-->
     <a href="{{ path('app_user_new') }}">Créer un utilisateur</a>
 
 <!--JS link-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {% endblock %}
-{% block javascript %}
-    <script>
-        $(document).on('click', '.deleteUser', function (e) {
-            e.preventDefault();
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--Delete a user call ajax on click-->
+<script>
+$(document).ready(function() {
+    $('.deleteBtn').click(function(e) {
+        e.preventDefault();
+        /*Declare userId and csrfToken in two variables*/
+        var userId = this.id.replace('delete', ''); /*Delete the id and replace it with empty*/
+        var csrfToken = $(this).data('csrf-token'); /*Get the csrf token*/
 
-            function deleteUser(userId, csrfToken) {
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: '{{ path('ajax_delete_user', {'id': userId}) }}',
-                    data: {'_token': csrfToken},
-                    success: function (data) {
-                        if (data.success) {
-                            // Update the content on the page based on the JSON response
-                            $('#successMessage').text(data.message);
-                            $('#user_' + userId).remove();
-                        } else {
-                            // Update the content on the page based on the JSON response
-                            $('#errorMessage').text('Failed to delete user. ' + (data.message || 'No message provided by the server.'));
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('An error occurred during the AJAX request.', xhr, status, error);
+        /*Confirmation popup*/
+        if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+            $.ajax({
+                url: '/user/' + userId, /*url path (user controller)*/
+                type: 'POST',
+                data: {
+                    '_token': csrfToken,
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert("Utilisateur supprimé avec succès"); /*If success display a pop up*/
+                        $('#delete' + userId).closest('tr').remove();
+                    } else {
+                        alert("La suppression a échoué"); /*If fail display a pop up*/
                     }
-                });
-            }
-
-            // Assuming you have a way to get the user id and CSRF token in your template
-            var userId = $(this).data('user-id');
-            var csrfToken = $(this).data('csrf-token');
-
-            deleteUser(userId, csrfToken);
-        });
-    </script>
+                },
+                error: function() {
+                    alert("Une erreur s'est produite"); /*If error display a pop up*/
+                }
+            });
+        }
+    });
+});
+</script>
 {% endblock %}

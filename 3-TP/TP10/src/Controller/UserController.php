@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use SebastianBergmann\Environment\Console;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,26 +71,16 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function ajaxDeleteUser(User $user, Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        // Check if the CSRF token is valid
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            // Remove the user and flush changes to the database
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
-    
-            // Return a JsonResponse indicating success
-            return new JsonResponse([
-                'success' => true,
-                'message' => 'User successfully deleted.',
-            ]);
+            return new JsonResponse(['success' => true]);
         }
-    
-        // Return a JsonResponse indicating failure
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'Invalid CSRF token',
-        ], 400);
+
+    return new JsonResponse(['success' => false]);
     }
-    
+
 } 
+
