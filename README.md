@@ -4,7 +4,8 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - OCTOBRE : Algorithmes, instructions conditionnelles en PHP, méthode Agile SCRUM
 - NOVEMBRE : Création et appel de fonctions en PHP, architecture MVC, bases de données relationnelles, requêtes SQL
 - DECEMBRE : Création et instanciation de classes d'objets et POO en PHP, héritage, procédures stockées MySQL, HTML/CSS
-- JANVIER : Commandes linux, intégration API + Json, Javascript, affichage dynamique sur une page, requêtes ajax/Jquery, frameworks Symfony pour PHP, frameworks Bootstrap pour HTML/CSS
+- JANVIER : Commandes linux, intégration API Rest + Json, Javascript, affichage dynamique sur une page, requêtes ajax/Jquery, frameworks Symfony pour PHP, frameworks Bootstrap pour HTML/CSS
+- FEVRIER :
 # Description du repository
 - 1-ALGO : Exercices sur l'écriture d'algorithmes, tableaux et d'instructions conditionnelles
 - 2-PHP : Exercices sur la création et l'appel de fonctions en PHP
@@ -14,7 +15,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 # Stack technique de la formation
 - HTML/CSS + Bootstrap
 - PHP + Symfony
-- Javascript
+- Javascript 
 - SQL/MySQL
 - Ajax/Jquery
 - Visual Studio Code
@@ -26,4 +27,5 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - Gitbash/Hub
 - Commandes Linux
 - Notepad++
-
+- API platform + Postman
+- Docker
