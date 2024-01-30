@@ -1,9 +1,8 @@
-
-
+/*Configuration du serveur Express*/
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const db = require('./queries')
+const db = require('./queries') /*Importation des fonctions queries.js*/
 const port = 3000
 
 app.use(bodyParser.json())
@@ -13,21 +12,19 @@ bodyParser.urlencoded({
  extended: true,
  })
 )
-
+    /*Mappage des requetes*/
     app.get('/', (request, response) => {
- 
-    response.json({ info: 'Node.js, Express, and Postgres API' })
+        response.json({ info: 'Node.js, Express, and Postgres API' })
     })
 
-
-
+    /*Methode HTTP, URL & fonction correspondante*/
     app.get('/users', db.getUsers)
     app.get('/users/:id', db.getUserById)
     app.post('/users', db.createUser)
     app.put('/users/:id', db.updateUser)
     app.delete('/users/:id', db.deleteUser)
 
-        app.listen(port, () => {
- 
-    console.log(`App running on port ${port}.`)
+    /*Configuration du port*/
+    app.listen(port, () => {
+        console.log(`App running on port ${port}.`)
     })

@@ -7,7 +7,8 @@ const pool = new Pool({
  password: 'password',
  port: 5432,
 })
-/*Création des routes*/
+
+/*Création des routes pour chaque fonction*/
     /*Get all users*/
     const getUsers = (request, response) => {
         pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
@@ -17,6 +18,7 @@ const pool = new Pool({
                 response.status(200).json(results.rows)
             })
         }
+
     /*Get user by ID*/
     const getUserById = (request, response) => {
         const id = parseInt(request.params.id)
@@ -27,6 +29,7 @@ const pool = new Pool({
                 response.status(200).json(results.rows)
             })
         }
+
     /*Create a user*/
     const createUser = (request, response) => {
         const { name, email } = request.body
@@ -38,6 +41,7 @@ const pool = new Pool({
                 response.status(201).send(`User added with ID: ${result.insertId}`)
             })
         }
+
     /*Update a user*/
     const updateUser = (request, response) => {
         const id = parseInt(request.params.id)
@@ -51,18 +55,19 @@ const pool = new Pool({
             }
                 response.status(200).send(`User modified with ID: ${id}`)
             })
-                }
+        }
 
+    /*Delete a user*/
     const deleteUser = (request, response) => {
         const id = parseInt(request.params.id)
         pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
-                if (error) {
-                    throw error
-                     }
-                    response.status(200).send(`User deleted with ID: ${id}`)
-                     })
-                    }  
-
+            if (error) {
+                throw error
+            }
+                response.status(200).send(`User deleted with ID: ${id}`)
+            })
+        }  
+        
     /*Exportation des méthodes*/
     module.exports = {
         getUsers,
