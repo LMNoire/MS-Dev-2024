@@ -20,4 +20,4 @@ Remplacement du header d'un contrôleur par un affichage dynamique sur la même 
 - TP10 :
 Installation de symfony et paramétrage de son environnement de travail, création d'un formulaire d'inscription, d'un login/logout, gestion des CRUD, intégration dans une vue et affichage de la page dynamique grâce au call Ajax, Bootstrap
 - TP11 :
-Création d'une API RESTful (ayant pour endpoints les CRUD utilisateurs) dans un environnement node.js exécuté sur un serveur Express et relié à une BDD Postgres. Tests des requêtes avec Postman
+Création d'une API RESTful (ayant pour endpoints les CRUD utilisateurs) avec API Platform dans un environnement node.js exécuté sur un serveur Express et relié à une BDD Postgres. Tests des requêtes avec Postman
