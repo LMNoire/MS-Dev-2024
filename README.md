@@ -5,7 +5,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - NOVEMBRE : Création et appel de fonctions en PHP, architecture MVC, bases de données relationnelles, requêtes SQL
 - DECEMBRE : Création et instanciation de classes d'objets et POO en PHP, héritage, procédures stockées MySQL, HTML/CSS
 - JANVIER : Commandes linux, intégration API Rest + Json, Javascript, affichage dynamique sur une page, requêtes Ajax/Jquery, frameworks Symfony pour PHP, frameworks Bootstrap pour HTML/CSS
-- FEVRIER : API platform + Postman, architecture Jamstack Node.js, PostgresQL
+- FEVRIER : API platform + Postman, architecture Jamstack Node.js, PostgresQL, base de données non relationnelle MongoDB
 # Description du repository
 - 1-ALGO : Exercices sur l'écriture d'algorithmes, tableaux et d'instructions conditionnelles
 - 2-PHP : Exercices sur la création et l'appel de fonctions en PHP
@@ -18,6 +18,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - Javascript 
 - SQL/MySQL
 - Postgres
+- MongoDB
 - Ajax/Jquery
 - Node.js
 - Visual Studio Code
