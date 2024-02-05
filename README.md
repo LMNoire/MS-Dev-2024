@@ -12,6 +12,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - 3-TP : Suite de TP sur l'utilisation d'une architecture MVC, création de différentes vues, modèles et contrôleurs, POO, BDD, affichage dynamique, requêtes Ajax/Jquery, intégration d'API, frameworks Symfony pour PHP, frameworks Bootstrap pour HTML/CSS, création et test d'une API RESTful avec API Platform-Node.js-Postman 
 - 4-BDD : Exercices sur la modélisation conceptuelle (MCD) et logique (MLD) de BDD relationnelle, création et utilisation des requêtes SQL
 - 5-OBJET : Exercices sur les objets en PHP, écriture de leurs propriétés et méthodes, constructeurs, instanciation, assesseurs, classes abstraites et notions d'héritage
+- 6-JS : Exercices sur le Javascript
 # Stack technique de la formation
 - HTML/CSS + Bootstrap
 - PHP + Symfony
