@@ -39,10 +39,10 @@ function onConfirm(){
    //====Code à rédiger ici======
   
   //si non majeur et que le controle parental est activé appeller la fonction refuser(), sinon apeller la fonction valider()
-  if (parentalInput.checked && age < 18) {
+  if (parentalInput.checked && age < ageMajorite) {
     refuser();
   } 
-  if (parentalInput.checked && age >= 18) {
+  if (parentalInput.checked && age >= ageMajorite) {
     valider();    
   }
   else {

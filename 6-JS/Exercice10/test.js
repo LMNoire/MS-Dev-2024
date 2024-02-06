@@ -33,7 +33,7 @@ function onConfirm(){
 
   //====Code à rédiger ici======
   //si non majeur appeler la fonction refuser(), sinon appeler la fonction valider()
-    if (age <= 18) {
+    if (age < ageMajorite) {
     refuser();
   } else {
     valider();
