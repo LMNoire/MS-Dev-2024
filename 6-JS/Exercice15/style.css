@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+}
+h1 {
+    text-align: center;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(50%);
+    margin: 5px;
+}
+#adressForm {
+    text-align: center;
+}
+#resetBtn {
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: tomato;
+}
