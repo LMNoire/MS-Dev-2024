@@ -13,37 +13,37 @@ $(document).ready(function() {
             autocomplete: 1,
             dataType: 'json' 
         }, function(data, status, xhr) {
-        /*Declare variable to store unique cities*/
+            /*Declare variable to store unique cities*/
             let uniqueCities = {}; 
-        if (data.features && data.features.length > 0) {
-            let suggestions = "";
-            $.each(data.features, function(i, obj) {
-        /*Check if the city is unique before adding it to suggestions*/
-        if (!uniqueCities[obj.properties.city]) {
-            uniqueCities[obj.properties.city] = true;
-            suggestions += '<li class="city-suggestions">' + obj.properties.city + '</li>';
-            }
+                if (data.features && data.features.length > 0) {
+                    let suggestions = "";
+                    $.each(data.features, function(i, obj) {
+                /*Check if the city is unique before adding it to suggestions*/
+                if (!uniqueCities[obj.properties.city]) {
+                    uniqueCities[obj.properties.city] = true;
+                    suggestions += '<li class="city-suggestions">' + obj.properties.city + '</li>';
+                    }
+                });
+                /* Display suggestions to the container */
+                $('.city-suggestions').html(suggestions);
+                /* Display suggestion container */
+                $('.suggestions-container').show();
+                    } else {
+                /* Hide suggestion container */
+                $('.suggestions-container').hide();
+                    }
+                /*If error*/
+                }, 'json').fail(function() {
+                    console.log("Error fetching address suggestions.");
+                });
+                /*Display suggestions*/
+                $('.city-suggestions').on("click", ".city-suggestions", function() {
+                $("#city").val($(this).text());
+                /*Clear suggestions*/
+                $('.suggestions-container').hide();
+            });
+        /*ZipCode END*/
         });
-        /* Display suggestions to the container */
-        $('.city-suggestions').html(suggestions);
-        /* Display suggestion container */
-        $('.suggestions-container').show();
-            } else {
-        /* Hide suggestion container */
-        $('.suggestions-container').hide();
-            }
-        /*If error*/
-        }, 'json').fail(function() {
-            console.log("Error fetching address suggestions.");
-        });
-        /*Display suggestions*/
-        $('.city-suggestions').on("click", ".city-suggestions", function() {
-        $("#city").val($(this).text());
-        /*Clear suggestions*/
-        $('.suggestions-container').hide();
-        });
-    /*ZipCode END*/
-    });
 
     /*Street START*/
     $("#street").keyup(function(e) {
@@ -61,19 +61,19 @@ $(document).ready(function() {
                 $.each(data.features, function(i, obj) {
                     suggestions += '<li class="street-suggestions">' + obj.properties.street + '</li>';
                 });
-            /*Display suggestions to the container*/
-            $('.street-suggestions').html(suggestions);
-            /*Display suggestion container*/
-            $('.suggestions-container2').show();
-                } else {
-            /*Hide suggestion container*/
-            $('.suggestions-container2').hide();
-                }
-            /*If error*/
-            }, 'json').fail(function() {
-                console.log("Error fetching address suggestions.");
+                /*Display suggestions to the container*/
+                $('.street-suggestions').html(suggestions);
+                /*Display suggestion container*/
+                $('.suggestions-container2').show();
+                    } else {
+                /*Hide suggestion container*/
+                $('.suggestions-container2').hide();
+                    }
+                /*If error*/
+                }, 'json').fail(function() {
+                    console.log("Error fetching address suggestions.");
+                });
             });
-        });
         /*Display suggestions*/
         $('.street-suggestions').on("click", ".street-suggestions", function() {
         $("#street").val($(this).text());
