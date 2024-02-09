@@ -1,60 +1,56 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-	<title>Adresse</title>
-	<meta charset="utf-8">
-    <link href="style.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!--Address form container-->
+    <div class="container">
+        <h1>Address form</h1>
+        <form id="addressForm">
+            <!--ZipCode-->
+            <div class="form-group">
+                <label for="postalCode">Zip code</label>
+                <input type="text" id="postalCode" name="postalCode">
+            </div>
+            <!--Error message display-->
+            <div id="error-message" class="error-message"></div>
+            <!--Get city button-->
+            <div class="form-group">
+                <button type="button" id="fetchCityBtn">Get city</button>
+            </div>
+            <!--City-->
+            <div class="form-group">
+                <label for="city">City</label>
+                <select id="city" name="city"></select>
+            </div>
+            <!--Street-->
+            <div class="form-group">
+                <label for="street">Street</label>
+                <select id="street" name="street"></select>
+            </div>
+            <!--Street number-->
+            <div class="form-group">
+                <label for="streetNumber">Street Number</label>
+                <input type="text" id="streetNumber" name="streetNumber">
+            </div>
+            <!--Weather API-->
+            <div class="form-group">
+                <button type="button" id="getWeather">Get weather</button>
+            </div>
+            <!--Display API response-->
+            <div id="weather-response"></div>
+            <!--Reset button-->
+            <button type="reset" id="resetBtn" class="btn btn-primary">Reset form</button>
+        </form>
+    </div>
 
-<!--Page title-->
-    <h1>Address Form</h1>
-
-<!--Adress Form-->
-<div class="wrapper">
-    <form action="" id="adressForm">
-        <!--ZipCode-->
-        <label for="zipCode">Zip Code</label>
-            <br>
-        <input type="text" id="zipCode">
-            <br>
-        <!--City-->
-        <label for="city">City</label>
-            <br>
-        <input type="text" id="city">
-        <!--City suggestion-->
-        <div class="suggestions-container" id="cityContainer">
-            <ul class="city-suggestions" id="citySuggestions"></ul>
-        </div> 
-            <br>
-        <!--Street-->
-        <label for="street">Street</label>
-            <br>
-        <input type="text" id="street">
-        <!--Street suggestion-->
-        <div class="suggestions-container2" id="street-suggestions">
-            <ul class="street-suggestions"></ul>
-        </div> 
-            <br>
-        <!--Street number-->
-        <label for="streetNbr">Street number</label>
-            <br>
-        <input type="text" id="streetNbr">
-            <br>
-        <!--Reset button-->
-        <input type="reset" value="Reset" id="resetBtn"/>
-    </form>
-</div>
-
-<!--Weather API-->
-<div class="wrapper2">
-
-</div>
-
-<!--JS scripts-->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="test.js"></script>
-
+    <!--JS Scripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
