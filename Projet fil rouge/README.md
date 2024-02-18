@@ -1,0 +1,6 @@
+# Description
+Projet fil rouge à réaliser en équipe en utilisant la méthode Agile et reprenant le stack technique de la formation
+# Consigne
+Réaliser une application/site pour une société de nettoyage fictive "CleanThis". La première partie inclue un espace utilisateur avec connexion via service externe (Google Auth), la gestion des rôles utilisateurs, la création et le suivi d'opérations, génération de rapports en pdf et envoi par email, utilisation d'APIs, le tout sous Symfony et relié à une BDD relationnelle MySql. La seconde partie inclue un back office en mode API avec node.js et disposant d'un dashboard statistique pour l'admin, mais également l'utilisation de Google Lense afin de pouvoir soumettre une opération et obtenir un devis selon l'objet en photo. L'archivage des logs doit se faire avec une BDD non relationnelle MongoDB.
+# Sprints
+- Sprint #1 (26 février) : Mise en place du Git, Trello et Jiro. Etablissement du MCD puis du MLD avec JMerise. Réalisation de l'UML et premiers tests sur Symfony afin de tester les entités décidées pendant le MCD. Réalisation du wireframe sur Figma.
