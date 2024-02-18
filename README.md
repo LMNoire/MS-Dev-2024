@@ -26,7 +26,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - Visual Studio Code
 - Looping/JMerise
 - Miro
-- Trello
+- Trello/Jira
 - Figma
 - XAMPP/Apache
 - Gitbash/Hub
