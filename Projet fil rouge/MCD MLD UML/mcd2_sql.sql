@@ -17,8 +17,7 @@ CREATE TABLE User(
         street        Varchar (100) NOT NULL ,
         phone         Varchar (25) NOT NULL ,
         role          Varchar (50) NOT NULL ,
-        hash_password Varchar (250) NOT NULL ,
-        cpt_ope       Int  Auto_increment  NOT NULL
+        hash_password Varchar (250) NOT NULL
 	,CONSTRAINT User_PK PRIMARY KEY (id_user)
 )ENGINE=InnoDB;
 
