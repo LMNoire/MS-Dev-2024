@@ -90,12 +90,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
 
-            $builder->get('roles')
 
-            ->addModelTransformer(new CallbackTransformer(
-                fn ($rolesAsArray) => count($rolesAsArray) ? $rolesAsArray[0]: null,
-                fn ($rolesAsString) => [$rolesAsString]
-            ))
         ]);
     }
 
