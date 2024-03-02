@@ -1,77 +1,131 @@
 <?php
+// src/Controller/Admin/UserCrudController.php
 
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use App\Entity\Operation;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Controller\OperationCrudController;
+use Symfony\Component\HttpFoundation\Request;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use Symfony\Component\Security\Core\User\UserInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
+use EasyCorp\Bundle\EasyAdminBundle\Field\{IdField, EmailField, TextField};
+use Symfony\Component\Form\Extension\Core\Type\{PasswordType, RepeatedType};
+use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore};
 
 class UserCrudController extends AbstractCrudController
 {
-    private UserPasswordHasherInterface $passwordEncoder;
+    public function __construct(
+        public UserPasswordHasherInterface $userPasswordHasher
+    ) {}
 
-    public function __construct( UserPasswordHasherInterface $passwordEncoder ) {
-        $this->passwordEncoder = $passwordEncoder;
-    }
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
+    public function configureCrud(Crud $crud): Crud {
         return $crud
-            ->setEntityLabelInPlural('Utilisateurs')
-            ->setEntityLabelInSingular('Utilisateur')
-            ->setPageTitle("index", "Administration des utilisateurs");
+            ->overrideTemplate('crud/new', 'user/new.html.twig')
+            ->overrideTemplate('crud/edit', 'user/edit.html.twig')
+            
+            ->setSearchFields(null);
     }
 
-    
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->add(Crud::PAGE_EDIT, Action::INDEX)
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->add(Crud::PAGE_EDIT, Action::DETAIL)
+            ;
+    }
+
     public function configureFields(string $pageName): iterable
     {
-        return [
-            // IdField::new('id'),
-            TextField::new('email'),
+        $fields = [
+            IdField::new('id')->hideOnForm(),
+            EmailField::new('email'),
             TextField::new('name'),
             TextField::new('firstname'),
-            ArrayField::new('roles'),
-            TextField::new('zipcode'),
-            TextField::new('city'),
-            TextField::new('street'),
+            TextField::new('zipcode', 'Code Postal')
+            ->setFormTypeOption('attr', ['class' => 'zipcode_ope']),
+            TextField::new('city', 'Ville')
+            ->setFormTypeOption('attr', ['class' => 'city_ope']),
+            TextField::new('street', 'Rue')
+            ->setFormTypeOption('attr', ['class' => 'adresse-autocomplete']),
             TextField::new('phone'),
+            ChoiceField::new('singleRole', 'Role')
+                ->setChoices([
+                    'Admin' => 'ROLE_ADMIN',
+                    'Senior' => 'ROLE_SENIOR',
+                    'Apprenti' => 'ROLE_APPRENTI',
+                    'Client' => 'ROLE_CUSTOMER'
+                ]),
+    ];
 
-            Field::new( 'password', 'New password' )->onlyWhenCreating()->setRequired( true )
-                       ->setFormType( RepeatedType::class )
-                       ->setFormTypeOptions( [
-                           'type'            => PasswordType::class,
-                           'first_options'   => [ 'label' => 'New password' ],
-                           'second_options'  => [ 'label' => 'Repeat password' ],
-                           'error_bubbling'  => true,
-                           'invalid_message' => 'The password fields do not match.',
-                       ] ),
-            Field::new( 'password', 'New password' )->onlyWhenUpdating()->setRequired( false )
-                       ->setFormType( RepeatedType::class )
-                       ->setFormTypeOptions( [
-                           'type'            => PasswordType::class,
-                           'first_options'   => [ 'label' => 'New password' ],
-                           'second_options'  => [ 'label' => 'Repeat password' ],
-                           'error_bubbling'  => true,
-                           'invalid_message' => 'The password fields do not match.',
-                       ] )
-                       ];
+
+        $password = TextField::new('password')
+            ->setFormType(RepeatedType::class)
+            ->setFormTypeOptions([
+                'type' => PasswordType::class,
+                'first_options' => ['label' => 'Password'],
+                'second_options' => ['label' => '(Repeat)'],
+                'mapped' => false,
+            ])
+            ->setRequired($pageName === Crud::PAGE_NEW)
+            ->onlyOnForms()
+            ;
+        $fields[] = $password;
+
+        return $fields;
     }
+
+    public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
+    {
+        $formBuilder = parent::createNewFormBuilder($entityDto, $formOptions, $context);
+        return $this->addPasswordEventListener($formBuilder);
+    }
+
+    public function createEditFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
+    {
+        $formBuilder = parent::createEditFormBuilder($entityDto, $formOptions, $context);
+        return $this->addPasswordEventListener($formBuilder);
+    }
+
+    private function addPasswordEventListener(FormBuilderInterface $formBuilder): FormBuilderInterface
+    {
+        return $formBuilder->addEventListener(FormEvents::POST_SUBMIT, $this->hashPassword());   
+    } 
+
+    private function hashPassword() {
+        return function($event) {
+            $form = $event->getForm();
+            if (!$form->isValid()) {
+                return;
+            }
+            $password = $form->get('password')->getData();
+            if ($password === null) {
+                return;
+            }
+
+            $hash = $this->userPasswordHasher->hashPassword($form->getData(), $password);
+            $form->getData()->setPassword($hash);
+        };
+
+    }
+
 }
+
