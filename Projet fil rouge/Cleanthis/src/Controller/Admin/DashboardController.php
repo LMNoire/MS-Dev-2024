@@ -36,7 +36,7 @@ class DashboardController extends AbstractDashboardController
                 ->generateUrl();
 
             return $this->redirect($url);
-        } elseif ($this->authorizationChecker->isGranted('ROLE_USER')) {
+        } elseif ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $url = $this->adminUrlGenerator
                 ->setController(OperationCrudController::class)
                 ->generateUrl();

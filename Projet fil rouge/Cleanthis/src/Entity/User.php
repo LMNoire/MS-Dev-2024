@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Operation;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -32,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
@@ -41,16 +42,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, nullable:true)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable:true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable:true)]
     private ?string $street = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 25, nullable:true)]
     private ?string $phone = null;
 
     #[ORM\OneToMany(targetEntity: Operation::class, mappedBy: 'customer')]
@@ -61,6 +62,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->operations = new ArrayCollection();
     }
     private $plainPassword;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $id_google = null;
 
     // Ajoutez les getters et setters pour ce champ
     public function getPlainPassword(): ?string
@@ -126,7 +130,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -250,6 +254,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     public function getSingleRole(): ?string {
         return $this->roles[0] ?? null;
+    }
+
+
+    public function getIdGoogle(): ?String
+    {
+        return $this->id_google;
+    }
+
+    public function setIdGoogle(?string $id_google): static
+    {
+        $this->id_google = $id_google;
+
+        return $this;
     }
 
     public function setSingleRole(string $role): self {
