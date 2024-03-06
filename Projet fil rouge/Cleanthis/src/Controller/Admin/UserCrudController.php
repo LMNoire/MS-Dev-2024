@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
+use Symfony\Component\Validator\Constraints\Regex;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
@@ -55,17 +56,17 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $fields = [
+        $fields = [  
             IdField::new('id')->hideOnForm(),
             EmailField::new('email'),
             TextField::new('name'),
             TextField::new('firstname'),
+            TextField::new('street', 'Rue')
+            ->setFormTypeOption('attr', ['class' => 'adresse-autocomplete']),
             TextField::new('zipcode', 'Code Postal')
             ->setFormTypeOption('attr', ['class' => 'zipcode_ope']),
             TextField::new('city', 'Ville')
             ->setFormTypeOption('attr', ['class' => 'city_ope']),
-            TextField::new('street', 'Rue')
-            ->setFormTypeOption('attr', ['class' => 'adresse-autocomplete']),
             TextField::new('phone'),
             ChoiceField::new('singleRole', 'Role')
                 ->setChoices([
@@ -76,7 +77,6 @@ class UserCrudController extends AbstractCrudController
                 ]),
     ];
 
-
         $password = TextField::new('password')
             ->setFormType(RepeatedType::class)
             ->setFormTypeOptions([
@@ -84,6 +84,9 @@ class UserCrudController extends AbstractCrudController
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => '(Repeat)'],
                 'mapped' => false,
+                'constraints' => [
+                    new Regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', "Il faut un mot de passe de 8 caractères, une majuscule et un chiffre")
+                ]
             ])
             ->setRequired($pageName === Crud::PAGE_NEW)
             ->onlyOnForms()

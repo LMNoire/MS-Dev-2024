@@ -10,6 +10,7 @@
 			color: #212529;
 		}
 
+
 		.container {
 			display: flex;
 			align-items: center;
@@ -86,10 +87,16 @@
 	</style>
 {% endblock %}
 
+
+
+
 {% block body %}
+
 	<div class="container">
+	<h1>Inscription</h1>
 		<div class="form-container">
-			<h1>Inscription</h1>
+			
+
 			{{ form_start(registrationForm) }}
 			<div class="form-group">
 				{{ form_label(registrationForm.name) }}
@@ -98,7 +105,8 @@
 			<div class="form-group">
 				{{ form_label(registrationForm.firstname) }}
 				{{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
-			</div>
+
+			</div>			
             <div class="form-group">
 				{{ form_label(registrationForm.street) }}
 				{{ form_widget(registrationForm.street, {'attr': {'class': 'form-control adresse-autocomplete'}}) }}
@@ -118,10 +126,12 @@
 			<div class="form-group">
 				{{ form_label(registrationForm.email) }}
 				{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.email) }} 
 			</div>
 			<div class="form-group">
 				{{ form_label(registrationForm.plainPassword, 'Password') }}
 				{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.plainPassword) }} 
 			</div>
 
 			<div class="form-group form-check">
@@ -134,8 +144,10 @@
 			{{ form_end(registrationForm) }}
 		</div>
 	</div>
+
 {% endblock %}
 
 {% block body_javascript %}
 	<script src="{{ asset('js/adresse-autocomplete.js') }}"></script>
+
 {% endblock %}
