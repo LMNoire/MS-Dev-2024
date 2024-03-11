@@ -101,8 +101,7 @@ class OperationCrudController extends AbstractCrudController {
             TextField::new('city_ope', 'Ville')
             ->setFormTypeOption('attr', ['class' => 'city_ope']),
             DateTimeField::new('finished_at', 'Terminé le')->hideOnForm(),
-
-            AssociationField::new('customer'),       
+     
             AssociationField::new('salarie'), 
         ];
     }
@@ -119,7 +118,7 @@ class OperationCrudController extends AbstractCrudController {
         if ($statusFilter) {
             $qb->andWhere('entity.status = :status')->setParameter('status', $statusFilter);
         }
-        if ($this->isGranted('ROLE_CUSTOM')) {
+        if ($this->isGranted('ROLE_USER')) {
         if ($user) {
             $qb->andWhere('entity.customer = :user')
                ->setParameter('user', $user);
