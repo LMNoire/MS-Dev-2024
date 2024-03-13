@@ -118,7 +118,7 @@ class OperationCrudController extends AbstractCrudController {
         if ($statusFilter) {
             $qb->andWhere('entity.status = :status')->setParameter('status', $statusFilter);
         }
-        if ($this->isGranted('ROLE_USER')) {
+        if ($this->isGranted('ROLE_CUSTOMER')) {
         if ($user) {
             $qb->andWhere('entity.customer = :user')
                ->setParameter('user', $user);

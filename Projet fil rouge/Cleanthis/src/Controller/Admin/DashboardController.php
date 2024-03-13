@@ -34,15 +34,9 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response {
 
-        if ($this->authorizationChecker->isGranted("ROLE_ADMIN","ROLE_SENIOR","ROLE_APPRENTI","ROLE_CUSTOMER")) {
+        if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_SENIOR') || $this->isGranted('ROLE_APPRENTI')||$this->isGranted('ROLE_CUSTOMER')) {
             $url = $this->adminUrlGenerator
                 ->setController(OperationCrudController::class) // Contrôleur d'opération pour l'admin
-                ->generateUrl();
-
-            return $this->redirect($url);
-        } elseif ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $url = $this->adminUrlGenerator
-                ->setController(OperationCrudController::class)
                 ->generateUrl();
 
             return $this->redirect($url);
@@ -72,16 +66,11 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Terminées', 'fa fa-check', Operation::class)
                 ->setQueryParameter('status', 'Terminée'),
             ]);
-            yield MenuItem::subMenu('Profil', 'fa fa-user')->setSubItems([
-                MenuItem::linkToCrud('Tous les profils', 'fa fa-address-book', User::class),
-                MenuItem::linkToCrud('Admin', 'fa fa-address-book-o', User::class)
-                    ->setQueryParameter('roles', '["ROLE_ADMIN"]'),
-                MenuItem::linkToCrud('Senior', 'fa fa-address-book-o', User::class)
-                    ->setQueryParameter('roles', '["ROLE_SENIOR"]'), 
-                    MenuItem::linkToCrud('Apprenti', 'fa fa-address-book-o', User::class)
-                    ->setQueryParameter('roles', '["ROLE_APPRENTI"]'),
-                MenuItem::linkToCrud('Clients', 'fa fa-address-book-o', User::class)
-                    ->setQueryParameter('roles', '["ROLE_USER"]'),
+            yield MenuItem::subMenu('Membres', 'fa fa-users')->setSubItems([
+                MenuItem::linkToCrud('Clients', 'fa fa-user', User::class)
+                    ->setQueryParameter('userType', 'customer'),
+                MenuItem::linkToCrud('Employés', 'fa fa-briefcase', User::class)
+                    ->setQueryParameter('userType', 'employee'),
             ]);
             yield MenuItem::linkToRoute('Statistiques', 'fa fa-chart-line', 'statistics_route');
             
@@ -118,7 +107,7 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToRoute('Besoin D’aide ?', 'fa fa-question-circle', 'help_route');
             yield MenuItem::linkToRoute('Chat', 'fa fa-comments', 'chat_route');
         }
-        if ($this->isGranted('ROLE_USER')) {
+        if ($this->isGranted('ROLE_CUSTOMER')) {
             
             yield MenuItem::section('Principal');
             yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');

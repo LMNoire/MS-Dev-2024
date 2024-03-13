@@ -86,7 +86,7 @@ class UserCrudController extends AbstractCrudController
                     'Admin' => 'ROLE_ADMIN',
                     'Senior' => 'ROLE_SENIOR',
                     'Apprenti' => 'ROLE_APPRENTI',
-                    'Client' => 'ROLE_USER'
+                    'Client' => 'ROLE_CUSTOMER'
                 ]),
     ];
 
@@ -143,15 +143,27 @@ class UserCrudController extends AbstractCrudController
 
     }
 
-    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder {
-        $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+            $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
     
-        $rolesFilter = $this->getContext()->getRequest()->query->get('roles');
-        if ($rolesFilter) {
-            $qb->andWhere('entity.roles = :roles')->setParameter('roles', $rolesFilter);
+            $entityAlias = $qb->getRootAliases()[0];
+    
+            $request = $this->container->get('request_stack')->getCurrentRequest();
+            $userType = $request->query->get('userType');
+    
+            if ($userType === 'customer') {
+                $qb->andWhere($entityAlias . '.roles LIKE :role')
+                   ->setParameter('role', '%"ROLE_CUSTOMER"%');
+            } elseif ($userType === 'employee') {
+                $qb->andWhere($entityAlias . '.roles LIKE :roleAdmin OR ' . $entityAlias . '.roles LIKE :roleSenior OR ' . $entityAlias . '.roles LIKE :roleApprenti')
+                   ->setParameter('roleAdmin', '%"ROLE_ADMIN"%')
+                   ->setParameter('roleSenior', '%"ROLE_SENIOR"%')
+                   ->setParameter('roleApprenti', '%"ROLE_APPRENTI"%');
+            }
+    
+            return $qb;
         }
-    
-        return $qb;
-    } 
-}
+    }
+
 
