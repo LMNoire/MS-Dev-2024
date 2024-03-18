@@ -17,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -27,6 +28,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class OperationCrudController extends AbstractCrudController {
 
@@ -55,16 +57,42 @@ class OperationCrudController extends AbstractCrudController {
         $operation = new Operation();
         $operation->setCustomer($this->getUser());
         $operation->setCreatedAt(new DateTimeImmutable());
-        $operation->setCustomer($this->getUser());
         $operation->setSalarie($this->getUser());
         return $operation;
     }
-
+    
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void {
+        if ($entityInstance instanceof Operation) {
+            // Vous pouvez ajuster cette logique pour définir le prix en fonction de la valeur du champ 'type'
+            $this->setOperationPrice($entityInstance);
+        }
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+    
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void {
         if ($entityInstance instanceof Operation) {
-            $entityInstance->setCustomer($this->getUser());
+            // Même logique pour ajuster le prix lors de la mise à jour
+            $this->setOperationPrice($entityInstance);
         }
         parent::updateEntity($entityManager, $entityInstance);
+    }
+    
+    private function setOperationPrice(Operation $operation) {
+        // Assurez-vous que le type est bien défini
+        switch ($operation->getType()) {
+            case 'Little':
+                $operation->setPrice(100000);
+                break;
+            case 'Medium':
+                $operation->setPrice(250000);
+                break;
+            case 'Big':
+                $operation->setPrice(500000);
+                break;
+            case 'Custom':
+                // Implémentez ici votre logique pour un prix personnalisé
+                break;
+        }
     }
 
     public function configureFields(string $pageName): iterable {
@@ -76,14 +104,18 @@ class OperationCrudController extends AbstractCrudController {
             AssociationField::new('customer', 'Client')->hideOnForm(),
             TextField::new('name', 'Intitulé de l’opération')
             ->setLabel('Mission'),
-            ChoiceField::new('type')->setChoices([
-                'Little' => 'Petite',
-                'Medium' => 'Moyenne',
-                'Big' => 'Grande',
-                'Custom' => 'Custom',
-            ])->hideOnIndex(),
-            TextField::new('type')->hideOnForm(),
-            MoneyField::new('price', 'Prix')->setCurrency('EUR'),
+            TextField::new('attachmentFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('attachment')->setBasePath('/images/products')->onlyOnIndex(),
+            ChoiceField::new('type')
+            ->setChoices([
+                'Petite' => 'Little',
+                'Moyenne' => 'Medium',
+                'Grande' => 'Big',
+                'Personnalisée' => 'Custom',
+            ]),
+        MoneyField::new('price', 'Prix')
+            ->setCurrency('EUR')
+            ->hideOnForm(), // Cacher le champ prix dans le formulaire
             FormField::addColumn('col-lg-4 col-xl-4'),
             DateTimeField::new('rdv_at', 'Date de RDV'),
             FormField::addColumn('col-lg-3 col-xl-6'),
@@ -112,24 +144,32 @@ class OperationCrudController extends AbstractCrudController {
         EntityDto $entityDto,
         FieldCollection $fields,
         FilterCollection $filters
-        ): QueryBuilder {
+    ): QueryBuilder {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
         $user = $this->security->getUser();
         $statusFilter = $this->getContext()->getRequest()->query->get('status');
+    
         if ($statusFilter) {
             $qb->andWhere('entity.status = :status')->setParameter('status', $statusFilter);
         }
-        // Vérifiez si l'utilisateur actuel a le rôle qui lui permet de voir toutes les missions.
-        // Par exemple, vous pouvez utiliser `ROLE_ADMIN` pour tester si l'utilisateur est un administrateur.
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            // Restriction pour les utilisateurs qui ne sont pas administrateurs.
+    
+        if ($this->isGranted('ROLE_CUSTOMER')) {
+            // Restreindre les opérations aux celles du client connecté
+            $qb->andWhere('entity.customer = :currentUser')
+               ->setParameter('currentUser', $user);
+        } elseif ($this->isGranted('ROLE_ADMIN')) {
+            // Laisser l'administrateur voir toutes les opérations
+        } else {
+            // Restreindre les utilisateurs qui ne sont pas administrateurs.
             $qb->andWhere('entity.status = :statusPending OR (entity.status = :statusAccepted AND entity.salarie = :user)')
                ->setParameter('statusPending', 'En attente de Validation')
                ->setParameter('statusAccepted', 'En cours')
                ->setParameter('user', $user);
         }
+    
         return $qb;
     }
+    
     
     public function configureActions(Actions $actions): Actions {
         $acceptAction = Action::new('accept', 'Accepter', 'fa fa-check')
