@@ -167,7 +167,7 @@ class OperationCrudController extends AbstractCrudController {
                         'Petite' => 'Little',
                         'Moyenne' => 'Medium',
                         'Grande' => 'Big',
-                        'Personnalisée' => 'Custom',
+                        'Personnalisée' => 'Custom', //TODO:
                 ]),
                 MoneyField::new('price', 'Prix')
                     ->setCurrency('EUR')

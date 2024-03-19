@@ -73,7 +73,7 @@ class DashboardController extends AbstractDashboardController
                         ->setQueryParameter('userType', 'employee'),
             ]);        
             // yield MenuItem::linkToRoute('Statistiques', 'fa fa-chart-line', 'statistics_route'); TODO:
-            yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
+            // yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
             yield MenuItem::section('Support');
             // yield MenuItem::linkToCrud('Votre Profil', 'fa fa-user', User::class); FIXME:
             yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out');
@@ -92,31 +92,29 @@ class DashboardController extends AbstractDashboardController
                     MenuItem::linkToCrud('Terminées', 'fa fa-check', Operation::class)
                         ->setQueryParameter('status', 'Terminée'),
             ]);
-            yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
+            // yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
             yield MenuItem::section('Support');
             yield MenuItem::linkToCrud('Votre Profil', 'fa fa-user', User::class);
             yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out');
         }
-        //Apprenti dashboard
         if ($this->isGranted('ROLE_APPRENTI')) {
+            
             yield MenuItem::section('Principal');
             yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-            yield MenuItem::subMenu('Opérations', 'fa fa-broom')
-                ->setSubItems([
-                    MenuItem::linkToCrud('Toutes les opérations', 'fa fa-tags', Operation::class),
-                    MenuItem::linkToCrud('En attente de Validation', 'fa fa-clock-o', Operation::class)
-                        ->setQueryParameter('status', 'En attente de Validation'),
-                    MenuItem::linkToCrud('En cours', 'fa fa-arrow-right', Operation::class)
-                        ->setQueryParameter('status', 'En cours'),
-                    MenuItem::linkToCrud('Terminées', 'fa fa-check', Operation::class)
-                        ->setQueryParameter('status', 'Terminée'),
+            yield MenuItem::subMenu('Opérations', 'fa fa-broom')->setSubItems([
+                MenuItem::linkToCrud('Toutes les opérations', 'fa fa-tags', Operation::class),
+                MenuItem::linkToCrud('En attente de Validation', 'fa fa-clock-o', Operation::class)
+                ->setQueryParameter('status', 'En attente de Validation'),
+                MenuItem::linkToCrud('En cours', 'fa fa-arrow-right', Operation::class)
+                    ->setQueryParameter('status', 'En cours'),
+                MenuItem::linkToCrud('Terminées', 'fa fa-check', Operation::class)
+                    ->setQueryParameter('status', 'Terminée'),
             ]);
-            yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
+            // yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
             yield MenuItem::section('Support');
             yield MenuItem::linkToCrud('Votre Profil', 'fa fa-user', User::class);
             yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out');
         }
-        //Customer dashboard
         if ($this->isGranted('ROLE_CUSTOMER')) {
             yield MenuItem::section('Principal');
             yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
@@ -130,7 +128,7 @@ class DashboardController extends AbstractDashboardController
                     MenuItem::linkToCrud('Terminées', 'fa fa-check', Operation::class)
                         ->setQueryParameter('status', 'Terminée'),
             ]);
-            yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
+            // yield MenuItem::linkToRoute('Historique', 'fa fa-history', 'history_route');
             yield MenuItem::section('Support');
             yield MenuItem::linkToCrud('Votre Profil', 'fa fa-user', User::class);
             yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out');
