@@ -14,7 +14,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - 4-BDD : Exercices sur la modélisation conceptuelle (MCD) et logique (MLD) de BDD relationnelle, création et utilisation des requêtes SQL
 - 5-OBJET : Exercices sur les objets en PHP, écriture de leurs propriétés et méthodes, constructeurs, instanciation, assesseurs, classes abstraites et notions d'héritage
 - 6-JS : Exercices sur le Javascript
-- Projet fil rouge : Elaboration d'un projet de la conception à son deployement reprenant le stack technique de la formation et la mise en situation pratique du travail d'équipe en entreprise
+- Projet fil rouge : Elaboration d'un projet de la conception à son deployement reprenant le stack technique de la formation et la mise en situation pratique du travail d'équipe en entreprise. Gestion des daily, préparations et comptes rendus de sprints
 # Stack technique de la formation
 - HTML/CSS + Bootstrap
 - PHP + Symfony
