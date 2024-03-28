@@ -12,7 +12,7 @@
                     <div class="row">
 
                         <div class="col-lg-7 col-12">
-                            <h1 class="text-white mb-lg-0">Contact</h1>
+                            <h1 class="text-white mb-lg-0">{{ "Contact"|trans }}</h1>
                         </div>
 
                         <div class="col-lg-4 col-12 d-flex justify-content-lg-end align-items-center ms-auto">
@@ -20,7 +20,7 @@
                                 <ol class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a href="templates\user\index.html.twig">{{ "Accueil"|trans }}</a></li>
 
-                                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ "Contact"|trans }}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -87,7 +87,7 @@
                                         <option value="Petite surface">{{ "Petite surface (0-30m²)"|trans }}</option>
                                         <option value="Moyenne surface">{{ "Moyenne surface (30-100m²)"|trans }}</option>
                                         <option value="Grande surface">{{ "Grande surface (100-300m²)"|trans }}</option>
-                                        <option value="Opération personnalisée">{{ "Opération personnalisée"|trans }}</option>
+                                        <option value="Custom">{{ "Opération personnalisée"|trans }}</option>
                                     </select>
 
                                     <textarea name="volunteer-message" rows="3" class="form-control" id="volunteer-message" placeholder="Détails de l'opération (Type de surfaces, de missions, taille...)"></textarea>

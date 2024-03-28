@@ -8,6 +8,7 @@ use App\Entity\Operation;
 use Doctrine\ORM\QueryBuilder;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -45,7 +46,47 @@ class OperationCrudController extends AbstractCrudController {
     public static function getEntityFqcn(): string {
         return Operation::class;
     }
+    public function edit(AdminContext $context)
+    {
+        $operation = $context->getEntity()->getInstance();
+        $user = $this->getUser();
+    
+        if (!$operation instanceof Operation || ($operation->getCustomer() !== $user && !$this->isGranted('ROLE_ADMIN'))) {
+            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier cette opération.');
+            return $this->redirectToRoute('admin'); // Assurez-vous que la route 'admin' est correcte
+        }
+    
+        // Assurez-vous que vous avez accès à Twig ou injectez le service Twig
+        return $this->render('operation_crud/edit.html.twig', [
+            'operation' => $operation
+        ]);
+    }
+    
+public function delete(AdminContext $context)
+{
+    $operation = $context->getEntity()->getInstance();
+    if (!$operation instanceof Operation) {
+        throw new \RuntimeException('L\'entité attendue n\'est pas une instance d\'Operation.');
+    }
 
+    // Vérifier les droits de l'utilisateur sur l'opération
+    $this->denyAccessUnlessGranted('DELETE', $operation);
+
+    return parent::delete($context);
+}
+
+    
+    protected function initialize(Request $request): void
+    {
+        parent::initialize($request);
+    
+        $entityId = $request->query->get('entityId');
+        if ($entityId) {
+            $operation = $this->entityManager->getRepository(Operation::class)->find($entityId);
+            $this->denyAccessUnlessGranted('EDIT', $operation);
+        }
+    }
+    
     public function configureCrud(Crud $crud): Crud {
         return $crud
             ->overrideTemplate('crud/new', 'operation_crud/new.html.twig')
@@ -57,14 +98,15 @@ class OperationCrudController extends AbstractCrudController {
             if ($statusFilter) {
                 $crud->setDefaultSort(['status' => $statusFilter]);
             }
+            
     }
+    
 
     public function createEntity(string $entityFqcn) {
         $operation = new Operation();
         $operation->setCustomer($this->getUser());
         $operation->setCreatedAt(new DateTimeImmutable());
         $operation->setSalarie(null);
-    
         return $operation;
     }
     
@@ -77,8 +119,10 @@ class OperationCrudController extends AbstractCrudController {
     
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void {
         if ($entityInstance instanceof Operation) {
+            $this->denyAccessUnlessGranted('EDIT', $entityInstance);
             $this->setOperationPrice($entityInstance);
         }
+    
         parent::updateEntity($entityManager, $entityInstance);
     }
     
@@ -99,59 +143,72 @@ class OperationCrudController extends AbstractCrudController {
     }
 
     public function configureFields(string $pageName): iterable {
-        //Formulaire creation operation pour client
-        if ($this->isGranted('ROLE_CUSTOMER')) {
-            return [
-                FormField::addTab('Mission'),
-                DateTimeField::new('created_at', 'Créé le')
-                    ->hideOnForm(),
-                FormField::addColumn('col-lg-8 col-xl-3'),
-                IdField::new('id', 'Nº')
-                    ->hideOnForm(),
-                AssociationField::new('customer', 'Client')
-                    ->hideOnForm()
-                    ->hideOnIndex(),
-                AssociationField::new('salarie', 'Salarié')
-                    ->hideOnForm(),
-                TextField::new('name', 'Intitulé de l’opération')
-                    ->setLabel('Mission'),
-                TextField::new('attachmentFile')
-                    ->setLabel('Photo')
-                    ->setFormType(VichImageType::class)
-                    ->onlyWhenCreating(),
-                ImageField::new('attachment')
-                    ->setLabel('Photo')
-                    ->setBasePath('/images/products')
-                    ->onlyOnIndex(),
-                ChoiceField::new('type')
-                    ->setChoices([
-                        'Petite - 1000€' => 'Little',
-                        'Moyenne - 2500€' => 'Medium',
-                        'Grande - 5000€' => 'Big',
-                        'Personnalisée' => 'Custom',
-                ]),
-                MoneyField::new('price', 'Prix')
-                    ->setCurrency('EUR')
-                    ->hideOnForm(),
-                FormField::addColumn('col-lg-4 col-xl-4'),
-                DateTimeField::new('rdv_at', 'Date de RDV'),
-                FormField::addColumn('col-lg-3 col-xl-6'),
-                TextEditorField::new('description', 'Description')
-                    ->hideOnForm(),
-                TextareaField::new('description', 'Description')
-                    ->renderAsHtml()
-                    ->hideOnIndex(),
-                TextField::new('street_ope', 'Rue')
-                    ->setFormTypeOption('attr', ['class' => 'adresse-autocomplete']),
-                TextField::new('zipcode_ope', 'Code Postal')
-                    ->setFormTypeOption('attr', ['class' => 'zipcode_ope']),
-                TextField::new('city_ope', 'Ville')
-                    ->setFormTypeOption('attr', ['class' => 'city_ope']),
-                DateTimeField::new('finished_at', 'Terminé le')
-                    ->hideOnForm() 
+        $fields = [];
+
+        if ($this->isGranted('ROLE_CUSTOMER') && Crud::PAGE_INDEX === $pageName) {
+            $fields[] = TextField::new('name', 'Mission');
+            $fields[] = TextField::new('descritpion', 'La description de la mission de néttoyage');
+            $fields[] = ChoiceField::new('type', 'Type de mission')
+                        ->setChoices([
+                            'Petite - 1000€' => 'Little',
+                            'Moyenne - 2500€' => 'Medium',
+                            'Grande - 5000€' => 'Big',
+                            'Personnalisée' => 'Custom',
+                        ])->renderAsBadges([
+                            'Little' => 'info',
+                            'Medium' => 'warning',
+                            'Big' => 'success',
+                            'Custom' => 'secondary',
+                        ]);
+                        $fields[] = AssociationField::new('salarie', 'Employé En Charge de Votre Demande')
+                        ->formatValue(function ($value, $entity) {
+                            $salarie = $entity->getSalarie();
+                            return $salarie ? sprintf('%s %s', $salarie->getFirstName(), $salarie->getName()) : 'Non assigné';
+                        });
+                        $fields[] =ChoiceField::new('status')
+                        ->setChoices([
+                        'En attente' => 'En attente de Validation',
+                        'En cours' => 'En cours',
+                        'Terminée' => 'Terminée',
+                        'Refusée' => 'Refusée',
+                    ])   ->renderAsBadges([
+                        'En attente de Validation' => 'warning',
+                        'En cours' => 'primary',
+                        'Terminée' => 'success',
+                        'Refusée' => 'danger',
+                    ]);
+                    $fields[] = TextField::new('fullAddress', 'Adresse d\'intervention')
+                    ->formatValue(function ($value, $entity) {
+                        return $entity->getFullAddress();
+                    });
+        }
+            if (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
+                // Champs pour les pages de création et d'édition
+                $fields = [
+                    FormField::addPanel('Détails de la Mission'),
+                    TextField::new('name', 'Intitulé de l’opération')
+                        ->setLabel('Mission'),
+                    ChoiceField::new('type', 'Type de mission')
+                        ->setChoices([
+                            'Petite - 1000€' => 'Little',
+                            'Moyenne - 2500€' => 'Medium',
+                            'Grande - 5000€' => 'Big',
+                            'Personnalisée' => 'Custom',
+                        ]),
+                    DateTimeField::new('rdv_at', 'Date de RDV'),
+                    TextareaField::new('description', 'Description'),
+                    TextField::new('street_ope', 'Rue')
+                        ->setFormTypeOption('attr', ['class' => 'adresse-autocomplete']),
+                    TextField::new('zipcode_ope', 'Code Postal')
+                        ->setFormTypeOption('attr', ['class' => 'zipcode_ope']),
+                    TextField::new('city_ope', 'Ville')
+                        ->setFormTypeOption('attr', ['class' => 'city_ope']),
+                    TextField::new('attachmentFile')
+                        ->setLabel('Photo')
+                        ->setFormType(VichImageType::class)
+                        ->onlyWhenCreating(),
                 ];
-        } else { 
-        //Formulaire creation operation pour salariés
+        } else {
             return [
                 FormField::addTab('Mission'),
                 DateTimeField::new('created_at', 'Créé le')
@@ -212,8 +269,12 @@ class OperationCrudController extends AbstractCrudController {
                     ->setFormTypeOption('attr', ['class' => 'city_ope']),
                 DateTimeField::new('finished_at', 'Terminée le')
                     ->hideOnForm(),
-            ];}
+            ];
+        }
+    
+        return $fields;
     }
+    
 
     public function createIndexQueryBuilder(
         SearchDto $searchDto,
@@ -346,10 +407,11 @@ class OperationCrudController extends AbstractCrudController {
                 }
             }
         }
+        
     
         // Logique pour accepter l'opération
         $operation->setStatus('En cours');
-        $operation->setSalarie($this->security->getUser());
+        $operation->setSalarie($user);
         $entityManager->flush();
     
         // Vérifier si le message flash a déjà été affiché dans la session
@@ -382,7 +444,7 @@ class OperationCrudController extends AbstractCrudController {
         $operation = $context->getEntity()->getInstance();
         $customer = $operation->getCustomer();
         $user = $this->security->getUser();
-        
+
         if (!$operation) {
             throw $this->createNotFoundException('Opération non trouvée');
         }
@@ -394,27 +456,27 @@ class OperationCrudController extends AbstractCrudController {
             // Si le message flash n'a pas encore été affiché, l'ajouter
             $session->getFlashBag()->add('error', 'La mission a été annulée et est maintenant "Refusée".');
 
-        //Try & catch envoi de mail au client opération refusée
-        try {
-            $mail->send(
-                'no-reply@cleanthis.fr',
-                $customer->getEmail(),
-                'Refus de votre opération',
-                'opedecline',
-                [
-                    'user' => $customer
-                ]
-            );
-        } catch (Exception $e) {
-            echo 'Caught exception: Connexion avec MailHog sur 1025 non établie',  $e->getMessage(), "\n";
-        }
+                //Try & catch envoi de mail au client opération refusée
+                try {
+                    $mail->send(
+                        'no-reply@cleanthis.fr',
+                        $customer->getEmail(),
+                        'Refus de votre opération',
+                        'opedecline',
+                        [
+                            'user' => $customer
+                        ]
+                    );
+                } catch (Exception $e) {
+                    echo 'Caught exception: Connexion avec MailHog sur 1025 non établie',  $e->getMessage(), "\n";
+                }
+
                     return new RedirectResponse('/admin');
         }
-
-
+    
         return new Response('<script>window.location.reload();</script>');
-    }
 
+    }
     public function finishOperation(AdminContext $context, EntityManagerInterface $entityManager, SessionInterface $session, SendMailService $mail): Response {
         $operation = $context->getEntity()->getInstance();
         $customer = $operation->getCustomer();
@@ -451,8 +513,6 @@ class OperationCrudController extends AbstractCrudController {
             }
                     return new RedirectResponse('/admin');
         }
-
-
         return new Response('<script>window.location.reload();</script>');
     } 
 
@@ -466,6 +526,7 @@ class OperationCrudController extends AbstractCrudController {
         $operation->setStatus('Archivée');
         $operation->setSalarie($this->security->getUser());
         $entityManager->flush();
+
         
         // Vérifier si le message flash a déjà été affiché dans la session
         if (!$session->getFlashBag()->has('success')) {
@@ -473,7 +534,7 @@ class OperationCrudController extends AbstractCrudController {
             $session->getFlashBag()->add('success', 'La mission est maintenant archivée');
                     return new RedirectResponse('/admin');
         }
+    
         return new Response('<script>window.location.reload();</script>');
     } 
-
 }
