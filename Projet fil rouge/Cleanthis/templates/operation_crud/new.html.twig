@@ -515,6 +515,11 @@ function handleError(error) {
         }
     }
 
+    function handleError(error) {
+        console.error('Erreur:', error);
+        Swal.fire('Erreur!', 'Un problème est survenu lors de la création de l\'opération.', 'error');
+    }
+
 // Ajouter cet écouteur pour chaque champ de saisie de votre formulaire
 document.getElementById('street_ope').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
@@ -539,8 +544,6 @@ document.getElementById('city_ope').addEventListener('keypress', function(event)
         updateMap();
     }
 });
-
-
 
 </script>
 
