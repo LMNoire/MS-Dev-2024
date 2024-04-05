@@ -224,7 +224,7 @@ public function delete(AdminContext $context)
             
         } else {
             if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_APPRENTI') || ($this->isGranted('ROLE_SENIOR') && Crud::PAGE_INDEX === $pageName))
- {
+        {
             return [
                 FormField::addTab('Mission'),
                 DateTimeField::new('created_at', 'Créé le')
