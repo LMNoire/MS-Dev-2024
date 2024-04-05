@@ -24,7 +24,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix
 - Postgres
 - MongoDB
 - Ajax/Jquery
-- Node.js
+- Node.js/React
 - Visual Studio Code
 - Looping/JMerise
 - Miro
