@@ -15,3 +15,4 @@ Réaliser une application/site pour une société de nettoyage fictive "CleanThi
 
 - Sprint #6 (04 avril) : Suite traduction EN/FR en continu, amélioration du parcours UX pour la création d'opérations, intégration API Map pour la création d'opération, corrections suite aux tests de non-regressions, finitions du CSS
 # Sprints partie II
+- Sprint #7 (15 avril) : Intégration des logs dans le projet. Insertion et lecture via un point d'API en node.js vers MongoDb
