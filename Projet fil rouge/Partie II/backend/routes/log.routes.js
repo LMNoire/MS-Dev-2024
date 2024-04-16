@@ -1,13 +1,13 @@
 //Import express lib
 const express = require("express");
 //Import methods
-const { setLogs, getLogs, getLogById } = require("../controllers/log.controller");
+const { setLogs, getLogs, getLogByUser } = require("../controllers/log.controller");
 const router = express.Router();
 
 //Get logs
 router.get("/", getLogs);
-//Get log
-router.get("/:id", getLogById);
+//Get logs by user
+router.get("/:user", getLogByUser);
 //Post logs
 router.post("/", setLogs);
 

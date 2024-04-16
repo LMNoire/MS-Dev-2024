@@ -11,7 +11,7 @@ connectDB();
 
 //Middleware (traitement data de la request)
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 //Import routes
 app.use("/log", require("./routes/log.routes"));

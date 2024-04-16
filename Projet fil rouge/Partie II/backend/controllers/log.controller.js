@@ -20,15 +20,15 @@ module.exports.getLogs = async (req, res) => {
 };
 
 //Get log by id
-module.exports.getLogById = async (req, res) => {
-    try {
-        const log = await LogModel.findById({ _id: req.params.id });
-        if (!log) {
-            return res.status(400).json({ message: "Ce log n'existe pas" });
-        }
-        res.status(200).json(log);
-    } catch (error) {
-        res.status(500).json({ message: "Une erreur s'est produite lors de la récupération du log" });
-    }
+module.exports.getLogByUser = async (req, res) => {
+    // try {
+        const logsUsers = await db.collection('cleanthis').find({ user: req.params.user });
+        // if (!logs) {
+        //     return res.status(400).json({ message: "Ce log n'existe pas" });
+        // }
+        res.status(200).json(logsUsers);
+    // } catch (error) {
+    //     res.status(500).json({ message: "Une erreur s'est produite lors de la récupération du log" });
+    // }
 };
 
