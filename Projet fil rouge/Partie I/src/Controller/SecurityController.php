@@ -2,29 +2,31 @@
 
 namespace App\Controller;
 
-use ApiPlatform\Api\UrlGeneratorInterface;
-use App\Form\ResetPasswordFormType;
-use App\Form\ResetPasswordRequestFormType;
-use App\Repository\UserRepository;
-use App\Service\SendMailService;
+use Exception;
 use Doctrine\ORM\EntityManager;
+use App\Service\SendMailService;
+use App\Repository\UserRepository;
+use App\Form\ResetPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use ApiPlatform\Api\UrlGeneratorInterface;
+use App\Form\ResetPasswordRequestFormType;
+use App\Service\LogsService;
 use Symfony\Bridge\Twig\NodeVisitor\Scope;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
 
 class SecurityController extends AbstractController
 {
@@ -48,11 +50,22 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/logout', name: 'app_logout')]
-    public function logout(Request $request): Response
+    public function logout(Request $request, LogsService $logsService): Response
     {
+        $user = $this->getUser();
         // Clear the session including the stored locale
         $request->getSession()->invalidate();
-
+        // Log successful logout
+        try {
+            $logsService->postLog([
+            'loggerName' => 'SecurityController',
+            'user' => 'N\C',
+            'message' => 'User logout successfully',
+            'level' => 'info'
+        ]);
+        } catch (Exception $e) {
+            echo 'Insertion du log échoué';
+        }
         // Redirect to the login page or any other page
         return $this->redirectToRoute('app_login');
     }
@@ -63,6 +76,7 @@ class SecurityController extends AbstractController
         if (!in_array($service, array_keys(self::SCOPES), true)){
           throw $this->createNotFoundException();  
         }
+        
         return $clientRegistery
         ->getClient($service)
         ->redirect(self::SCOPES[$service]);
@@ -79,7 +93,8 @@ public function check():Response
             UserRepository $userRepository,
             TokenGeneratorInterface $tokenGenerator,
             EntityManagerInterface $entityManager,
-            SendMailService $mail
+            SendMailService $mail,
+            LogsService $logsService
             ): Response
         {
             $form = $this->createForm(ResetPasswordRequestFormType::class);
@@ -107,6 +122,17 @@ public function check():Response
                         'password_reset',
                         $context
                     );
+                    // Log forgotten pass
+                    try {
+                        $logsService->postLog([
+                        'loggerName' => 'Operation',
+                        'user' => $user->getEmail(),
+                        'message' => 'User used forgotten pass link',
+                        'level' => 'info'
+                    ]);
+                    } catch (Exception $e) {
+                    }
+                    
                     return $this->redirectToRoute('app_login');
                 }
 
@@ -124,7 +150,8 @@ public function check():Response
         Request $request,
         UserRepository $userRepository,
         EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $passwordHasher
+        UserPasswordHasherInterface $passwordHasher,
+        LogsService $logsService
         ): Response 
     {
         $user = $userRepository->findOneByResetToken($token);
@@ -144,6 +171,16 @@ public function check():Response
                     $entityManager->persist($user);
                     $entityManager->flush();
 
+            // Log new pass
+            try {
+                $logsService->postLog([
+                'loggerName' => 'Operation',
+                'user' => $user->getEmail(),
+                'message' => 'User set new password from forgotten pass',
+                'level' => 'info'
+            ]);
+            } catch (Exception $e) {
+            }
                     return $this->redirectToRoute('app_login');
             }
 
