@@ -55,7 +55,6 @@ class SecurityController extends AbstractController
     #[Route('/logout', name: 'app_logout')]
     public function logout(Request $request, LogsService $logsService): Response
     {
-
         // Clear the session including the stored locale
         $request->getSession()->invalidate();
 

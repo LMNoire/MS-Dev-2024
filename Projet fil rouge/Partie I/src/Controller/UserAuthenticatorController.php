@@ -29,7 +29,7 @@ class UserAuthenticatorController extends AbstractController
     }
 
     #[Route('/logout', name: 'app_logout')]
-    public function logout(Request $request, LogsService $logsService): Response
+    public function logout(Request $request): Response
     {
 
         // Clear the session including the stored locale
