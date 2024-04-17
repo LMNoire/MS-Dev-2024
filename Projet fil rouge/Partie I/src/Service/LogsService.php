@@ -15,8 +15,10 @@ class LogsService
         $this->httpClient = $httpClient;
     }
 
+    //Fonction envoi des logs
     public function postLog(array $logData): array
     {
+        //Paramètres de la requete (body)
         $requestData = [
             'eventTime' => new DateTimeImmutable,
             'loggerName' => $logData['loggerName'],
@@ -29,6 +31,7 @@ class LogsService
 
         $requestJson = json_encode($requestData, JSON_THROW_ON_ERROR);
 
+        //Requete vers endpoint API (backend en node.js)
         $response = $this->httpClient->request('POST', 'http://localhost:3000/log', [
             'headers' => [
                 'Content-Type: application/json',
