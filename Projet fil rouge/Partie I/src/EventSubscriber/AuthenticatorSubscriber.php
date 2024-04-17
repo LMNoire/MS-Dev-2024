@@ -52,7 +52,6 @@ class LogoutEventListener implements EventSubscriberInterface
         $user = $event->getAuthenticationToken()->getUser();
 
         try {
-            // Send logs using LogsService
             $logData = [
                 'loggerName' => 'Login',
                 'user' => 'N\C',
@@ -65,20 +64,17 @@ class LogoutEventListener implements EventSubscriberInterface
     }
 
     public function onLoginFailureEvent(LoginFailureEvent $event): void
-{
-
-    try {
-        // Send logs using LogsService
-        $logData = [
-            'loggerName' => 'Login',
-            'user' => 'N\C',
-            'message' => 'Login failed: ',
-            'level' => 'error'
-        ];
-        $this->logsService->postLog($logData);
-    } catch (\Exception $e) {
-        // Handle any exceptions here
+    {
+        try {
+            $logData = [
+                'loggerName' => 'Login',
+                'user' => 'N\C',
+                'message' => 'User failed to log',
+                'level' => 'error'
+            ];
+            $this->logsService->postLog($logData);
+        } catch (\Exception $e) {
+        }
     }
-}
 }
 
