@@ -34,7 +34,7 @@ class LogsService
         $requestJson = json_encode($requestData, JSON_THROW_ON_ERROR);
 
         //Requete vers endpoint API (backend en node.js)
-        $response = $this->httpClient->request('POST', 'http://localhost:3000/log', [
+        $response = $this->httpClient->request('POST', 'http://localhost:3000/logs', [
             'headers' => [
                 'Content-Type: application/json',
                 'Accept: application/json',

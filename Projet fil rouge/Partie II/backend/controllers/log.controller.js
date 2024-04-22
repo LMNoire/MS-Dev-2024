@@ -19,6 +19,18 @@ module.exports.getLogs = async (req, res) => {
     res.status(200).json(logs);
 };
 
+//Method to get customers rate
+module.exports.getCustomersRate = async (req, res) => {
+    var users = await LogModel.find({ loggerName: "Registration" });
+    var NbUsers = await LogModel.count(users);
+
+    var customers = await LogModel.find({
+        "data": { $elemMatch: { "role": "ROLE_CUSTOMER" } }
+    });
+    var NbCustomers = await LogModel.count(customers);
+
+    res.status(200).json({ NbUsers, NbCustomers });
+}
 
 
 
