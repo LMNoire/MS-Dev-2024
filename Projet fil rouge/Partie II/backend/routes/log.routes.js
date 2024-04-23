@@ -1,7 +1,7 @@
 //Import express lib
 const express = require("express");
 //Import methods
-const { setLogs, getLogs, getCustomersRate } = require("../controllers/log.controller");
+var { setLogs, getLogs, getCustomersRate } = require("../controllers/log.controller");
 const router = express.Router();
 
 //Post logs

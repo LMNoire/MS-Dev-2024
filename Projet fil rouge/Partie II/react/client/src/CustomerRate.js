@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-var CustomerRate = () => {
-    var [nbUsers, setNbUsers] = useState(null);
-    var [NbCustomers, setNbCustomers] = useState(null);
+const CustomerRate = () => {
+    let [nbUsers, setNbUsers] = useState(null);
+    let [NbCustomers, setNbCustomers] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:3000/logs')
+        fetch('http://localhost:3000/logs/customers') // Request to the /customers endpoint
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -14,11 +14,8 @@ var CustomerRate = () => {
                 return response.json();
             })
             .then(data => {
-                // Extract the count of registered users from the array of logs
-                var userCount = data.length;
-                var customerCount = data.length;
-                setNbUsers(userCount);
-                setNbCustomers(customerCount);
+                setNbUsers(data.NbUsers);
+                setNbCustomers(data.NbCustomers);
             })
             .catch(err => console.error("Error fetching data: ", err));
     }, []);

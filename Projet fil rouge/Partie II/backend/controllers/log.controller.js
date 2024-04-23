@@ -15,22 +15,28 @@ module.exports.setLogs = async (req, res) => {
 
 //Method to get all logs
 module.exports.getLogs = async (req, res) => {
-    const logs = await LogModel.find({ loggerName: "User" });
+    var logs = await LogModel.find({ loggerName: "User" });
     res.status(200).json(logs);
 };
 
 //Method to get customers rate
 module.exports.getCustomersRate = async (req, res) => {
-    var users = await LogModel.find({ loggerName: "Registration" });
-    var NbUsers = await LogModel.count(users);
+    try {
+        let users = await LogModel.find({ loggerName: "Registration" });
+        let NbUsers = await LogModel.countDocuments({ loggerName: "Registration" });
 
-    var customers = await LogModel.find({
-        "data": { $elemMatch: { "role": "ROLE_CUSTOMER" } }
-    });
-    var NbCustomers = await LogModel.count(customers);
+// Find documents where any string in the "data" array contains "ROLE_CUSTOMER"
+let customers = await LogModel.find({ "data": { $regex: "ROLE_CUSTOMER" } });
 
-    res.status(200).json({ NbUsers, NbCustomers });
+// Count the number of documents where any string in the "data" array contains "ROLE_CUSTOMER"
+let NbCustomers = await LogModel.countDocuments({ "data": { $regex: "ROLE_CUSTOMER" } });
+
+
+
+        res.status(200).json({ NbUsers, NbCustomers });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 }
-
 
 
