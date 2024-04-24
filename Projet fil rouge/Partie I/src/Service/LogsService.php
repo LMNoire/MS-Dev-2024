@@ -46,8 +46,6 @@ class LogsService
             throw new Exception('Response status code is different than expected.');
         }
 
-        // ... other checks
-
         $responseJson = $response->getContent();
         $responseData = json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR);
 

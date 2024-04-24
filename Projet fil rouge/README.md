@@ -18,3 +18,5 @@ Réaliser une application/site pour une société de nettoyage fictive "CleanThi
 - Sprint #7 (15 avril) : Intégration des logs dans le projet. Insertion et lecture via un point d'API en node.js vers MongoDb
 
 - Sprint #8 (22 avril) : Création d'un composant React affichant des données statistiques via le point d'API en node.js depuis MongoDb
+
+- Sprint #9 (29 avril) : Dockerisation de l'application
