@@ -37,7 +37,7 @@ class RegisterEventListener implements EventSubscriberInterface
         try {
             //Send logs using LogsService
             $logData = [
-                'loggerName' => 'Registration',
+            'loggerName' => 'Registration',
             'user' => 'Anonymous',
             'message' => 'User registered',
             'level' => 'info',
