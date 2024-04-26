@@ -183,6 +183,7 @@ public function createOperation(Request $request, EntityManagerInterface $entity
     }
 }
 
+
         private function determinePriceBasedOnType(string $type): int
         {
             // Déterminez le prix en fonction du type d'opération
