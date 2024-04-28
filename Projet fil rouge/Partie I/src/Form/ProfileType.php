@@ -25,8 +25,7 @@ class ProfileType extends AbstractType
             ])
             ->add('street', TextType::class, [
                 'label' => 'Rue'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

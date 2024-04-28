@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use Exception;
-use App\Service\LogsService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,10 +13,10 @@ class UserAuthenticatorController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-         if ($this->getUser()) {
+        if ($this->getUser()) {
 
-             return $this->redirectToRoute('app_login');
-         }
+            return $this->redirectToRoute('app_login');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

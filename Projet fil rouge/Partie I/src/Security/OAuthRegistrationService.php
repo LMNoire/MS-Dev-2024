@@ -19,12 +19,13 @@ final class OAuthRegistrationService
      * @param GoogleUser $resourceOwner
      * 
      */
-    public function persist(ResourceOwnerInterface $resourceOwner): User {
+    public function persist(ResourceOwnerInterface $resourceOwner): User
+    {
         $user = (new User())
-                ->setEmail($resourceOwner->getEmail())
-                ->setIdGoogle($resourceOwner->getId())
-                ->setName($resourceOwner->getLastName())
-                ->setFirstname($resourceOwner->getFirstName());
+            ->setEmail($resourceOwner->getEmail())
+            ->setIdGoogle($resourceOwner->getId())
+            ->setName($resourceOwner->getLastName())
+            ->setFirstname($resourceOwner->getFirstName());
 
         $this->repository->add($user, flush: true);
         return $user;

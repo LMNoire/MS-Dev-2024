@@ -51,7 +51,6 @@ class UserType extends AbstractType
                 new Regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', "Il faut un mot de passe de 8 caractères, une majuscule et un chiffre")
             ],
         ]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

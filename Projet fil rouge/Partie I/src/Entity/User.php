@@ -4,10 +4,6 @@ namespace App\Entity;
 
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
 use App\Entity\Operation;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -48,26 +44,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 10, nullable:true)]
+    #[ORM\Column(length: 10, nullable: true)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 50, nullable:true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 100, nullable:true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $street = null;
 
-    #[ORM\Column(length: 25, nullable:true)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $phone = null;
 
     #[ORM\OneToMany(targetEntity: Operation::class, mappedBy: 'customer')]
     private Collection $operations;
 
-    
+
     public function __construct()
     {
         $this->operations = new ArrayCollection();
-        
     }
     public function __toString()
     {
@@ -87,7 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->plainPassword;
     }
-    
+
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
@@ -130,7 +125,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         return array_unique($roles);
-    } 
+    }
 
     /**
      * @param list<string> $roles
@@ -140,7 +135,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
 
         return $this;
-
     }
 
     /**
@@ -268,7 +262,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    public function getSingleRole(): ?string {
+    public function getSingleRole(): ?string
+    {
         return $this->roles[0] ?? null;
     }
 
@@ -285,7 +280,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function setSingleRole(string $role): self {
+    public function setSingleRole(string $role): self
+    {
         $this->roles = [$role];
         return $this;
     }
@@ -301,5 +297,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
 }

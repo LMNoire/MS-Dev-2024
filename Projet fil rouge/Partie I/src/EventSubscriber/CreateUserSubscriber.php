@@ -33,23 +33,21 @@ class RegisterEventListener implements EventSubscriberInterface
 
         $role = $entity->getRoles();
         $userId = $entity->getId();
-        
+
         try {
             //Send logs using LogsService
             $logData = [
-            'loggerName' => 'Registration',
-            'user' => 'Anonymous',
-            'message' => 'User registered',
-            'level' => 'info',
-            'data' => [
-                'role' => $role,
-                'userId' => $userId
-            ]
+                'loggerName' => 'Registration',
+                'user' => 'Anonymous',
+                'message' => 'User registered',
+                'level' => 'info',
+                'data' => [
+                    'role' => $role,
+                    'userId' => $userId
+                ]
             ];
             $this->logsService->postLog($logData);
         } catch (Exception $e) {
         }
     }
-
-
 }

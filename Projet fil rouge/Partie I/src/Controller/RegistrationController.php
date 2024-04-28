@@ -32,13 +32,13 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-                
-            ) ;
+
+            );
 
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            
+
             try {
                 $mail->send(
                     'no-reply@cleanthis.fr',
@@ -50,9 +50,8 @@ class RegistrationController extends AbstractController
                     ]
                 );
             } catch (Exception $e) {
-                
+
                 echo 'Caught exception: Connexion avec MailHog sur 1025 non établie',  $e->getMessage(), "\n";
-                
             }
 
             $role = $user->getRoles();
@@ -61,18 +60,18 @@ class RegistrationController extends AbstractController
             // Log successful registration
             try {
                 $logsService->postLog([
-                'loggerName' => 'Registration',
-                'user' => 'Anonymous',
-                'message' => 'User registered',
-                'level' => 'info',
-                'data' => [
-                    'role' => $role,
-                    'userId' => $userId
-                ]
-            ]);
+                    'loggerName' => 'Registration',
+                    'user' => 'Anonymous',
+                    'message' => 'User registered',
+                    'level' => 'info',
+                    'data' => [
+                        'role' => $role,
+                        'userId' => $userId
+                    ]
+                ]);
             } catch (Exception $e) {
             }
-            
+
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,

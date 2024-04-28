@@ -27,17 +27,17 @@ class RegistrationFormType extends AbstractType
 
         $builder
 
-        ->add('email', EmailType::class, [
-            'constraints' => [
-                new NotBlank(),
-                new Email(),
-                
-            ],
-        ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Email(),
+
+                ],
+            ])
 
             ->add('agreeTerms', CheckboxType::class, [
-                                'mapped' => false,
-                                'label' => "conditions d'utilisations",
+                'mapped' => false,
+                'label' => "conditions d'utilisations",
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Merci d\'accepter les conditions d\'utilisation.',
@@ -45,7 +45,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                                // instead of being set onto the object directly,
+                // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'label' => 'Mot de passe',
@@ -54,13 +54,13 @@ class RegistrationFormType extends AbstractType
                     new Regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', "Il faut un mot de passe de 8 caractères, une majuscule et un chiffre")
                 ],
             ])
-            
+
             ->add('name', TextType::class, [
                 'label' => 'Nom'
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prenom'
-            ])            
+            ])
             ->add('street', TextType::class, [
                 'label' => 'Rue',
                 'attr' => ['class' => 'adresse-autocomplete']

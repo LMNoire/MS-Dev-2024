@@ -76,4 +76,3 @@ class LogoutEventListener implements EventSubscriberInterface
         }
     }
 }
-

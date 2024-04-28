@@ -15,13 +15,13 @@ class ResetPasswordFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('password', PasswordType::class, [
-            'label' => 'Entrez votre nouveau mot de passe',
-            'attr' => ['class' => 'form-control'],
-            'constraints' => [
-            new Regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', "Il faut un mot de passe de 8 caractères, une majuscule et un chiffre")
-            ]
-        ]);
+            ->add('password', PasswordType::class, [
+                'label' => 'Entrez votre nouveau mot de passe',
+                'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new Regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', "Il faut un mot de passe de 8 caractères, une majuscule et un chiffre")
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

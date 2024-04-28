@@ -1,38 +1,41 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="login-container">
-    <img src="{{ asset('images/Raccoon.png') }}" alt="Logo de votre entreprise" class="login-logo">
-    <form method="post" class="login-form">
-            {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+	<div class="login-container">
+		<img src="{{ asset('images/Raccoon.png') }}" alt="Logo de votre entreprise" class="login-logo">
+		<form method="post" class="login-form">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                {{ "Vous êtes déjà connecté en tant que"|trans }} {{ app.user.userIdentifier }} <br> <a href="{{ path('app_logout') }}">{{ "Se déconnecter"|trans }}</a>
-            </div>
-        {% else %}
-        <div class="form-group">
-            <label for="inputEmail">{{ "Adresse email"|trans }}</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-        </div>
-        
-        <div class="form-group">
-            <label for="inputPassword">{{ "Mot de passe"|trans }}</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" required>
-        </div>
+			{% if app.user %}
+				<div class="mb-3">
+					{{ "Vous êtes déjà connecté en tant que"|trans }}
+					{{ app.user.userIdentifier }}
+					<br>
+					<a href="{{ path('app_logout') }}">{{ "Se déconnecter"|trans }}</a>
+				</div>
+			{% else %}
+				<div class="form-group">
+					<label for="inputEmail">{{ "Adresse email"|trans }}</label>
+					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+				</div>
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				<div class="form-group">
+					<label for="inputPassword">{{ "Mot de passe"|trans }}</label>
+					<input type="password" name="password" id="inputPassword" class="form-control" required>
+				</div>
 
-        <button class="btn login-btn" type="submit">{{ "Se Connecter"|trans }}</button>
-        
-        <a href="{{ path('forgotten_password') }}">{{ "Mot de passe oublié"|trans }}</a>
-<br>
-            <h6>{{ "Se connecter avec Google"|trans }}</h6>
-            
-    <a href="{{ path('auth_oauth_connect', {service: 'google'}) }}"
-	 class="btn-google"> <img src="images/Google_logo.png" class="logogoogle" alt="Logo Google"></a>
-     {% endif %}
-    </form>
-</div>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<button class="btn login-btn" type="submit">{{ "Se Connecter"|trans }}</button>
+
+				<a href="{{ path('forgotten_password') }}">{{ "Mot de passe oublié"|trans }}</a>
+				<br>
+				<h6>{{ "Se connecter avec Google"|trans }}</h6>
+
+				<a href="{{ path('auth_oauth_connect', {service: 'google'}) }}" class="btn-google">
+					<img src="images/Google_logo.png" class="logogoogle" alt="Logo Google"></a>
+			{% endif %}
+		</form>
+	</div>
 {% endblock %}

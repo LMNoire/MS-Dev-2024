@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -20,8 +21,7 @@ class SensitiveInfoType extends AbstractType
             ])
             ->add('currentPassword', PasswordType::class, [
                 'mapped' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

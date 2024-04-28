@@ -13,16 +13,16 @@ class StatistiqueController extends AbstractController
     #[Route('/stats', name: 'stats')]
     public function statistiques(OperationRepository $operationRepository): Response
     {
-            try {
-                $this->denyAccessUnlessGranted('ROLE_ADMIN');
-            } catch (AccessDeniedException $e) {
-                return $this->redirectToRoute('admin');
-            }
+        try {
+            $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        } catch (AccessDeniedException $e) {
+            return $this->redirectToRoute('admin');
+        }
         $chiffreAffairesMoisEnCours = $operationRepository->findSalesForCurrentMonth();
-         // Récupérer les missions en coursdes salariés 
+        // Récupérer les missions en coursdes salariés 
         $totalMissionsEnCours = $operationRepository->countMissionsEnCours();
 
-         // Récupérer les missions terminées des salariés 
+        // Récupérer les missions terminées des salariés 
         $operationsTerminees = $operationRepository->countOperationsTerminees();
 
         // Récupérer les statistiques des salariés en fonction du nombre de missions
@@ -36,10 +36,10 @@ class StatistiqueController extends AbstractController
 
         // Récupérer les données du chiffre d'affaires par date
         $chiffreAffairesParDate = $operationRepository->getSalesByDate();
-        
+
         // Récupérer les statistiques des missions par statut
         $missionStatusStatistics = $operationRepository->findMissionStatusStatistics();
-        
+
 
         // Récupérer les salariés sur le podium
         $podiumEmployees = $operationRepository->getPodiumEmployees();
@@ -54,7 +54,7 @@ class StatistiqueController extends AbstractController
             'statistiquesOperations' => $statistiquesOperations,
             'chiffreAffairesParDate' => $chiffreAffairesParDate,
             'missionStatusStatistics' => $missionStatusStatistics,
-            'chiffreAffaires' => $chiffreAffaires, 
+            'chiffreAffaires' => $chiffreAffaires,
             'podiumEmployees' => $podiumEmployees,
             'missionsEnCours' => $missionsEnCours,
             'operationsTerminees' => $operationsTerminees,

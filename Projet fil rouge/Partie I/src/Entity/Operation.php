@@ -1,14 +1,9 @@
 <?php
+
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
 use App\Entity\User;
-use DateTimeImmutable;
 use App\Repository\OperationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Operation
 {
 
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -59,14 +54,14 @@ class Operation
     #[ORM\ManyToOne(inversedBy: 'operations')]
     private ?User $salarie = null;
 
-/**
-*@ORM\ManyToOne(targetEntity=User::class)
-*@ORM\JoinColumn(nullable=false)
- */
-private $createdBy;
+    /**
+     *@ORM\ManyToOne(targetEntity=User::class)
+     *@ORM\JoinColumn(nullable=false)
+     */
+    private $createdBy;
 
-#[ORM\Column(nullable: true)]
-private ?\DateTimeImmutable $finished_at = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $finished_at = null;
 
     public function getCreatedBy(): ?User
     {
@@ -193,8 +188,7 @@ private ?\DateTimeImmutable $finished_at = null;
     {
         $this->salarie = $salarie;
         return $this;
-
-    }   
+    }
 
     public function getFinishedAt(): ?\DateTimeImmutable
     {
@@ -211,24 +205,24 @@ private ?\DateTimeImmutable $finished_at = null;
         if (!$this->customer) {
             return null;
         }
-    
+
         return $this->customer->getFirstname() . ' ' . $this->customer->getName();
     }
-  
+
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $created_at;
 
     #[ORM\Column(nullable: true)]
     #[Assert\GreaterThanOrEqual(propertyPath: "created_at")]
     private ?\DateTimeImmutable $rdv_at = null;
-    
-    #[ORM\Column(length: 255, type: 'string',nullable: true)]
+
+    #[ORM\Column(length: 255, type: 'string', nullable: true)]
     private ?string $attachment = null;
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'attachment')]
     #[Assert\File(maxSize: '1024k')]
     private ?File $attachmentFile = null;
-    
+
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $UpdatedAt = null;
 
@@ -293,12 +287,10 @@ private ?\DateTimeImmutable $finished_at = null;
     {
         $this->UpdatedAt = $UpdatedAt;
         return $this;
-    } 
+    }
 
     public function getFullAddress()
     {
         return $this->street_ope . ', ' . $this->zipcode_ope . ' ' . $this->city_ope;
     }
 }
-
-

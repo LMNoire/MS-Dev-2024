@@ -31,10 +31,11 @@ class DashboardController extends AbstractDashboardController
     }
 
     #[Route('/admin', name: 'admin')]
-    public function index(): Response {
+    public function index(): Response
+    {
         if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_SENIOR') || $this->isGranted('ROLE_APPRENTI') || $this->isGranted('ROLE_CUSTOMER')) {
             $url = $this->adminUrlGenerator
-                ->setController(OperationCrudController::class) 
+                ->setController(OperationCrudController::class)
                 ->generateUrl();
             return $this->redirect($url);
         } else {
@@ -43,13 +44,15 @@ class DashboardController extends AbstractDashboardController
     }
 
 
-    public function configureAssets(): Assets {
+    public function configureAssets(): Assets
+    {
         return parent::configureAssets()
             ->addCssFile('css/Sidebar.css');
     }
-    
-    
-    public function configureMenuItems(): iterable {
+
+
+    public function configureMenuItems(): iterable
+    {
         //Admin dashboard
         if ($this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::section('Principal');
@@ -65,8 +68,8 @@ class DashboardController extends AbstractDashboardController
                         ->setQueryParameter('status', 'Terminée'),
                     MenuItem::linkToCrud('Archivées', 'fa fa-history', Operation::class)
                         ->setQueryParameter('status', 'Archivée'),
-            ]);
-            yield MenuItem::linkToRoute('Statistiques', 'fa fa-pie-chart', 'stats');   
+                ]);
+            yield MenuItem::linkToRoute('Statistiques', 'fa fa-pie-chart', 'stats');
             yield MenuItem::submenu('Profil', 'fa fa-user');
             yield MenuItem::subMenu('Membres', 'fa fa-users')
                 ->setSubItems([
@@ -74,25 +77,25 @@ class DashboardController extends AbstractDashboardController
                         ->setQueryParameter('userType', 'customer'),
                     MenuItem::linkToCrud('Employés', 'fa fa-briefcase', User::class)
                         ->setQueryParameter('userType', 'employee'),
-            ]);        
+                ]);
             // yield MenuItem::linkToRoute('Statistiques', 'fa fa-chart-line', 'statistics_route');
 
             yield MenuItem::section('Support');
             // yield MenuItem::linkToCrud('Votre Profil', 'fa fa-user', User::class);
             yield MenuItem::linkToRoute(
-                'English', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'English',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'en', 
+                    'locale' => 'en',
                 ]
             );
             yield MenuItem::linkToRoute(
-                'Français', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'Français',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'fr', 
+                    'locale' => 'fr',
                 ]
             );
             yield MenuItem::linkToRoute('Votre Profil', 'fa fa-user', 'profile_edit');
@@ -111,37 +114,37 @@ class DashboardController extends AbstractDashboardController
                         ->setQueryParameter('status', 'En cours'),
                     MenuItem::linkToCrud('Terminées', 'fa fa-check', Operation::class)
                         ->setQueryParameter('status', 'Terminée'),
-                     MenuItem::linkToCrud('Archivées', 'fa fa-history', Operation::class)
+                    MenuItem::linkToCrud('Archivées', 'fa fa-history', Operation::class)
                         ->setQueryParameter('status', 'Archivée'),
-            ]);
+                ]);
             yield MenuItem::section('Support');
             yield MenuItem::linkToCrud('Votre Profil', 'fa fa-user', User::class);
             yield MenuItem::linkToRoute(
-                'English', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'English',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'en', 
+                    'locale' => 'en',
                 ]
             );
             yield MenuItem::linkToRoute(
-                'Français', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'Français',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'fr', 
+                    'locale' => 'fr',
                 ]
             );
             yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out');
         }
         if ($this->isGranted('ROLE_APPRENTI')) {
-            
+
             yield MenuItem::section('Principal');
             yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
             yield MenuItem::subMenu('Opérations', 'fa fa-broom')->setSubItems([
                 MenuItem::linkToCrud('Toutes les opérations', 'fa fa-tags', Operation::class),
                 MenuItem::linkToCrud('En attente de Validation', 'fa fa-clock-o', Operation::class)
-                ->setQueryParameter('status', 'En attente de Validation'),
+                    ->setQueryParameter('status', 'En attente de Validation'),
                 MenuItem::linkToCrud('En cours', 'fa fa-arrow-right', Operation::class)
                     ->setQueryParameter('status', 'En cours'),
                 MenuItem::linkToCrud('Terminées', 'fa fa-check', Operation::class)
@@ -152,19 +155,19 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::section('Support');
             yield MenuItem::linkToRoute('Votre Profil', 'fa fa-user', 'profile_edit');
             yield MenuItem::linkToRoute(
-                'English', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'English',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'en', 
+                    'locale' => 'en',
                 ]
             );
             yield MenuItem::linkToRoute(
-                'Français', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'Français',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'fr', 
+                    'locale' => 'fr',
                 ]
             );
 
@@ -184,23 +187,23 @@ class DashboardController extends AbstractDashboardController
                         ->setQueryParameter('status', 'Terminée'),
                     MenuItem::linkToCrud('Archivées', 'fa fa-history', Operation::class)
                         ->setQueryParameter('status', 'Archivée'),
-            ]);
+                ]);
             yield MenuItem::section('Support');
             yield MenuItem::linkToRoute('Votre Profil', 'fa fa-user', 'profile_edit');
             yield MenuItem::linkToRoute(
-                'English', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'English',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'en', 
+                    'locale' => 'en',
                 ]
             );
             yield MenuItem::linkToRoute(
-                'Français', 
-                "fa-solid fa-globe", 
-                'change_locale', 
+                'Français',
+                "fa-solid fa-globe",
+                'change_locale',
                 [
-                    'locale' => 'fr', 
+                    'locale' => 'fr',
                 ]
             );
 
@@ -208,14 +211,16 @@ class DashboardController extends AbstractDashboardController
         }
     }
 
-    public function configureDashboard(): Dashboard {
-            return Dashboard::new()
+    public function configureDashboard(): Dashboard
+    {
+        return Dashboard::new()
             ->setTitle('<img src="images/cleanThis.png" class="img-fluid d-flex" style="max-width:200px; width:200%; padding-right:40px">');
-        }
+    }
 
-    public function configureUserMenu(UserInterface $user): UserMenu {
-            return parent::configureUserMenu($user)
-                ->setName($user->getFirstname())
-                ->displayUserName(true);
-        }
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+        return parent::configureUserMenu($user)
+            ->setName($user->getFirstname())
+            ->displayUserName(true);
+    }
 }
