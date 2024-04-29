@@ -8,12 +8,11 @@ use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\File;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 
-class SendMailService
+class SendMailService 
 {
     private $mailer;
 
-    public function __construct(MailerInterface $mailer)
-    {
+    public function __construct(MailerInterface $mailer) {
         $this->mailer = $mailer;
     }
 
@@ -40,7 +39,7 @@ class SendMailService
         string $subject,
         string $template,
         array $context,
-        string $pdfPath
+        string $pdfPath 
     ): void {
         $email = (new TemplatedEmail())
             ->from($from)
@@ -49,7 +48,8 @@ class SendMailService
             ->htmlTemplate("email/$template.html.twig")
             ->context($context)
             ->addPart(new DataPart(new File($pdfPath)));
-
+    
         $this->mailer->send($email);
     }
+
 }

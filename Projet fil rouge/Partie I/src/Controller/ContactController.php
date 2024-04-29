@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact')]
@@ -44,23 +45,23 @@ class ContactController extends AbstractController
             // Envoyer l'email
             $mailer->send($email);
 
-            // Generate a token
-            $token = $this->generateToken();
+                // Generate a token
+                $token = $this->generateToken();
 
-            // Calculate the expiration time (e.g., 1 hour from now)
-            $expirationTime = (new DateTimeImmutable())->modify('+1 hour');
+                // Calculate the expiration time (e.g., 1 hour from now)
+                $expirationTime = (new DateTimeImmutable())->modify('+1 hour');
 
-            // Store the token and its expiration time in your database or session
-            // For simplicity, let's assume you store it in a session variable
-            $request->getSession()->set('registration_token', [
-                'token' => $token,
-                'expiration_time' => $expirationTime,
-            ]);
+                // Store the token and its expiration time in your database or session
+                // For simplicity, let's assume you store it in a session variable
+                $request->getSession()->set('registration_token', [
+                    'token' => $token,
+                    'expiration_time' => $expirationTime,
+                ]);
 
-            // Construct the registration link with the token
-            $registrationLink = $this->generateUrl('app_register', [
-                'token' => $token,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
+                // Construct the registration link with the token
+                $registrationLink = $this->generateUrl('app_register', [
+                    'token' => $token,
+                ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             try {
                 $mail->send(
@@ -75,16 +76,16 @@ class ContactController extends AbstractController
                 );
             } catch (Exception $e) {
                 echo 'Caught exception: Connexion avec MailHog sur 1025 non établie',  $e->getMessage(), "\n";
-            }
+            } 
 
-            // Log edit operation
-            try {
+             // Log edit operation
+             try {
                 $logsService->postLog([
-                    'loggerName' => 'Contact',
-                    'user' => 'Anonymous',
-                    'message' => 'User send email contact',
-                    'level' => 'info'
-                ]);
+                'loggerName' => 'Contact',
+                'user' => 'Anonymous',
+                'message' => 'User send email contact',
+                'level' => 'info'
+            ]);
             } catch (Exception $e) {
             }
 

@@ -30,7 +30,7 @@ class UserCrudController extends AbstractCrudController
 {
     private Security $security;
     private AuthorizationCheckerInterface $authChecker;
-
+    
     public function __construct(
         public UserPasswordHasherInterface $userPasswordHasher,
         Security $security,
@@ -45,8 +45,7 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
+    public function configureCrud(Crud $crud): Crud {
         return $crud
             ->overrideTemplate('crud/new', 'user_crud/new.html.twig')
             ->overrideTemplate('crud/edit', 'user_crud/edit.html.twig')
@@ -55,30 +54,29 @@ class UserCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Ajouter un Membre')
             ->setPageTitle(Crud::PAGE_DETAIL, 'Détails du Membre')
             ->setSearchFields(['name', 'firstname', 'roles'])
-            ->setPaginatorPageSize(10)
+            ->setPaginatorPageSize(10)            
             ->setPaginatorRangeSize(0);
-        $rolesFilter = $this->getContext()->getRequest()->query->get('roles');
-        if ($rolesFilter) {
-            $crud->setDefaultSort(['roles' => $rolesFilter]);
+            $rolesFilter = $this->getContext()->getRequest()->query->get('roles');
+            if ($rolesFilter) {
+                $crud->setDefaultSort(['roles' => $rolesFilter]);
         }
     }
-
-    public function configureActions(Actions $actions): Actions
-    {
+    
+    public function configureActions(Actions $actions): Actions {
         $actions = parent::configureActions($actions);
-
+    
         //Obtenez l'utilisateur actuellement connecté
         $currentUser = $this->security->getUser();
-
+    
         //Vérifiez si l'utilisateur actuel est un administrateur
         $isAdmin = $this->security->isGranted('ROLE_ADMIN');
-
+    
         //Désactiver l'action 'NEW' pour les utilisateurs sans le rôle 'ROLE_ADMIN'
         if (!$isAdmin) {
             $actions->disable(Action::NEW);
             $actions->disable(Action::DETAIL);
         }
-
+    
         //Mise à jour de l'action DELETE
         $actions->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) use ($currentUser, $isAdmin) {
             //L'action DELETE est conditionnée : seulement pour les administrateurs et ils ne peuvent pas se supprimer eux-mêmes
@@ -86,60 +84,59 @@ class UserCrudController extends AbstractCrudController
                 return $isAdmin && $entity->getId() !== $currentUser->getId();
             });
         });
-
+    
         return $actions;
     }
+    
+    
 
-
-
-    public function edit(AdminContext $context)
-    {
+    public function edit(AdminContext $context) {
         $entity = $context->getEntity()->getInstance();
         $currentUser = $this->security->getUser();
-
+    
         // Interdire l'édition d'autres profils pour les rôles non-admin
         if (!$this->security->isGranted('ROLE_ADMIN') && $entity->getId() !== $currentUser->getId()) {
             throw new AccessDeniedException('Vous n\'avez pas les droits pour modifier ce profil.');
         }
-
+    
         return parent::edit($context);
     }
 
-    // ...
+// ...
 
-
+    
 
     public function configureFields(string $pageName): iterable
     {
-        $fields = [
+        $fields = [  
             IdField::new('id')->hideOnForm(),
             TextareaField::new('email')
-                ->setFormType(EmailType::class),
+            ->setFormType(EmailType::class),
             TextField::new('name', 'Nom'),
-            TextField::new('firstname', 'Prenom'),
+            TextField::new('firstname','Prenom'),
             TextField::new('street', 'Rue')
-                ->setFormTypeOption('attr', ['class' => 'adresse-autocomplete']),
+            ->setFormTypeOption('attr', ['class' => 'adresse-autocomplete']),
             TextField::new('zipcode', 'Code Postal')
-                ->setFormTypeOption('attr', ['class' => 'zipcode_ope']),
+            ->setFormTypeOption('attr', ['class' => 'zipcode_ope']),
             TextField::new('city', 'Ville')
-                ->setFormTypeOption('attr', ['class' => 'city_ope']),
-            TextField::new('phone', 'Telephone'),
+            ->setFormTypeOption('attr', ['class' => 'city_ope']),
+            TextField::new('phone','Telephone'),
             ChoiceField::new('singleRole', 'Role')
-                ->setChoices([
-                    'Admin' => 'ROLE_ADMIN',
-                    'Senior' => 'ROLE_SENIOR',
-                    'Apprenti' => 'ROLE_APPRENTI',
-                    'Client' => 'ROLE_CUSTOMER'
-                ])
-                ->renderAsBadges([
-                    'ROLE_APPRENTI' => 'warning',
-                    'ROLE_SENIOR' => 'primary',
-                    'ROLE_EXPERT' => 'success',
-                    'ROLE_ADMIN' => 'danger'
-                ])
-                ->setFormTypeOption('disabled', !$this->security->isGranted('ROLE_ADMIN')),
-        ];
-        $password = TextField::new('password', 'Mot de passe')
+            ->setChoices([
+                'Admin' => 'ROLE_ADMIN',
+                'Senior' => 'ROLE_SENIOR',
+                'Apprenti' => 'ROLE_APPRENTI',
+                'Client' => 'ROLE_CUSTOMER'
+            ])
+            ->renderAsBadges([
+                'ROLE_APPRENTI' => 'warning',
+                'ROLE_SENIOR' => 'primary',
+                'ROLE_EXPERT' => 'success',
+                'ROLE_ADMIN' => 'danger'
+            ])
+            ->setFormTypeOption('disabled', !$this->security->isGranted('ROLE_ADMIN')),
+    ];
+            $password = TextField::new('password', 'Mot de passe')
             ->setFormType(RepeatedType::class)
             ->setFormTypeOptions([
                 'type' => PasswordType::class,
@@ -153,7 +150,7 @@ class UserCrudController extends AbstractCrudController
             ->setRequired($pageName === Crud::PAGE_NEW)
             ->onlyOnForms();
 
-        $fields[] = $password;
+        $fields[] = $password; 
 
         return $fields;
     }
@@ -172,12 +169,11 @@ class UserCrudController extends AbstractCrudController
 
     private function addPasswordEventListener(FormBuilderInterface $formBuilder): FormBuilderInterface
     {
-        return $formBuilder->addEventListener(FormEvents::POST_SUBMIT, $this->hashPassword());
-    }
+        return $formBuilder->addEventListener(FormEvents::POST_SUBMIT, $this->hashPassword());   
+    } 
 
-    private function hashPassword()
-    {
-        return function ($event) {
+    private function hashPassword() {
+        return function($event) {
             $form = $event->getForm();
             if (!$form->isValid()) {
                 return;
@@ -190,18 +186,18 @@ class UserCrudController extends AbstractCrudController
             $hash = $this->userPasswordHasher->hashPassword($form->getData(), $password);
             $form->getData()->setPassword($hash);
         };
+
     }
 
-    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
-    {
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
         $entityAlias = $qb->getRootAliases()[0];
         $currentUser = $this->security->getUser();
-
+    
         // Filtre pour les administrateurs
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $userType = $this->container->get('request_stack')->getCurrentRequest()->query->get('userType');
-
+    
             if ($userType === 'customer') {
                 $qb->andWhere($entityAlias . '.roles LIKE :role')
                     ->setParameter('role', '%"ROLE_CUSTOMER"%');
@@ -218,7 +214,8 @@ class UserCrudController extends AbstractCrudController
                     ->setParameter('current_user_id', $currentUser->getId());
             }
         }
-
+    
         return $qb;
     }
+    
 }

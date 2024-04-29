@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use Exception;
@@ -46,16 +45,16 @@ class ProfilController extends AbstractController
 
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
 
-            // Log user edit profil
-            try {
-                $logsService->postLog([
-                    'loggerName' => 'User',
-                    'user' => 'Anonymous',
-                    'message' => 'User edited profil',
-                    'level' => 'info'
-                ]);
-            } catch (Exception $e) {
-            }
+        // Log user edit profil
+        try {
+            $logsService->postLog([
+            'loggerName' => 'User',
+            'user' => 'Anonymous',
+            'message' => 'User edited profil',
+            'level' => 'info'
+        ]);
+        } catch (Exception $e) {
+        }
 
             $this->entityManager->flush();
             $this->addFlash('success', 'Vos informations ont été mises à jour.');
@@ -70,17 +69,17 @@ class ProfilController extends AbstractController
                     $user->setPassword($this->userPasswordHasher->hashPassword($user, $newPassword));
                 }
 
-                // Log user edit sensitive profil info
-                try {
-                    $logsService->postLog([
-                        'loggerName' => 'User',
-                        'user' => 'Anonymous',
-                        'message' => 'User edited password',
-                        'level' => 'info'
-                    ]);
-                } catch (Exception $e) {
-                    // echo 'Insertion du log échoué';
-                }
+                        // Log user edit sensitive profil info
+        try {
+            $logsService->postLog([
+            'loggerName' => 'User',
+            'user' => 'Anonymous',
+            'message' => 'User edited password',
+            'level' => 'info'
+        ]);
+        } catch (Exception $e) {
+            // echo 'Insertion du log échoué';
+        }
                 $this->entityManager->flush();
 
                 $this->addFlash('success', 'Vos informations sensibles ont été mises à jour.');
@@ -91,6 +90,7 @@ class ProfilController extends AbstractController
             'profileForm' => $profileForm->createView(),
             'sensitiveInfoForm' => $sensitiveInfoForm->createView(),
         ]);
+    
     }
     /**
      * @Route("/check-password", name="check_password", methods={"POST"})

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 		<title>{{ "Votre facture de nettoyage"|trans}}</title>
 
 		<!-- Favicon -->
-		<link
-		rel="icon" href="./images/favicon.png" type="image/x-icon"/>
+		<link rel="icon" href="./images/favicon.png" type="image/x-icon" />
 
 		<!-- Invoice styling -->
 		<style>
@@ -21,8 +20,8 @@
 
 			body h1 {
 				font-weight: 300;
-				margin-bottom: 0;
-				padding-bottom: 0;
+				margin-bottom: 0px;
+				padding-bottom: 0px;
 				color: #000;
 			}
 
@@ -37,7 +36,7 @@
 			body a {
 				color: #06f;
 			}
-
+            
 			.invoice-box {
 				max-width: 800px;
 				margin: auto;
@@ -103,7 +102,7 @@
 				font-weight: bold;
 			}
 
-			@media only screen and(max-width: 600px) {
+			@media only screen and (max-width: 600px) {
 				.invoice-box table tr.top table td {
 					width: 100%;
 					display: block;
@@ -127,17 +126,13 @@
 						<table>
 							<tr>
 								<td class="title">
-									<img src="{{ logo_base64 }}" alt="Logo" style="width: 100%; max-width: 200px;">
+									 <img src="{{ logo_base64 }}" alt="Logo" style="width: 100%; max-width: 200px;">
 								</td>
 
 								<td>
-									{{ "Facture"|trans}}
-									#:
-									{{ operation.id }}<br/>
-									{{ "Date création"|trans}}:
-									{{ operation.createdAt|date('Y-m-d') }}<br/>
-									{{ "Date prestation"|trans}}:
-									{{ operation.finishedAt|date('Y-m-d') }}
+									{{ "Facture"|trans}} #: {{ operation.id }}<br />
+									{{ "Date création"|trans}}: {{ operation.createdAt|date('Y-m-d') }}<br />
+									{{ "Date prestation"|trans}}: {{ operation.finishedAt|date('Y-m-d') }}
 
 								</td>
 							</tr>
@@ -150,14 +145,13 @@
 						<table>
 							<tr>
 								<td>
-									{{ operation.name }}<br/>
-									{{ operation.streetope }},
-									{{ operation.zipcodeope }}<br/>
-									{{ operation.cityope }}<br/>
+								{{ operation.name }}<br />
+                                {{ operation.streetope }}, {{ operation.zipcodeope }}<br />
+                                {{ operation.cityope }}<br />
 								</td>
 
 								<td>
-									{{ operation.getCustomerFullName }}<br/>
+									{{ operation.getCustomerFullName }}<br />
 									{{ operation.customer.email }}
 								</td>
 							</tr>
@@ -169,7 +163,7 @@
 
 					<td>{{ "Prix"|trans}}</td>
 				</tr>
-
+	
 				<tr class="item">
 					<td>{{ operation.name }}</td>
 
@@ -181,13 +175,12 @@
 
 				<tr class="item last">
 					<td>
-						{{ operation.type }}{{ "Taille"|trans}}</td>
+                    {{ operation.type }}{{ "Taille"|trans}}</td>
 
-					<td>{{ operation.price }}
-						€</td>
+					<td>{{ operation.price }} €</td>
 				</tr>
 
-				<tr class="heading">
+                <tr class="heading">
 					<td>{{ "Méthode de paiement"|trans}}</td>
 
 					<td>{{ "Total"|trans}}</td>
@@ -196,24 +189,23 @@
 				<tr class="details">
 					<td>{{ "Prélévement bancaire"|trans}}</td>
 
-					<td>{{ operation.price }}
-						€</td>
+					<td>{{ operation.price }} €</td>
 				</tr>
 
 			</table>
 		</div>
-		<div
-			class="invoice-box">
+        <div class="invoice-box">
+        <!-- ... Reste du contenu ... -->
 
-			<div class="footer">
-				<p class="footer-info">
-					<i class="fas fa-envelope icon"></i>CleanThis@Pro.com |
-					<i class="fas fa-phone icon"></i>(+33) 753382997
-				</p>
-				<p class="footer-info">
-					<i class="fas fa-globe icon"></i>www.Cleanthis.com
-				</p>
-			</div>
-		</div>
+        <div class="footer">
+            <p class="footer-info">
+                <i class="fas fa-envelope icon"></i>CleanThis@Pro.com | 
+                <i class="fas fa-phone icon"></i>(+33) 753382997
+            </p>
+            <p class="footer-info">
+                <i class="fas fa-globe icon"></i>www.Cleanthis.com
+            </p>
+        </div>
+    </div>
 	</body>
 </html>

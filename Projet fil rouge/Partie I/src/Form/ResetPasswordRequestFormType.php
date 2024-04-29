@@ -13,18 +13,18 @@ class ResetPasswordRequestFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => 'Entrez votre email',
-                'attr' => [
-                    'placeholder' => 'exemple@email.fr',
-                    'class' => 'form-control'
-                ],
-                'constraints' => [
-                    new Email([
-                        'message' => 'L\'adresse email "{{ value }}" n\'est pas valide.'
-                    ])
-                ]
-            ]);
+        ->add('email', EmailType::class, [
+            'label' => 'Entrez votre email', 
+            'attr' => [
+                'placeholder' => 'exemple@email.fr',
+                'class' => 'form-control'
+            ],
+            'constraints' => [
+                new Email([
+                    'message' => 'L\'adresse email "{{ value }}" n\'est pas valide.'
+                ])
+            ]
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

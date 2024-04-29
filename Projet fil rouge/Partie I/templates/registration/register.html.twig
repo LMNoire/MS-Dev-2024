@@ -1,58 +1,59 @@
+
 {% extends 'base.html.twig' %}
 
 {% block body %}
 
-	<div class="container registration-container">
-		<img src="{{ asset('images/racoonregister.png') }}" alt="Logo de votre entreprise" class="register-logo">
-		<div class="form-container registration-form">
-			<h2>{{ "Veuillez remplir vos coordonnées"|trans }}</h2>
-			{{ form_start(registrationForm) }}
-			<div class="form-group">
-				{{ form_label(registrationForm.name) }}
-				{{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.firstname) }}
-				{{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.street) }}
-				{{ form_widget(registrationForm.street, {'attr': {'class': 'form-control adresse-autocomplete'}}) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.zipcode) }}
-				{{ form_widget(registrationForm.zipcode, {'attr': {'class': 'form-control zipcode_ope'}}) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.city) }}
-				{{ form_widget(registrationForm.city, {'attr': {'class': 'form-control city_ope'}}) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.phone) }}
-				{{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.email) }}
-				{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.email) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.plainPassword, 'Password') }}
-				{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.plainPassword) }}
-			</div>
+		<div class="container registration-container">
+   <img src="{{ asset('images/racoonregister.png') }}" alt="Logo de votre entreprise" class="register-logo">
+    <div class="form-container registration-form">
+	<h2>{{ "Veuillez remplir vos coordonnées"|trans }}</h2>
+        {{ form_start(registrationForm) }}
+        <div class="form-group">
+            {{ form_label(registrationForm.name) }}
+            {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.firstname) }}
+            {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
+        </div>            
+        <div class="form-group">
+            {{ form_label(registrationForm.street) }}
+            {{ form_widget(registrationForm.street, {'attr': {'class': 'form-control adresse-autocomplete'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.zipcode) }}
+            {{ form_widget(registrationForm.zipcode, {'attr': {'class': 'form-control zipcode_ope'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.city) }}
+            {{ form_widget(registrationForm.city, {'attr': {'class': 'form-control city_ope'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.phone) }}
+            {{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.email) }} 
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword, 'Password') }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.plainPassword) }} 
+        </div>
 
-			<div class="form-group form-check">
-				{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
-				{{ form_label(registrationForm.agreeTerms, 'Agree to terms', {'label_attr': {'class': 'form-check-label'}}) }}
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary login-btn">{{ "Valider"|trans }}</button>
-			</div>
-			{{ form_end(registrationForm) }}
-		</div>
-	</div>
+        <div class="form-group form-check">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(registrationForm.agreeTerms, 'Agree to terms', {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary login-btn">{{ "Valider"|trans }}</button>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
 
 
-	<script src="{{ asset('js/adresse-autocomplete.js') }}"></script>
+<script src="{{ asset('js/adresse-autocomplete.js') }}"></script>
 {% endblock %}

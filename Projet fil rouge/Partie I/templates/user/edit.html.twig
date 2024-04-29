@@ -3,208 +3,201 @@
 {% block body_id 'page-content-wrapper' %}
 
 {% block main %}
-	<section class="content-body my-5">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div
-					class="col-md-8">
+<section class="content-body my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                
+                <!-- Profile Information Card -->
+                <div class="card mb-5 shadow">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3 text-center text-primary">{{ "Informations du Profil"|trans }}</h2>
+                        <div class="mb-2"><strong>{{ "Nom:"|trans }}</strong> <span id="name-display">{{ profileForm.vars.value.name }}</span></div>
+                        <div class="mb-2"><strong>{{ "Prénom:"|trans }}</strong> <span id="firstname-display">{{ profileForm.vars.value.firstname }}</span></div>
+                        <div class="mb-2"><strong>{{ "Code Postal:"|trans }}</strong> <span id="zipcode-display">{{ profileForm.vars.value.zipcode }}</span></div>
+                        <div class="mb-2"><strong>{{ "Ville:"|trans }}</strong> <span id="city-display">{{ profileForm.vars.value.city }}</span></div>
+                        <div class="mb-4"><strong>{{ "Rue:"|trans }}</strong> <span id="street-display">{{ profileForm.vars.value.street }}</span></div>
+                        <button class="btn btn-primary btn-block" data-bs-toggle="collapse" data-bs-target="#profile-edit-form">{{ "Modifier Profil"|trans }}</button>
+                    </div>
+                </div>
+                
+                <!-- Profile Edit Form -->
+                <div class="collapse" id="profile-edit-form">
+                    <div class="card card-body mb-4">
+                        {{ form_start(profileForm, {'attr': {'class': 'form'}}) }}
+                        {{ form_row(profileForm.name, {'attr': {'class': 'form-control mb-3'}}) }}
+                        {{ form_row(profileForm.firstname, {'attr': {'class': 'form-control mb-3'}}) }}
+                        {{ form_row(profileForm.zipcode, {'attr': {'class': 'form-control mb-3'}}) }}
+                        {{ form_row(profileForm.city, {'attr': {'class': 'form-control mb-3'}}) }}
+                        {{ form_row(profileForm.street, {'attr': {'class': 'form-control mb-3'}}) }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">{{ "Sauvegarder"|trans }}</button>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#profile-edit-form">{{ "Annuler"|trans }}</button>
+                        </div>
+                        {{ form_end(profileForm) }}
+                    </div>
+                </div>
 
-					<!-- Profile Information Card -->
-					<div class="card mb-5 shadow">
-						<div class="card-body">
-							<h2 class="h4 mb-3 text-center text-primary">{{ "Informations du Profil"|trans }}</h2>
-							<div class="mb-2">
-								<strong>{{ "Nom:"|trans }}</strong>
-								<span id="name-display">{{ profileForm.vars.value.name }}</span>
-							</div>
-							<div class="mb-2">
-								<strong>{{ "Prénom:"|trans }}</strong>
-								<span id="firstname-display">{{ profileForm.vars.value.firstname }}</span>
-							</div>
-							<div class="mb-2">
-								<strong>{{ "Code Postal:"|trans }}</strong>
-								<span id="zipcode-display">{{ profileForm.vars.value.zipcode }}</span>
-							</div>
-							<div class="mb-2">
-								<strong>{{ "Ville:"|trans }}</strong>
-								<span id="city-display">{{ profileForm.vars.value.city }}</span>
-							</div>
-							<div class="mb-4">
-								<strong>{{ "Rue:"|trans }}</strong>
-								<span id="street-display">{{ profileForm.vars.value.street }}</span>
-							</div>
-							<button class="btn btn-primary btn-block" data-bs-toggle="collapse" data-bs-target="#profile-edit-form">{{ "Modifier Profil"|trans }}</button>
-						</div>
-					</div>
+                <!-- Sensitive Information Card -->
+               <div class="card mb-5 shadow">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3 text-center text-primary">{{ "Informations Confidentielles"|trans }}</h2>
+                        <div class="mb-2"><strong>{{ "Téléphone:"|trans }}</strong> <span>{{ sensitiveInfoForm.vars.value.phone | mask_phone }}</span></div>
+                        <div class="mb-4"><strong>{{ "Mot de passe:"|trans }}</strong> <span>********</span></div>
+                        <button class="btn btn-primary btn-block" data-bs-toggle="collapse" data-bs-target="#sensitive-edit-form">{{ "Modifier Informations confidentielles"|trans }}</button>
+                    </div>
+                </div>
 
-					<!-- Profile Edit Form -->
-					<div class="collapse" id="profile-edit-form">
-						<div class="card card-body mb-4">
-							{{ form_start(profileForm, {'attr': {'class': 'form'}}) }}
-							{{ form_row(profileForm.name, {'attr': {'class': 'form-control mb-3'}}) }}
-							{{ form_row(profileForm.firstname, {'attr': {'class': 'form-control mb-3'}}) }}
-							{{ form_row(profileForm.zipcode, {'attr': {'class': 'form-control mb-3'}}) }}
-							{{ form_row(profileForm.city, {'attr': {'class': 'form-control mb-3'}}) }}
-							{{ form_row(profileForm.street, {'attr': {'class': 'form-control mb-3'}}) }}
-							<div class="text-center">
-								<button type="submit" class="btn btn-success">{{ "Sauvegarder"|trans }}</button>
-								<button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#profile-edit-form">{{ "Annuler"|trans }}</button>
-							</div>
-							{{ form_end(profileForm) }}
-						</div>
-					</div>
+                <!-- Sensitive Information Edit Form -->
+                <div class="collapse" id="sensitive-edit-form">
+                    <div class="card card-body mb-4">
+                        {{ form_start(sensitiveInfoForm, {'attr': {'class': 'form'}}) }}
+                        {{ form_row(sensitiveInfoForm.phone, {'attr': {'class': 'form-control mb-3'}}) }}
+                        {{ form_row(sensitiveInfoForm.newPassword, {'attr': {'class': 'form-control mb-3'}}) }}
+                        {{ form_row(sensitiveInfoForm.currentPassword, {'attr': {'class': 'form-control mb-3'}}) }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">{{ "Modifier"|trans }}</button>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#sensitive-edit-form">{{ "Annuler"|trans }}</button>
+                        </div>
+                        {{ form_end(sensitiveInfoForm) }}
+                    </div>
+                </div>
 
-					<!-- Sensitive Information Card -->
-					<div class="card mb-5 shadow">
-						<div class="card-body">
-							<h2 class="h4 mb-3 text-center text-primary">{{ "Informations Confidentielles"|trans }}</h2>
-							<div class="mb-2">
-								<strong>{{ "Téléphone:"|trans }}</strong>
-								<span>{{ sensitiveInfoForm.vars.value.phone | mask_phone }}</span>
-							</div>
-							<div class="mb-4">
-								<strong>{{ "Mot de passe:"|trans }}</strong>
-								<span>********</span>
-							</div>
-							<button class="btn btn-primary btn-block" data-bs-toggle="collapse" data-bs-target="#sensitive-edit-form">{{ "Modifier Informations confidentielles"|trans }}</button>
-						</div>
-					</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function toggleEditForm(formId) {
+        let profileInfo = document.getElementById('profile-info');
+        let editForms = document.querySelectorAll('.edit-form');
+        
+        editForms.forEach(form => {
+            if (form.id === formId) {
+                form.classList.toggle('d-none');
+                profileInfo.style.display = form.classList.contains('d-none') ? 'block' : 'none';
+            } else {
+                form.classList.add('d-none');
+            }
+        });
+    }
 
-					<!-- Sensitive Information Edit Form -->
-					<div class="collapse" id="sensitive-edit-form">
-						<div class="card card-body mb-4">
-							{{ form_start(sensitiveInfoForm, {'attr': {'class': 'form'}}) }}
-							{{ form_row(sensitiveInfoForm.phone, {'attr': {'class': 'form-control mb-3'}}) }}
-							{{ form_row(sensitiveInfoForm.newPassword, {'attr': {'class': 'form-control mb-3'}}) }}
-							{{ form_row(sensitiveInfoForm.currentPassword, {'attr': {'class': 'form-control mb-3'}}) }}
-							<div class="text-center">
-								<button type="submit" class="btn btn-success">{{ "Modifier"|trans }}</button>
-								<button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#sensitive-edit-form">{{ "Annuler"|trans }}</button>
-							</div>
-							{{ form_end(sensitiveInfoForm) }}
-						</div>
-					</div>
+    function handleFormSubmission(form, url, successMessage) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-				</div>
-			</div>
-		</div>
-	</section>
-	{% block javascripts %}
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script type="text/javascript">
-			function toggleEditForm(formId) {
-let profileInfo = document.getElementById('profile-info');
-let editForms = document.querySelectorAll('.edit-form');
+            let formData = new FormData(form);
+            let currentPassword = formData.get('sensitive_info[currentPassword]');
 
-editForms.forEach(form => {
-if (form.id === formId) {
-form.classList.toggle('d-none');
-profileInfo.style.display = form.classList.contains('d-none') ? 'block' : 'none';
-} else {
-form.classList.add('d-none');
-}
-});
-}
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({ password: currentPassword }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isValid) {
+                    form.submit();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: 'Mot de passe actuel incorrect.'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    }
 
-function handleFormSubmission(form, url, successMessage) {
-form.addEventListener('submit', function (event) {
-event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+        let sensitiveForm = document.getElementById('sensitive-info-form-twig');
+        let checkPasswordUrl = '{{ path('check_password') }}';
 
-let formData = new FormData(form);
-let currentPassword = formData.get('sensitive_info[currentPassword]');
+        handleFormSubmission(sensitiveForm, checkPasswordUrl, 'Informations sensibles mises à jour avec succès.');
 
-fetch(url, {
-method: 'POST',
-body: JSON.stringify(
-{password: currentPassword}
-),
-headers: {
-'Content-Type': 'application/json',
-'X-Requested-With': 'XMLHttpRequest'
-}
-}).then(response => response.json()).then(data => {
-if (data.isValid) {
-form.submit();
-} else {
-Swal.fire({icon: 'error', title: 'Erreur', text: 'Mot de passe actuel incorrect.'});
-}
-}).catch(error => {
-console.error('Error:', error);
-});
-});
-}
+        // SweetAlert pour les messages flash
+        {% for message in app.flashes('success') %}
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: '{{ message }}'
+            });
+        {% endfor %}
 
-document.addEventListener('DOMContentLoaded', function () {
-let sensitiveForm = document.getElementById('sensitive-info-form-twig');
-let checkPasswordUrl = '{{ path('check_password') }}';
+        {% for message in app.flashes('error_password') %}
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: '{{ message }}'
+            });
+        {% endfor %}
+    });
+</script>
 
-handleFormSubmission(sensitiveForm, checkPasswordUrl, 'Informations sensibles mises à jour avec succès.');
+<style>
+    /* Custom styles for a more refined look */
+    .card-header {
+        letter-spacing: 0.05rem;
+        border-bottom: none;
+    }
 
-// SweetAlert pour les messages flash
-{% for message in app.flashes('success') %}
-Swal.fire({icon: 'success', title: 'Succès', text: '{{ message }}'});{% endfor %}
+    .card-body {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
 
-{% for message in app.flashes('error_password') %}
-Swal.fire({icon: 'error', title: 'Erreur', text: '{{ message }}'});{% endfor %}
-});
-		</script>
+    .btn-outline-primary {
+        border-color: #007bff;
+        color: #007bff;
+    }
 
-		<style>
-			/* Custom styles for a more refined look */
-			.card-header {
-				letter-spacing: 0.05rem;
-				border-bottom: none;
-			}
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
 
-			.card-body {
-				padding-top: 2rem;
-				padding-bottom: 2rem;
-			}
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
 
-			.btn-outline-primary {
-				border-color: #007bff;
-				color: #007bff;
-			}
+    .btn-success {
+        background-color: #28a745;
+    }
 
-			.btn-outline-primary:hover {
-				background-color: #007bff;
-				color: #fff;
-			}
+    .btn-secondary {
+        background-color: #6c757d;
+    }
 
-			.btn-primary {
-				background-color: #007bff;
-				border: none;
-			}
+    .btn-block {
+        display: block;
+        width: 100%;
+    }
 
-			.btn-success {
-				background-color: #28a745;
-			}
+    .form-control {
+        border-radius: 0.25rem;
+    }
 
-			.btn-secondary {
-				background-color: #6c757d;
-			}
+    /* Spacing and alignment adjustments */
+    .mb-2, .mb-3, .mb-4 {
+        margin-bottom: 1.5rem !important;
+    }
 
-			.btn-block {
-				display: block;
-				width: 100%;
-			}
-
-			.form-control {
-				border-radius: 0.25rem;
-			}
-
-			/* Spacing and alignment adjustments */
-			.mb-2,
-			.mb-3,
-			.mb-4 {
-				margin-bottom: 1.5rem !important;
-			}
-
-			.text-center {
-				text-align: center;
-			}
-		</style>
-	{% endblock %}
+    .text-center {
+        text-align: center;
+    }
+</style>
+{% endblock %}
 
 
 {% endblock %}
+
+

@@ -8,22 +8,18 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 
-class UserVoter extends Voter
-{
+class UserVoter extends Voter {
     private Security $security;
 
-    public function __construct(Security $security)
-    {
+    public function __construct(Security $security) {
         $this->security = $security;
     }
 
-    protected function supports($attribute, $subject): bool
-    {
+    protected function supports($attribute, $subject): bool {
         return in_array($attribute, ['EDIT', 'VIEW']) && $subject instanceof User;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
-    {
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool {
         $currentUser = $token->getUser();
 
         if (!$currentUser instanceof User) {

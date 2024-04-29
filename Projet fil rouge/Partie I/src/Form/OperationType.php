@@ -26,12 +26,13 @@ class OperationType extends AbstractType
             ->add('street_ope')
             ->add('customer', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
+'choice_label' => 'id',
             ])
             ->add('salarie', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
-            ]);
+'choice_label' => 'id',
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
