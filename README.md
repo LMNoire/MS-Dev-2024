@@ -8,7 +8,10 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix.
 - FEVRIER : API platform + Postman, architecture Jamstack, Node.js, PostgresQL, base de données non relationnelle MongoDB, démarrage partie I projet fil rouge
 - MARS : Suite projet fil route
 - AVRIL : Fin de la partie I projet fil rouge et début de la partie II, Docker, composants React, serveur LAMP
-- MAI : Stage en entreprise (Merci à "Weeki - Endless Visual Workspace" !) Refonte et création de composants React 
+- MAI : Stage en entreprise (Merci à "Weeki - Endless Visual Workspace" !)
+  - Développer l'accès à un back-office avec système d'authentification d'une application PHP/Symfony en API
+  - Remonter des données statistiques concernant les utilisateurs et leurs connexion depuis la base de donnée
+  - Traiter les données et les afficher dans des composants React
 # Description du repository
 - 1-ALGO : Exercices sur l'écriture d'algorithmes, tableaux et d'instructions conditionnelles
 - 2-PHP : Exercices sur la création et l'appel de fonctions en PHP
