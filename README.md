@@ -12,6 +12,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix.
   - Développer l'accès à un back-office avec système d'authentification d'une application PHP/Symfony en API
   - Remonter des données statistiques concernant les utilisateurs et leurs connexion depuis la base de donnée
   - Traiter les données et les afficher dans des composants React
+- JUIN : Rapport de stage et passage devant le jury
 # Description du repository
 - 1-ALGO : Exercices sur l'écriture d'algorithmes, tableaux et d'instructions conditionnelles
 - 2-PHP : Exercices sur la création et l'appel de fonctions en PHP
