@@ -22,7 +22,7 @@ Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix.
 - 6-JS : Exercices sur le Javascript
 - Projet fil rouge : Elaboration d'une application de la conception à son deployement reprenant le stack technique de la formation et la mise en situation pratique du travail d'équipe en entreprise. Gestion des daily, préparations et comptes rendus de sprints. Réalisée avec Symfony/Twig et MySQL pour la partie I, ajout d'un microservice externe (API) avec un backend en node.js couplé à une BDD non relationnelle MongoDB et des composants React en front pour la partie II
 # Stack technique de la formation
-- [LAMP] Linux/Apache/MySql/PHP
+- [LAMP] Linux/Apache/MySQL/PHP
 - [MERN] Mongo/Express/React/Nodejs
 - HTML 5/CSS 3 + Bootstrap
 - Twig 3
