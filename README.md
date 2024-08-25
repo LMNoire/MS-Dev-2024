@@ -1,5 +1,5 @@
 # MS-Dev-2024
-Formation developpeur full-stack débutée en octobre 2023 à l'AFPA de Roubaix. 
+Formation MS developpeur full-stack débutée en octobre 2023 et terminée en juin 2024, en présentiel à l'AFPA de Roubaix (Titre de niveau 5/Bac +2). 
 # Contenu de la formation
 - OCTOBRE : Algorithmes, instructions conditionnelles en PHP, méthode Agile SCRUM
 - NOVEMBRE : Création et appel de fonctions en PHP, architecture MVC, bases de données relationnelles, requêtes SQL
